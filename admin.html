@@ -179,7 +179,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <button class="btn sm ghost" id="famAddG">+ 그룹 추가</button>
 
     <h2 style="margin-top:26px">TAB 3 · PROMPT</h2>
-    <p class="hint" style="margin:0 0 10px">카드마다 왼쪽(OC)·오른쪽(PAIR) 이미지와 외형/의상 프롬프트를 넣으면 버튼을 눌러 복사할 수 있어요.</p>
+    <p class="hint" style="margin:0 0 10px">카드마다 왼쪽(OC)·오른쪽(PAIR) 이미지와 외형/네거티브 프롬프트를 넣으면 버튼을 눌러 복사할 수 있어요.</p>
     <div id="prBox"></div>
     <button class="btn sm ghost" id="prAdd">+ 카드 추가</button>
   </section>
@@ -277,7 +277,7 @@ const SEC = new URLSearchParams(location.search).get('p');
 const MODE = SECS.includes(SEC) ? 'sec' : 'main';
 document.body.dataset.mode = MODE;
 const SEC_DEF = {oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS'}, pair:{title:'Pair',subtitle:'DREAM & PAIRS'}, me:{title:'Me',subtitle:'ABOUT ME'}};
-const pcd=(t,l,a,b)=>({tag:t,label:l,a:{role:'OC',name:a,image:'',look:'',outfit:''},b:{role:'PAIR',name:b,image:'',look:'',outfit:''}});
+const pcd=(t,l,a,b)=>({tag:t,label:l,couple:'',a:{role:'OC',name:a,image:'',look:'',outfit:''},b:{role:'PAIR',name:b,image:'',look:'',outfit:''}});
 const ME_DEF={v:2,title:'Profile',subtitle:'ABOUT THE ACCOUNT',avatar:'',name:'xoya',handle:'@xxxoyaaa',
  about:{profile:{title:'프로필',label:'PROFILE',fields:[{k:'NAME',v:'쏘야'},{k:'AGED',v:'성인 여성'}]},
   notice:{title:'안내',label:'Notice',rows:[
@@ -557,7 +557,7 @@ function renderPr(){
       <div class="row" style="gap:6px"><input type="text" style="flex:.6" data-p="${b}.role" value="${esc(c[k].role)}" placeholder="OC"><input type="text" data-p="${b}.name" value="${esc(c[k].name)}" placeholder="이름"></div>
       <div class="row" style="gap:8px;margin:8px 0">${imgCtl(b+'.image',60,80)}</div>
       <textarea data-p="${b}.look" placeholder="외형 프롬프트">${esc(c[k].look)}</textarea>
-      <textarea style="margin-top:6px" data-p="${b}.outfit" placeholder="의상 프롬프트">${esc(c[k].outfit)}</textarea></div>`; }).join('')}</div></div>`).join('') || '<div class="empty">카드가 없어요</div>';
+      <textarea style="margin-top:6px" data-p="${b}.outfit" placeholder="네거티브 프롬프트">${esc(c[k].outfit)}</textarea></div>`; }).join('')}</div><textarea style="margin-top:10px" data-p="prompt.cards.${i}.couple" placeholder="커플 네거티브 프롬프트">${esc(c.couple||'')}</textarea></div>`).join('') || '<div class="empty">카드가 없어요</div>';
   bindMe(box, renderPr);
 }
 function renderMe(){
