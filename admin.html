@@ -486,17 +486,23 @@ async function ghApi(path, method, body, q){
   const g = ghGet();
   return fetch(`https://api.github.com/repos/${g.owner}/${g.repo}/contents/${path}${q||''}`, {
     method: method || 'GET',
+    cache: 'no-store',
     headers: {Authorization:'Bearer '+g.token, Accept:'application/vnd.github+json', 'Content-Type':'application/json'},
     body: body ? JSON.stringify(body) : undefined
   });
 }
 async function ghPut(path, b64, msg){
-  const g = ghGet(); let sha;
-  const r0 = await ghApi(path, 'GET', null, '?ref=' + encodeURIComponent(g.branch));
-  if (r0.ok) sha = (await r0.json()).sha;
-  else if (r0.status !== 404) throw new Error(await ghFail(r0));
-  const r = await ghApi(path, 'PUT', {message:msg, content:b64, branch:g.branch, sha});
-  if (!r.ok) throw new Error(await ghFail(r));
+  const g = ghGet();
+  for (let attempt = 0; attempt < 3; attempt++){
+    let sha;
+    const r0 = await ghApi(path, 'GET', null, '?ref=' + encodeURIComponent(g.branch) + '&t=' + Date.now());
+    if (r0.ok) sha = (await r0.json()).sha;
+    else if (r0.status !== 404) throw new Error(await ghFail(r0));
+    const r = await ghApi(path, 'PUT', {message:msg, content:b64, branch:g.branch, sha});
+    if (r.ok) return;
+    if (r.status === 409 && attempt < 2){ await new Promise(res => setTimeout(res, 800)); continue; }
+    throw new Error(await ghFail(r));
+  }
 }
 $('#pub').onclick = async () => {
   const g = ghGet();
