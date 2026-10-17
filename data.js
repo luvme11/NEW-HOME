@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792277048241,
+  "updatedAt": 1792277083501,
   "title": [
     "LOVE",
     "ME"
@@ -45,6 +45,13 @@ window.SITE_DATA = {
       "memo": "",
       "repeat": false,
       "done": true
+    },
+    {
+      "date": "2026-10-18",
+      "time": "",
+      "title": "룩/구도 업로드 사이트 제작",
+      "memo": "",
+      "repeat": false
     }
   ],
   "favicon": "images/favicon-1792265260687.png",
@@ -57,20 +64,21 @@ window.SITE_DATA = {
         "name": "선유이",
         "note": "Pair 임찬희",
         "image": "images/oc-1792264710015-0.jpg",
-        "soon": true
+        "soon": true,
+        "since": "",
+        "siteName": "",
+        "url": ""
       },
       {
         "name": "츠키시로 시오리",
         "note": "月城 しおり",
         "image": "images/oc-1792265344606-1.jpg",
-        "soon": true
+        "soon": true,
+        "since": "",
+        "siteName": "",
+        "url": ""
       }
     ]
-  },
-  "pins": {
-    "oc": "",
-    "pair": "",
-    "me": ""
   },
   "pair": {
     "title": "Pair",
@@ -318,5 +326,10 @@ window.SITE_DATA = {
       ]
     },
     "characters": []
+  },
+  "pins": {
+    "oc": "",
+    "pair": "",
+    "me": ""
   }
 };
