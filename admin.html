@@ -72,6 +72,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
 #toast.on{opacity:1;transform:translateX(-50%)}
 </style>
 <script src="data.js"></script>
+<style>body[data-mode="sec"] .mainonly{display:none !important}body:not([data-mode="sec"]) .seconly{display:none !important}</style>
 </head>
 <body>
 
@@ -86,31 +87,31 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
 </div>
 
 <div class="top"><div class="top-in">
-  <a class="back" href="index.html">← 메인 보기</a>
+  <a class="back" id="backLink" href="index.html">← 메인 보기</a>
   <span class="status" id="status"></span>
-  <button class="btn" id="imp">불러오기</button>
-  <button class="btn" id="exp">data.js 내보내기</button>
+  <button class="btn mainonly" id="imp">불러오기</button>
+  <button class="btn mainonly" id="exp">data.js 내보내기</button>
   <button class="btn pri" id="pub">게시하기</button>
   <input type="file" id="impFile" accept=".js,.json">
 </div></div>
 
 <main>
-  <h1>관리자</h1>
-  <p class="lead">여기서 고친 내용은 이 브라우저에 바로 저장되어 메인에서 미리 볼 수 있어요.<br>
+  <h1 id="h1">관리자</h1>
+  <p class="lead" id="lead">여기서 고친 내용은 이 브라우저에 바로 저장되어 메인에서 미리 볼 수 있어요.<br>
   다른 사람에게도 보이게 하려면 상단 <b>게시하기</b>를 누르세요. (처음 한 번만 아래 <b>GitHub 연결</b> 설정이 필요해요)</p>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>기본</h2>
     <label class="f">타이틀 <small>줄바꿈 = 다음 줄</small></label>
     <textarea id="title"></textarea>
     <label class="f">세로 문구</label>
     <input type="text" id="vtext">
-    <label class="f">오른쪽 목록 <small>왼쪽 = 이름, 오른쪽 = 이동 주소 (OC 페이지는 <code>#oc</code>, 비우면 눌리지 않아요)</small></label>
+    <label class="f">오른쪽 목록 <small>왼쪽 = 이름, 오른쪽 = 이동 주소 (<code>#oc</code> <code>#pair</code> <code>#me</code> 또는 주소, 비우면 눌리지 않아요)</small></label>
     <div id="menuList"></div>
     <button class="btn sm ghost" id="menuAdd">+ 항목 추가</button>
   </section>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>메인 이미지</h2>
     <div class="imgrow">
       <div class="preview-arch" id="mainPrev">MAIN</div>
@@ -127,19 +128,29 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     </div>
   </section>
 
-  <section class="card">
-    <h2>OC 페이지</h2>
+  <section class="card mainonly">
+    <h2>페이지별 관리자</h2>
+    <p class="hint" style="margin:0 0 12px">OC · Pair · Me 는 각각 따로 관리해요. 비밀번호도 따로, 게시할 때도 그 페이지 내용만 바뀌어서 페이지마다 다른 사람에게 맡길 수 있어요.<br>
+    위 오른쪽 목록 이동 칸에 <code>#oc</code> <code>#pair</code> <code>#me</code> 를 적으면 연결돼요. (이름이 OC / Pair / Me면 비워 둬도 자동 연결)</p>
+    <div class="row" style="gap:8px;flex-wrap:wrap">
+      <a class="btn" style="display:grid;place-items:center" href="admin.html?p=oc">OC 관리자 →</a>
+      <a class="btn" style="display:grid;place-items:center" href="admin.html?p=pair">Pair 관리자 →</a>
+      <a class="btn" style="display:grid;place-items:center" href="admin.html?p=me">Me 관리자 →</a>
+    </div>
+  </section>
+
+  <section class="card seconly">
+    <h2 id="secH">PAGE</h2>
     <div class="row" style="gap:10px">
       <div style="flex:1"><label class="f" style="margin-top:0">제목</label><input type="text" id="ocTitle"></div>
       <div style="flex:1.4"><label class="f" style="margin-top:0">부제목</label><input type="text" id="ocSub"></div>
     </div>
-    <label class="f">캐릭터 <small>No.01부터 순서대로 카드가 표시돼요</small></label>
+    <label class="f">카드 <small>No.01부터 순서대로 표시돼요</small></label>
     <div id="ocList"></div>
-    <button class="btn sm ghost" id="ocAdd">+ 캐릭터 추가</button>
-    <p class="hint">메인 오른쪽 목록의 이동 칸에 <code>#oc</code>를 적으면 이 페이지로 연결돼요. (이름이 OC면 기본으로 연결돼 있어요)</p>
+    <button class="btn sm ghost" id="ocAdd">+ 카드 추가</button>
   </section>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>파비콘 (브라우저 탭 아이콘)</h2>
     <div class="row" style="gap:14px;align-items:center">
       <div id="favPrev" style="width:48px;height:48px;border-radius:12px;background:#ececec;overflow:hidden;display:grid;place-items:center;color:#bbb;font-size:18px;flex:none">♡</div>
@@ -152,7 +163,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <p class="hint">올린 사진은 가운데를 기준으로 정사각형 64×64 PNG로 자동 변환돼요. 게시 후에도 탭 아이콘은 브라우저가 기억하고 있어서 바뀌는 데 시간이 걸릴 수 있어요.</p>
   </section>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>음악 (YouTube)</h2>
     <div id="trackList"></div>
     <button class="btn sm ghost" id="trackAdd">+ 곡 추가</button>
@@ -160,7 +171,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <input type="range" id="vol" min="0" max="100">
   </section>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>캘린더 · 디데이</h2>
     <label class="chk"><input type="checkbox" id="showCal"> 캘린더 위젯 보이기</label>
     <label class="f" style="margin-top:18px">디데이 목록 <small>비어 있으면 아무것도 표시되지 않아요</small></label>
@@ -172,7 +183,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <p class="hint">D+ : 시작일부터 며칠째인지 표시 (시작일 = 1일)<br>D- : 남은 일수 표시, 가까운 순서로 최대 3개. “매년 반복”을 켜면 기념일·생일 등에 편해요.</p>
   </section>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>일정</h2>
     <p class="hint" style="margin:0 0 12px">일정이 있는 날은 캘린더에 작은 점이 생기고, 날짜를 누르면 그날의 일정이 보여요.</p>
     <div id="scList"></div>
@@ -202,7 +213,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
   </section>
 
   <section class="card">
-    <h2>관리자 잠금 (선택)</h2>
+    <h2 id="pinH">관리자 잠금 (선택)</h2>
     <div class="row">
       <input type="password" id="pin" placeholder="새 비밀번호" autocomplete="new-password">
       <button class="btn sm pri" id="pinSet">설정</button>
@@ -212,7 +223,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <p class="hint">GitHub Pages 같은 정적 사이트라 진짜 보안은 아니에요. 지나가다 들어오는 걸 막는 가벼운 잠금 정도로만 생각해 주세요.</p>
   </section>
 
-  <section class="card">
+  <section class="card mainonly">
     <h2>수동으로 반영하는 법 (GitHub 연결을 안 했을 때)</h2>
     <ol class="steps">
       <li>이 페이지에서 내용을 고친다 (자동 저장)</li>
@@ -227,15 +238,24 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
 
 <script>
 const $ = s => document.querySelector(s);
+const SECS = ['oc','pair','me'];
+const SEC = new URLSearchParams(location.search).get('p');
+const MODE = SECS.includes(SEC) ? 'sec' : 'main';
+document.body.dataset.mode = MODE;
+const SEC_DEF = {oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS'}, pair:{title:'Pair',subtitle:'PAIR'}, me:{title:'Me',subtitle:'ABOUT ME'}};
 const KEY = 'sc_data';
 const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],favicon:'',pin:''};
 
 function norm(d){
   d.menu = (d.menu||[]).map(m => typeof m === 'string'
-    ? {label:m, href:/^oc$/i.test(m.trim()) ? '#oc' : ''}
+    ? {label:m, href:SECS.includes(m.trim().toLowerCase()) ? '#'+m.trim().toLowerCase() : ''}
     : {label:m.label||'', href:m.href||''});
-  d.oc = Object.assign({title:'OC', subtitle:'ORIGINAL CHARACTERS', characters:[]}, d.oc || {});
-  if (!Array.isArray(d.oc.characters)) d.oc.characters = [];
+  SECS.forEach(k => {
+    d[k] = Object.assign({title:SEC_DEF[k].title, subtitle:SEC_DEF[k].subtitle, characters:[]}, d[k] || {});
+    if (!Array.isArray(d[k].characters)) d[k].characters = [];
+    d[k].characters = d[k].characters.map(c => ({name:c.name||'', note: c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : ''), image:c.image||'', soon:!!c.soon}));
+  });
+  d.pins = Object.assign({oc:'',pair:'',me:''}, d.pins || {});
   return d;
 }
 function load(){
@@ -312,7 +332,7 @@ function renderMenu(){
     <div class="row" style="margin-bottom:8px">
       <span style="font-size:11px;color:#999;width:18px">${String(i+1).padStart(2,'0')}</span>
       <input type="text" data-k="label" data-i="${i}" value="${esc(m.label)}" placeholder="이름" style="flex:1">
-      <input type="text" data-k="href" data-i="${i}" value="${esc(m.href)}" placeholder="이동 (#oc 또는 주소)" style="flex:1.2">
+      <input type="text" data-k="href" data-i="${i}" value="${esc(m.href)}" placeholder="이동 (#oc #pair #me 또는 주소)" style="flex:1.2">
       <button class="ib" data-up="${i}">↑</button><button class="ib" data-dn="${i}">↓</button><button class="ib" data-rm="${i}">✕</button>
     </div>`).join('');
   box.querySelectorAll('input').forEach(el=> el.oninput = e => { D.menu[+el.dataset.i][el.dataset.k] = e.target.value.trim(); saveSoon(); });
@@ -379,13 +399,14 @@ $('#favFile').onchange = async e => {
 $('#favUrl').oninput = e => { D.favicon = e.target.value.trim(); saveSoon(); $('#favPrev').innerHTML = D.favicon ? `<img src="${esc(D.favicon)}" alt="" style="width:100%;height:100%;object-fit:cover">` : '♡'; applyFav(); };
 $('#favDel').onclick = () => { D.favicon=''; save(); renderFav(); };
 
-/* ---------- OC 페이지 ---------- */
-function renderOc(){
-  $('#ocTitle').value = D.oc.title; $('#ocSub').value = D.oc.subtitle;
-  $('#ocTitle').oninput = e => { D.oc.title = e.target.value; saveSoon(); };
-  $('#ocSub').oninput = e => { D.oc.subtitle = e.target.value; saveSoon(); };
-  const box = $('#ocList'), list = D.oc.characters;
-  if(!list.length){ box.innerHTML = '<div class="empty">등록된 캐릭터가 없어요</div>'; return; }
+/* ---------- 섹션 페이지 (OC / Pair / Me) ---------- */
+function renderOc(){ if (MODE !== 'sec') return; renderSecInner(); }
+function renderSecInner(){
+  $('#ocTitle').value = D[SEC].title; $('#ocSub').value = D[SEC].subtitle;
+  $('#ocTitle').oninput = e => { D[SEC].title = e.target.value; saveSoon(); };
+  $('#ocSub').oninput = e => { D[SEC].subtitle = e.target.value; saveSoon(); };
+  const box = $('#ocList'), list = D[SEC].characters;
+  if(!list.length){ box.innerHTML = '<div class="empty">등록된 카드가 없어요</div>'; return; }
   box.innerHTML = list.map((c,i)=>`
     <div class="item">
       <div class="item-head">No.${String(i+1).padStart(2,'0')}<span class="sp"></span>
@@ -395,7 +416,7 @@ function renderOc(){
         <div class="col">
           <div class="row" style="gap:8px">
             <div style="flex:1"><input type="text" data-k="name" data-i="${i}" value="${esc(c.name)}" placeholder="이름"></div>
-            <div style="flex:1"><input type="text" data-k="pair" data-i="${i}" value="${esc(c.pair)}" placeholder="Pair (예: SANTA)"></div>
+            <div style="flex:1"><input type="text" data-k="note" data-i="${i}" value="${esc(c.note)}" placeholder="작은 문구 (예: Pair SANTA)"></div>
           </div>
           <div class="row" style="gap:8px;margin-top:8px">
             <button class="btn sm" data-img="${i}">사진 올리기</button>
@@ -408,21 +429,21 @@ function renderOc(){
     </div>`).join('');
   box.querySelectorAll('input[data-k]').forEach(el=> el.oninput = e => { list[+el.dataset.i][el.dataset.k] = e.target.value; saveSoon(); });
   box.querySelectorAll('[data-soon]').forEach(el=> el.onchange = e => { list[+el.dataset.soon].soon = e.target.checked; save(); });
-  box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(list,+b.dataset.up,-1); save(); renderOc(); });
-  box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(list,+b.dataset.dn,1); save(); renderOc(); });
-  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ list.splice(+b.dataset.rm,1); save(); renderOc(); });
-  box.querySelectorAll('[data-imgdel]').forEach(b=> b.onclick = ()=>{ list[+b.dataset.imgdel].image=''; save(); renderOc(); });
+  box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(list,+b.dataset.up,-1); save(); renderSecInner(); });
+  box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(list,+b.dataset.dn,1); save(); renderSecInner(); });
+  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ list.splice(+b.dataset.rm,1); save(); renderSecInner(); });
+  box.querySelectorAll('[data-imgdel]').forEach(b=> b.onclick = ()=>{ list[+b.dataset.imgdel].image=''; save(); renderSecInner(); });
   box.querySelectorAll('[data-img]').forEach(b=> b.onclick = ()=>{
     const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
     inp.onchange = async e => {
       const f = e.target.files[0]; if(!f) return;
-      try{ list[+b.dataset.img].image = await fileToData(f, 700, .85); save(); renderOc(); toast('사진을 적용했어요'); }
+      try{ list[+b.dataset.img].image = await fileToData(f, 700, .85); save(); renderSecInner(); toast('사진을 적용했어요'); }
       catch(err){ toast('이미지를 읽지 못했어요'); }
     };
     inp.click();
   });
 }
-$('#ocAdd').onclick = () => { D.oc.characters.push({name:'', pair:'', image:'', soon:true}); save(); renderOc(); };
+$('#ocAdd').onclick = () => { D[SEC].characters.push({name:'', note:'', image:'', soon:true}); save(); renderSecInner(); };
 
 /* ---------- 음악 ---------- */
 function renderTracks(){
@@ -527,18 +548,21 @@ $('#scSort').onclick = () => {
   save(); renderSc();
 };
 
-/* ---------- 잠금 ---------- */
-function renderPin(){ $('#pinState').textContent = D.pin ? '현재: 잠금 사용 중' : '현재: 잠금 없음'; }
+/* ---------- 잠금 (메인 / 페이지별 비밀번호 따로) ---------- */
+const getPin = () => MODE === 'sec' ? D.pins[SEC] : D.pin;
+const setPin = v => { if (MODE === 'sec') D.pins[SEC] = v; else D.pin = v; };
+const OKK = 'sc_ok' + (MODE === 'sec' ? '_' + SEC : '');
+function renderPin(){ $('#pinState').textContent = getPin() ? '현재: 잠금 사용 중' : '현재: 잠금 없음'; }
 $('#pinSet').onclick = () => {
   const v = $('#pin').value; if(!v){ toast('비밀번호를 입력해 주세요'); return; }
-  D.pin = hash(v); $('#pin').value=''; save(); renderPin(); toast('잠금을 설정했어요 (내보내기 후 반영)');
+  setPin(hash(v)); $('#pin').value=''; save(); renderPin(); toast(MODE === 'sec' ? '잠금을 설정했어요 (게시 후 반영)' : '잠금을 설정했어요 (게시/내보내기 후 반영)');
 };
-$('#pinDel').onclick = () => { D.pin=''; save(); renderPin(); toast('잠금을 해제했어요'); };
-if (D.pin && sessionStorage.getItem('sc_ok') !== D.pin) $('#lock').classList.add('on');
-else localStorage.setItem('sc_owner', '1');
+$('#pinDel').onclick = () => { setPin(''); save(); renderPin(); toast('잠금을 해제했어요'); };
+if (getPin() && sessionStorage.getItem(OKK) !== getPin()) $('#lock').classList.add('on');
+else if (MODE === 'main') localStorage.setItem('sc_owner', '1');
 $('#lockForm').onsubmit = e => {
   e.preventDefault();
-  if (hash($('#lockPw').value) === D.pin){ sessionStorage.setItem('sc_ok', D.pin); localStorage.setItem('sc_owner', '1'); $('#lock').classList.remove('on'); }
+  if (hash($('#lockPw').value) === getPin()){ sessionStorage.setItem(OKK, getPin()); if (MODE === 'main') localStorage.setItem('sc_owner', '1'); $('#lock').classList.remove('on'); }
   else { $('#lockErr').textContent = '비밀번호가 달라요'; $('#lockPw').value=''; }
 };
 
@@ -569,6 +593,13 @@ $('#reset').onclick = () => {
 };
 
 function initAll(){
+  if (MODE === 'sec'){
+    const lb = SEC_DEF[SEC].title;
+    $('#h1').textContent = lb + ' 관리자'; $('#secH').textContent = lb.toUpperCase() + ' 페이지'; $('#pinH').textContent = lb.toUpperCase() + ' 잠금 (선택)';
+    $('#lead').innerHTML = '이 화면은 <b>' + lb + '</b> 페이지만 관리해요. 고친 내용은 이 브라우저에 바로 저장되고,<br>다른 사람에게도 보이게 하려면 상단 <b>게시하기</b>를 누르세요. 게시하면 이 페이지 내용(과 비밀번호)만 바뀌고 다른 페이지는 그대로예요.';
+    $('#backLink').href = 'index.html#' + SEC; $('#backLink').textContent = '← ' + lb + ' 페이지 보기';
+    document.title = 'Admin · ' + lb;
+  }
   bindBasic(); renderMenu(); renderMain(); renderFav(); renderOc(); renderTracks(); bindVol();
   $('#showCal').checked = D.showCalendar !== false; renderDD(); renderSc(); renderPin();
 }
@@ -628,30 +659,53 @@ async function ghPut(path, b64, msg){
     throw new Error(await ghFail(r));
   }
 }
+async function fetchRemote(){
+  const g = ghGet();
+  const r = await ghApi('data.js', 'GET', null, '?ref=' + encodeURIComponent(g.branch || 'main') + '&t=' + Date.now());
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error(await ghFail(r));
+  const j = await r.json();
+  const txt = decodeURIComponent(escape(atob(j.content.replace(/\n/g,''))));
+  return JSON.parse(txt.replace(/^window\.SITE_DATA\s*=\s*/,'').replace(/;\s*$/,''));
+}
 $('#pub').onclick = async () => {
   const g = ghGet();
   if (!(g.token && g.owner && g.repo)){
     toast('아래 “GitHub 연결”을 먼저 설정해 주세요');
     $('#ghCard').scrollIntoView({behavior:'smooth'}); return;
   }
+  g.branch = g.branch || 'main'; localStorage.setItem(GH_KEY, JSON.stringify(g));
   const btn = $('#pub'); btn.disabled = true; btn.textContent = '게시 중…';
   try{
     const ts = Date.now();
     const up = async (dataUrl, name) => { await ghPut('images/'+name, dataUrl.split(',')[1], 'Upload '+name); return 'images/'+name; };
-    if (D.mainImage.startsWith('data:')) D.mainImage = await up(D.mainImage, `main-${ts}.jpg`);
-    if ((D.favicon||'').startsWith('data:')) D.favicon = await up(D.favicon, `favicon-${ts}.png`);
-    for (let i=0; i<D.oc.characters.length; i++){
-      const c = D.oc.characters[i];
-      if ((c.image||'').startsWith('data:')) c.image = await up(c.image, `oc-${ts}-${i}.jpg`);
+    const upSection = async k => {
+      const list = D[k].characters;
+      for (let i=0; i<list.length; i++) if ((list[i].image||'').startsWith('data:')) list[i].image = await up(list[i].image, `${k}-${ts}-${i}.jpg`);
+    };
+    if (MODE === 'sec'){
+      await upSection(SEC);
+      const remote = (await fetchRemote()) || {};
+      remote[SEC] = D[SEC];
+      remote.pins = Object.assign({}, remote.pins, {[SEC]: D.pins[SEC]});
+      remote.updatedAt = Date.now();
+      await ghPut('data.js', btoa(unescape(encodeURIComponent('window.SITE_DATA = ' + JSON.stringify(remote, null, 2) + ';\n'))), 'Update ' + SEC + ' page');
+      D = norm(Object.assign({}, DEF, remote)); save(); initAll();
+    } else {
+      if (D.mainImage.startsWith('data:')) D.mainImage = await up(D.mainImage, `main-${ts}.jpg`);
+      if ((D.favicon||'').startsWith('data:')) D.favicon = await up(D.favicon, `favicon-${ts}.png`);
+      for (let i=0; i<D.playlist.length; i++){
+        const t = D.playlist[i];
+        if ((t.thumb||'').startsWith('data:')) t.thumb = await up(t.thumb, `thumb-${ts}-${i}.jpg`);
+      }
+      // OC/Pair/Me 내용과 그 비밀번호는 각 페이지 관리자에서 게시한 최신 내용을 그대로 유지
+      const remote = await fetchRemote();
+      if (remote){ SECS.forEach(k => { if (remote[k]) D[k] = remote[k]; }); D.pins = Object.assign({}, D.pins, remote.pins || {}); }
+      D = norm(D); save();
+      const txt = 'window.SITE_DATA = ' + JSON.stringify(D, null, 2) + ';\n';
+      await ghPut('data.js', btoa(unescape(encodeURIComponent(txt))), 'Update site data');
+      renderMain(); renderTracks();
     }
-    for (let i=0; i<D.playlist.length; i++){
-      const t = D.playlist[i];
-      if ((t.thumb||'').startsWith('data:')) t.thumb = await up(t.thumb, `thumb-${ts}-${i}.jpg`);
-    }
-    save();
-    const txt = 'window.SITE_DATA = ' + JSON.stringify(D, null, 2) + ';\n';
-    await ghPut('data.js', btoa(unescape(encodeURIComponent(txt))), 'Update site data');
-    renderMain(); renderTracks();
     $('#status').textContent = '✓ 게시 완료';
     toast('게시했어요! 1~2분 뒤 사이트에 반영돼요');
   }catch(e){
