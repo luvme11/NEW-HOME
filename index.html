@@ -143,8 +143,8 @@ input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:
 .menu li a:hover b{color:#2a2a2a}
 
 /* 페이지 전환 */
-body[data-view="oc"] .home-only{display:none !important}
-body:not([data-view="oc"]) .page{display:none}
+body[data-view="sec"] .home-only{display:none !important}
+body:not([data-view="sec"]) .page{display:none}
 .page{position:absolute;left:74px;top:172px;width:min(1000px,calc(100vw - 148px))}
 .back{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:.3em;color:#555}
 .back svg{width:8px;height:8px;stroke:#555;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -188,7 +188,7 @@ body:not([data-view="oc"]) .page{display:none}
 </head>
 <body>
 
-<a class="heart home-only" href="admin.html" aria-label="admin" title="">♡</a>
+<a class="heart" id="heart" href="admin.html" aria-label="admin" title="">♡</a>
 
 <h1 class="title home-only" id="title"></h1>
 
@@ -203,7 +203,7 @@ body:not([data-view="oc"]) .page{display:none}
 <ul class="menu home-only" id="menu"></ul>
 
 <!-- OC 페이지 -->
-<main class="page" id="view-oc">
+<main class="page" id="view-sec">
   <a class="back" href="#home"><svg viewBox="0 0 8 8"><path d="M5.5 1 2.5 4l3 3"/></svg>HOME</a>
   <h2 class="pg-title" id="ocTitle">OC</h2>
   <p class="pg-sub" id="ocSub"></p>
@@ -271,7 +271,7 @@ function loadData(){
     const ls = JSON.parse(localStorage.getItem('sc_data') || 'null');
     if (ls && (ls.updatedAt||0) > (base.updatedAt||0)) d = ls;
   }catch(e){}
-  return Object.assign({title:[],menu:[],playlist:[],ddays:[],schedule:[],oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS',characters:[]},volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
+  return Object.assign({title:[],menu:[],playlist:[],ddays:[],schedule:[],oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS',characters:[]},pair:{title:'Pair',subtitle:'PAIR',characters:[]},me:{title:'Me',subtitle:'ABOUT ME',characters:[]},volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
 }
 const DATA = loadData();
 
@@ -289,7 +289,9 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 $('#title').innerHTML = DATA.title.map(esc).join('<br>');
 document.title = DATA.title.join(' ') || 'Home';
 $('#vtext').textContent = DATA.verticalText;
-const MENU = DATA.menu.map(m => typeof m === 'string' ? {label:m, href:/^oc$/i.test(m.trim()) ? '#oc' : ''} : m);
+const SEC_KEYS = ['oc','pair','me'];
+const autoHref = l => { const k = String(l||'').trim().toLowerCase(); return SEC_KEYS.includes(k) ? '#'+k : ''; };
+const MENU = DATA.menu.map(m => typeof m === 'string' ? {label:m, href:autoHref(m)} : {label:m.label, href:m.href || autoHref(m.label)});
 $('#menu').innerHTML = MENU.map((m,i)=>{
   const b = `<b>${esc(m.label)}</b>`;
   const ext = /^https?:/.test(m.href||'') ? ' target="_blank" rel="noopener"' : '';
@@ -495,18 +497,19 @@ vol.oninput = e => { vol.style.setProperty('--p', e.target.value+'%'); if(ready)
 
 loadMeta();
 
-/* ===== OC 페이지 ===== */
-(function(){
-  const o = DATA.oc || {};
-  $('#ocTitle').textContent = o.title || 'OC';
+/* ===== 섹션 페이지 (OC / Pair / Me) ===== */
+function renderSection(k){
+  const o = DATA[k] || {};
+  $('#ocTitle').textContent = o.title || k.toUpperCase();
   $('#ocSub').textContent = o.subtitle || '';
   const LOCK = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="5.2" width="8" height="5.5" rx="1.2"/><path d="M4 5V3.8a2 2 0 0 1 4 0V5"/></svg>';
   const ch = o.characters || [];
-  $('#ocGrid').innerHTML = ch.length ? ch.map((c,i)=>
-    `<div class="oc-card"><div class="oc-img">${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">` : '<span class="oc-noimg">NO IMAGE</span>'}${c.soon ? `<span class="soon">${LOCK}COMING SOON</span>` : ''}</div>` +
-    `<div class="oc-info"><div class="no">No.${pad(i+1)}</div><div class="nm">${esc(c.name||'')}</div>${c.pair ? `<div class="pr">Pair ${esc(c.pair)}</div>` : ''}</div></div>`
-  ).join('') : '<div class="oc-empty">아직 등록된 캐릭터가 없어요</div>';
-})();
+  $('#ocGrid').innerHTML = ch.length ? ch.map((c,i)=>{
+    const note = c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : '');
+    return `<div class="oc-card"><div class="oc-img">${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">` : '<span class="oc-noimg">NO IMAGE</span>'}${c.soon ? `<span class="soon">${LOCK}COMING SOON</span>` : ''}</div>` +
+    `<div class="oc-info"><div class="no">No.${pad(i+1)}</div><div class="nm">${esc(c.name||'')}</div>${note ? `<div class="pr">${esc(note)}</div>` : ''}</div></div>`;
+  }).join('') : '<div class="oc-empty">아직 등록된 카드가 없어요</div>';
+}
 
 /* ===== 페이지 전환(해시) + 음악 접기 ===== */
 let VIEW = 'home', homeCollapsed = false;
@@ -516,9 +519,11 @@ musicEl.querySelector('[data-toggle]').onclick = () => setMusic(!musicEl.classLi
 $('#mOpen').onclick = () => setMusic(false);
 function route(){
   const r = (location.hash || '').replace(/^#/, '');
-  VIEW = r === 'oc' ? 'oc' : 'home';
+  VIEW = SEC_KEYS.includes(r) ? 'sec' : 'home';
+  if (VIEW === 'sec') renderSection(r);
+  $('#heart').href = VIEW === 'sec' ? 'admin.html?p=' + r : 'admin.html';
   document.body.dataset.view = VIEW;
-  musicEl.classList.toggle('collapsed', VIEW === 'oc' ? true : homeCollapsed);
+  musicEl.classList.toggle('collapsed', VIEW === 'sec' ? true : homeCollapsed);
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
