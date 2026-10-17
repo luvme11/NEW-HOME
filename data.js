@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792264089330,
+  "updatedAt": 1792264712273,
   "title": [
     "LOVE",
     "ME"
@@ -38,5 +38,20 @@ window.SITE_DATA = {
       "done": false
     }
   ],
-  "pin": ""
+  "pin": "",
+  "oc": {
+    "title": "OC",
+    "subtitle": "ORIGINAL CHARACTERS",
+    "characters": [
+      {
+        "name": "선유이",
+        "note": "Pair 임찬희",
+        "image": "images/oc-1792264710015-0.jpg",
+        "soon": true
+      }
+    ]
+  },
+  "pins": {
+    "oc": ""
+  }
 };
