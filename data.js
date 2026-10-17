@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792273403641,
+  "updatedAt": 1792277034652,
   "title": [
     "LOVE",
     "ME"
@@ -174,6 +174,7 @@ window.SITE_DATA = {
         "bullets": [
           "==1T1D 극온리 성향==으로 동일한 배려 요구합니다",
           "==탐라 유입 및 직멘 배려, 정실 찍먹 안 하기== 필수라 어려우신 분들은 ==흔적 X==",
+          "==MAIN 배려 필요, SUB 배려 불필요==",
           "블락이 아닌 경우 ==재연결 OK==",
           "블락의 경우 어떠한 경우에도 컨택 X"
         ]
@@ -277,12 +278,31 @@ window.SITE_DATA = {
           "couple": "bad quality, low quality, worst quality, lowres, jpeg artifacts, cropped, bad anatomy, bad proportions, watermark, username, artist name, nsfw,\n\n(boy with pale skin:1.5), (boy with white skin:1.5), (pale-skinned male:1.5), same skin tone, washed-out skin, girlish boy, feminine boy, (two girls:1.4), (2girls:1.4), (two boys:1.4), (2boys:1.4), (yaoi:1.3), (yuri:1.3), multiple girls, multiple boys, boy and boy, girl and girl,\n\ngirl with dark skin, girl with tanned skin, girl with black hair, girl with long hair,\n\nround face, baby face, chubby face, wide jaw, short neck, thick neck, droopy eyes, thick eyebrows, lipstick,\n\nbuzz cut, undercut, bald, slicked-back hair,\n\n(ash brown hair:1.5), (ashy hair:1.4), (grayish brown hair:1.5), (greyish brown hair:1.5), (cool-toned brown hair:1.3), (desaturated brown hair:1.3), gray hair, grey hair, silver hair, white hair, platinum hair, blonde hair, bleached hair,\n\n(wolf cut:1.3), (boy with wolf cut:1.4), mullet, shaggy hair, layered hair, (boy with long hair:1.3), long hair on boy, hair past nape, hair covering neck, hair on neck, back hair, long back hair, hair behind shoulders, ponytail, man bun, hair touching collar,\n\nbodybuilder, extremely muscular, stocky body, overweight, stubby fingers, chest hair, armpit hair,\n\nthree people, group, background person, clone, duplicate, extra person, extra character, different outfits, inconsistent appearance, extra head, extra arms, bad hands, extra fingers, fused fingers, missing fingers, distorted face, asymmetrical face, hands on wrong person, arms crossing incorrectly, (puffed cheeks:1.4), inflated cheeks, cheek puffing, blowing cheeks, fish lips, duck lips,\n\n3d, 3d render, 3dcg, cgi, game cg, realistic, photorealistic, colored border, decorative border, sweat, sweatdrop, sweat drop, sweating, sweaty, perspiration, wet skin,"
         },
         {
+          "tag": "유리미르",
+          "label": "Caveduck",
+          "couple": "",
+          "a": {
+            "role": "OC",
+            "name": "한유리",
+            "image": "images/me-1792277028638-0.jpg",
+            "look": "Girl, cute face, mistake, shy, black hair, black eyes, 2::tarame::, wavy long hair, thick white headband, wide white hairband",
+            "outfit": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, mosaic, cropped, error,\nbad composition, bad anatomy, bad hands, bad fingers,\nmissing fingers, extra fingers, extra hands, extra legs,\ntext, watermark, username, artist name, copyright name,\n\nnsfw,\n\nblonde hair, beige hair, brown hair, light brown hair, white hair, silver hair, gray hair, pink hair, purple hair, blue hair, red hair, multicolored hair, gradient hair, colored streaks, hair highlights,\n\npink eyes, brown eyes, blue eyes, green eyes, purple eyes, red eyes, golden eyes, amber eyes, heterochromia, multicolored eyes, glowing eyes, light-colored irises,\n\nshort hair, bob cut, pixie cut, shoulder-length hair, medium hair, blunt bob, boyish haircut, asymmetrical hair, ponytail, twintails, braids, hair bun, straight hair,\n\nbad anatomy, bad proportions, asymmetrical eyes, deformed eyes, cross-eyed, extra limbs, extra fingers, low quality, worst quality, blurry"
+          },
+          "b": {
+            "role": "PAIR",
+            "name": "서미르",
+            "image": "images/me-1792277028638-1.jpg",
+            "look": "boy, mature male, pale skin, broad shoulders, slender, 2::light brown hair, short hair::, full bangs, dark brown eyes, 1.3::tareme::, 0.6::tsurime, sanpaku::, -1::blunt ends, wolf cut, blush, parted bangs::",
+            "outfit": ""
+          }
+        },
+        {
           "tag": "성제다정",
           "label": "Weak Hero",
           "a": {
             "role": "OC",
             "name": "이다정",
-            "image": "images/me-1792270958582-0.jpg",
+            "image": "images/me-1792277028638-2.jpg",
             "look": "1girl, solo,\nfair skin,\n\n1.8::light beige blonde hair::,\n1.7::soft creamy blonde hair::,\n1.5::pale blonde hair::,\n\n2.0::chin-length bob haircut::,\n2.0::rounded bob haircut::,\n1.9::one-length bob haircut::,\n1.9::smooth compact bob silhouette::,\n1.8::hair ending around the jawline::,\n1.8::even-length hair::,\n1.8::unlayered hair::,\n1.7::rounded sides::,\n\n2.0::inward-curled hair ends::,\n1.9::soft C-curled ends::,\n1.8::hair tips curling inward toward the jaw::,\n1.7::rounded inward hair ends::,\n\n1.9::hair worn down::,\n1.9::untied hair::,\n1.8::loose hair on both sides::,\n1.8::no tied sections::,\n\n1.8::soft see-through bangs::,\n1.7::thin straight bangs::,\n1.6::slightly parted bangs::,\n\n1.8::green eyes::,\n1.6::light green eyes::,\n1.5::clear emerald green eyes::",
             "outfit": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, mosaic, cropped, error,\nbad composition, bad anatomy, bad hands, bad fingers,\nmissing fingers, extra fingers, extra hands, extra legs,\ntext, watermark, username, artist name, copyright name,\n\nnsfw,\n\narmpit hair, axillary hair, hairy armpits, underarm hair, hairy underarms,\nchest hair, hairy chest, torso hair, body hair on chest,\n\nfull lips, thick lips, plump lips, glossy lips, lip gloss, lipstick,\nbright pink lips, red lips, orange lips, saturated lips,\nheavy lip shading, detailed realistic lips, parted lips,\n\nfemale facing viewer, woman facing camera, frontal female face, front view woman,\n\nfemale short hair, short female hair, female short haircut,\nfemale bob cut, female bob haircut, female short bob,\nfemale blunt bob, female lob, female pixie cut,\nfemale cropped hair, female chin-length hair,\nfemale jaw-length hair, female neck-length hair,\nfemale shoulder-length hair, female medium hair,\n\nfemale bangs, female fringe, female blunt bangs,\nfemale straight bangs, female full bangs,\nfemale short bangs, female wispy bangs,\nfemale curtain bangs, female side bangs,\nfemale side-swept bangs, female see-through bangs,\nfemale parted bangs, female forelock,\nfemale face-framing bangs,\nfemale short front hair, female short front strands,\nfemale loose front strands,\nfemale hair over forehead, female hair covering forehead,\nfemale forehead hair strands,\n\nframe, picture frame, photo frame, ornate frame, decorative frame, gold frame,\nborder frame, framed image, card frame, panel frame, window frame,\nthick frame, outer frame, inner frame, decorative border, ornate border,\ngold border, fancy border, rectangular border, page border, margin border,\nposter border, print border, frame ornament, vintage frame, baroque frame,\nfiligree frame, gilded frame, embellished border,\npolaroid frame, comic panel border, manga panel border,\ncard border, trading card border, sticker sheet border around whole image,\nfull image border, border around the composition, boxed composition,\n\nfemale short hair,\nfemale bob cut,\nfemale bob haircut,\nfemale short bob,\nfemale chin-length hair,\nfemale jaw-length hair,\nfemale neck-length hair,\nfemale shoulder-length hair,\nfemale medium hair,\nfemale cropped hair,\nfemale pixie cut,\n\nmultiple people,\ntwo people,\ntwo girls,\ntwo women,\ncouple,\nduo,\ngroup,\ncrowd,\nextra person,\nextra character,\nbackground person,\ndistant person,\nsecond person,\nduplicate person,\nduplicate character,\ncloned character,\nclone,\n\nextra face,\nextra head,\nextra body,\nextra torso,\nextra arms,\nextra legs,\nmultiple bodies,\nmerged bodies,\n\nbad anatomy,\nbad proportions,\ndeformed body,\ndistorted face,\nbad hands,\nbad fingers,\nextra fingers,\nmissing fingers,\n\nshort hair,\nbob haircut,\nmedium hair,\nhaircut,\ndifferent hairstyle,\n\nbad hands, malformed hands, deformed hands,\nextra hands, duplicate hand, extra arms,\nextra fingers, extra digits, too many fingers,\nsix fingers, duplicate fingers, fused fingers,\nwrong number of fingers, incorrect number of fingers,\nextra thumb, multiple thumbs,\n\n3d,\n3d render,\n3dcg,\ncg render,\ncgi,\ngame cg,\nvideo game character,\ngame character render,\n3d anime,\n3d anime girl,\n3d model,\nrendered character,\noctane render,\nunreal engine,\nblender render, \n\nbangs, fringe, blunt bangs, straight-across bangs, full bangs, curtain bangs, see-through bangs, wispy bangs, side bangs, side-swept bangs, parted bangs, forehead-covered hair, hair covering forehead, face-framing bangs,\n\nextra arms, extra hands, multiple arms, multiple hands, duplicate limbs, duplicated arms, malformed arms, fused arms, bad hands, extra fingers, fused fingers, bad anatomy, bad proportions, deformed body, distorted body, hair fused with arms, hush cut, hush haircut,\nwolf cut, shag cut, shaggy hair,\nlayered bob, layered hair, short layers,"
           },
