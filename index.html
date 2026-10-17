@@ -302,6 +302,7 @@ a.fc:hover{transform:translateY(-2px);border-color:#bbb}
 .pb button{flex:1;height:22px;border:1px solid #ddd;border-radius:11px;font-size:8.5px;font-weight:700;color:#555;display:flex;align-items:center;justify-content:center;gap:4px}
 .pb button:hover{border-color:#2a2a2a;color:#111}.pb button.na{opacity:.4}
 .pb svg{width:9px;height:9px}
+.pb.pc{margin-top:4px}.pb.pc button{height:24px}
 @media (max-width:1000px){
   body[data-sec="me"] #view-me{grid-template-columns:1fr;gap:26px;width:100%}
   .me-card{height:auto}.me-body{overflow:visible}
@@ -731,7 +732,7 @@ function renderSection(k){
 }
 
 /* ===== Me / Profile ===== */
-const pcd=(t,l,a,b)=>({tag:t,label:l,a:{role:'OC',name:a,image:'',look:'',outfit:''},b:{role:'PAIR',name:b,image:'',look:'',outfit:''}});
+const pcd=(t,l,a,b)=>({tag:t,label:l,couple:'',a:{role:'OC',name:a,image:'',look:'',outfit:''},b:{role:'PAIR',name:b,image:'',look:'',outfit:''}});
 const ME_DEF={v:2,title:'Profile',subtitle:'ABOUT THE ACCOUNT',avatar:'',name:'xoya',handle:'@xxxoyaaa',
  about:{profile:{title:'프로필',label:'PROFILE',fields:[{k:'NAME',v:'쏘야'},{k:'AGED',v:'성인 여성'}]},
   notice:{title:'안내',label:'Notice',rows:[
@@ -757,7 +758,7 @@ function meTab(m){
   if(MT===1) return f.groups.map((g,gi)=>`<div class="sec">${sh(gi+1,g.title,g.sites.length+' SITES')}<div class="fg">${g.sites.map(s=>{
     const u=fixUrl(s.url);
     return `<${u?`a href="${esc(u)}" target="_blank" rel="noopener"`:'div'} class="fc"><div class="fi">${s.image?`<img src="${esc(s.image)}" alt="" loading="lazy">`:''}</div><div class="ft"><div><b>${esc(s.title)}</b>${s.desc?`<small>${esc(s.desc)}</small>`:''}</div>${u?`<i class="ar">${ARROW_SVG}</i>`:''}</div></${u?'a':'div'}>`;}).join('')}</div></div>`).join('') || '<div class="oc-empty">아직 등록된 사이트가 없어요</div>';
-  return `<div class="pg2">${pr.cards.map((c,ci)=>`<div>${sh(ci+1,'#'+c.tag,c.label,'sm')}<div class="pi">${[c.a,c.b].map(x=>x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy">`:'<u></u>').join('')}</div><div class="pn">${['a','b'].map((k,j)=>`<div><div class="pw"><em class="rl${j?'':' dk'}">${esc(c[k].role)}</em>${esc(c[k].name)}</div><div class="pb">${[['look','외형'],['outfit','의상']].map(([t,n])=>`<button data-c="${ci}.${k}.${t}" class="${c[k][t]?'':'na'}">${CP_SVG}${n}</button>`).join('')}</div></div>`).join('')}</div></div>`).join('')}</div>` + (pr.cards.length?'':'<div class="oc-empty">아직 등록된 프롬프트가 없어요</div>');
+  return `<div class="pg2">${pr.cards.map((c,ci)=>`<div>${sh(ci+1,'#'+c.tag,c.label,'sm')}<div class="pi">${[c.a,c.b].map(x=>x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy">`:'<u></u>').join('')}</div><div class="pn">${['a','b'].map((k,j)=>`<div><div class="pw"><em class="rl${j?'':' dk'}">${esc(c[k].role)}</em>${esc(c[k].name)}</div><div class="pb">${[['look','외형'],['outfit','네거티브']].map(([t,n])=>`<button data-c="${ci}.${k}.${t}" class="${c[k][t]?'':'na'}">${CP_SVG}${n}</button>`).join('')}</div></div>`).join('')}</div><div class="pb pc"><button data-c="${ci}.c.couple" class="${c.couple?'':'na'}">${CP_SVG}커플 네거티브</button></div></div>`).join('')}</div>` + (pr.cards.length?'':'<div class="oc-empty">아직 등록된 프롬프트가 없어요</div>');
 }
 function renderMe(){
   ME = DATA.me && DATA.me.v===2 ? Object.assign({}, ME_DEF, DATA.me) : ME_DEF;
@@ -772,7 +773,7 @@ function renderMe(){
 $('#meTabs').addEventListener('click', e=>{ const b=e.target.closest('[data-t]'); if(!b) return; MT=+b.dataset.t; renderMe(); $('#meBody').scrollTop=0; });
 $('#meBody').addEventListener('click', async e=>{
   const b=e.target.closest('[data-c]'); if(!b) return;
-  const [i,k,t]=b.dataset.c.split('.'), txt=ME.prompt.cards[+i][k][t]||'';
+  const [i,k,t]=b.dataset.c.split('.'), txt=(k==='c'?ME.prompt.cards[+i].couple:ME.prompt.cards[+i][k][t])||'';
   if(!txt) return;
   try{ await navigator.clipboard.writeText(txt); }catch(x){ const a=document.createElement('textarea'); a.value=txt; document.body.appendChild(a); a.select(); try{document.execCommand('copy')}catch(y){} a.remove(); }
   const o=b.innerHTML; b.textContent='복사됨 ✓'; setTimeout(()=>b.innerHTML=o,1200);
