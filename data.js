@@ -1,10 +1,10 @@
 window.SITE_DATA = {
-  "updatedAt": 1792265022776,
+  "updatedAt": 1792265265249,
   "title": [
     "LOVE",
     "ME"
   ],
-  "mainImage": "images/main-1792265020085.jpg",
+  "mainImage": "images/main-1792265260687.jpg",
   "verticalText": "chanhee",
   "menu": [
     {
@@ -47,7 +47,7 @@ window.SITE_DATA = {
       "done": false
     }
   ],
-  "favicon": "",
+  "favicon": "images/favicon-1792265260687.png",
   "pin": "",
   "oc": {
     "title": "OC",
