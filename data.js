@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792269850551,
+  "updatedAt": 1792269880886,
   "title": [
     "LOVE",
     "ME"
@@ -125,7 +125,7 @@ window.SITE_DATA = {
           {
             "groups": [
               {
-                "label": "AI!",
+                "label": "MAIN!",
                 "pills": [
                   {
                     "k": "Caveduck",
