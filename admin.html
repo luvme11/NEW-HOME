@@ -178,10 +178,15 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <div id="famBox"></div>
     <button class="btn sm ghost" id="famAddG">+ 그룹 추가</button>
 
-    <h2 style="margin-top:26px">TAB 3 · PROMPT</h2>
+    <h2 style="margin-top:26px">TAB 3 · PAIR PROMPT</h2>
     <p class="hint" style="margin:0 0 10px">카드마다 왼쪽(OC)·오른쪽(PAIR) 이미지와 외형/네거티브 프롬프트를 넣으면 버튼을 눌러 복사할 수 있어요.</p>
     <div id="prBox"></div>
     <button class="btn sm ghost" id="prAdd">+ 카드 추가</button>
+
+    <h2 style="margin-top:26px">TAB 4 · OC PROMPT</h2>
+    <p class="hint" style="margin:0 0 10px">OC 한 명짜리 카드예요. 외형/네거티브 프롬프트만 있고 커플 네거티브는 없어요.</p>
+    <div id="ocpBox"></div>
+    <button class="btn sm ghost" id="ocpAdd">+ OC 카드 추가</button>
   </section>
 
   <section class="card mainonly">
@@ -286,6 +291,7 @@ const ME_DEF={v:2,title:'Profile',subtitle:'ABOUT THE ACCOUNT',avatar:'',name:'x
    bullets:['==유동적인 성향==으로 배려 요구치 않습니다','트친소 알티로 인한 유입마저 곤란하신 분 연결 어렵습니다','계정 방치 및 교류 없는 단순 맞구독 비정기적 정리하며 ==재연결 OK==']},
   ng:{title:'NG',label:'NOTICE',items:['산타 한정 성향 예민하신 분','언급 없는 페어의 배려 요구','성향 억측','ff 100 ↑']}},
  family:{groups:[{title:'Family Site',sites:[{title:'Text Editor',desc:'발췌 기능 포함 글자 편집기'},{title:'winter.santarchive.com',desc:'겨울 놀이동산 3D 안내'},{title:'santa.naru.pub',desc:'기존 성향글'},{title:'[Legacy] 프롬프트',desc:''}]}]},
+ oc:{cards:[]},
  prompt:{cards:[pcd('탱글','ARCH','사이다','산타'),pcd('724','Aftermess','엑스','세븐'),pcd('더블','ARCH','더스티','블루'),pcd('서서','Sizz','서하리','서해영')]}};
 const KEY = 'sc_data';
 const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],favicon:'',pin:''};
@@ -516,7 +522,7 @@ const parseRow = s => ({groups: s.split('/').map(g => {
 const rowTxt = r => r.groups.map(g => g.label + ': ' + g.pills.map(p => p.k + '=' + p.v + (p.dark ? '*' : '')).join(', ')).join(' / ');
 function meImgs(m){
   const r = [], add = (o,k) => { if ((o[k]||'').startsWith('data:')) r.push([o,k]); };
-  add(m,'avatar'); m.family.groups.forEach(g => g.sites.forEach(s => add(s,'image'))); m.prompt.cards.forEach(c => { add(c.a,'image'); add(c.b,'image'); });
+  add(m,'avatar'); m.family.groups.forEach(g => g.sites.forEach(s => add(s,'image'))); m.prompt.cards.forEach(c => { add(c.a,'image'); add(c.b,'image'); }); ((m.oc||{}).cards||[]).forEach(c => add(c,'image'));
   return r;
 }
 function pickImg(max, cb){
@@ -560,6 +566,16 @@ function renderPr(){
       <textarea style="margin-top:6px" data-p="${b}.outfit" placeholder="네거티브 프롬프트">${esc(c[k].outfit)}</textarea></div>`; }).join('')}</div><textarea style="margin-top:10px" data-p="prompt.cards.${i}.couple" placeholder="커플 네거티브 프롬프트">${esc(c.couple||'')}</textarea></div>`).join('') || '<div class="empty">카드가 없어요</div>';
   bindMe(box, renderPr);
 }
+function renderOcp(){
+  const box = $('#ocpBox'), C = D.me.oc.cards;
+  box.innerHTML = C.map((c,i) => { const b = `oc.cards.${i}`; return `<div class="item"><div class="item-head">OC ${String(i+1).padStart(2,'0')}<span class="sp"></span>${hb('oc.cards',i)}</div>
+    <div class="row" style="gap:8px;margin-bottom:10px"><input type="text" data-p="${b}.tag" value="${esc(c.tag)}" placeholder="제목 (# 없이)"><input type="text" data-p="${b}.label" value="${esc(c.label)}" placeholder="오른쪽 라벨"></div>
+    <input type="text" data-p="${b}.name" value="${esc(c.name)}" placeholder="OC 이름">
+    <div class="row" style="gap:8px;margin:8px 0">${imgCtl(b+'.image',60,80)}</div>
+    <textarea data-p="${b}.look" placeholder="외형 프롬프트">${esc(c.look)}</textarea>
+    <textarea style="margin-top:6px" data-p="${b}.outfit" placeholder="네거티브 프롬프트">${esc(c.outfit)}</textarea></div>`; }).join('') || '<div class="empty">OC 카드가 없어요</div>';
+  bindMe(box, renderOcp);
+}
 function renderMe(){
   const m = D.me;
   $('#meT').value = m.title; $('#meS').value = m.subtitle; $('#meN').value = m.name; $('#meH').value = m.handle;
@@ -568,7 +584,7 @@ function renderMe(){
   $('#aRows').value = m.about.notice.rows.map(rowTxt).join('\n');
   $('#aBul').value = m.about.notice.bullets.join('\n');
   $('#aNg').value = m.about.ng.items.join('\n');
-  renderFam(); renderPr();
+  renderFam(); renderPr(); renderOcp();
 }
 [['meT','title'],['meS','subtitle'],['meN','name'],['meH','handle']].forEach(([id,k]) => $('#'+id).oninput = e => { D.me[k] = e.target.value; saveSoon(); });
 $('#aFields').oninput = e => { D.me.about.profile.fields = lines(e.target.value).map(kv); saveSoon(); };
@@ -578,6 +594,7 @@ $('#aNg').oninput = e => { D.me.about.ng.items = lines(e.target.value); saveSoon
 $('#meAvUp').onclick = () => pickImg(400, v => { D.me.avatar = v; renderMe(); });
 $('#meAvDel').onclick = () => { D.me.avatar = ''; save(); renderMe(); };
 $('#famAddG').onclick = () => { D.me.family.groups.push({title:'',sites:[]}); save(); renderFam(); };
+$('#ocpAdd').onclick = () => { D.me.oc.cards.push({tag:'',label:'',name:'',image:'',look:'',outfit:''}); save(); renderOcp(); };
 $('#prAdd').onclick = () => { D.me.prompt.cards.push(pcd('','','','')); save(); renderPr(); };
 
 /* ---------- 음악 ---------- */
