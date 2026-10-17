@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Santa & Cider</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--ink:#2a2a2a;--sub:#8a8a8a;--line:#d9d9d9;--card:#fff;--shadow:0 8px 30px rgba(0,0,0,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Pretendard Variable','Inter',system-ui,sans-serif;color:var(--ink);
+  background:linear-gradient(180deg,#f4f4f4 0%,#fff 60%);min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+/* 관리자 하트 */
+.heart{position:fixed;top:22px;right:38px;font-size:15px;line-height:1;color:#b9b9b9;z-index:20;transition:color .2s}
+.heart:hover{color:#666}
+
+.title{position:absolute;left:70px;top:218px;font-size:38px;font-weight:800;line-height:1.12;letter-spacing:-.02em}
+
+.stage{position:absolute;left:50%;top:220px;transform:translateX(-50%);width:336px}
+.arch{position:relative;width:336px;height:494px;border-radius:168px 168px 0 0;overflow:hidden;
+  background:#e9e9e9;box-shadow:0 24px 40px -12px rgba(0,0,0,.25)}
+.arch img{width:100%;height:100%;object-fit:cover;display:block}
+.arch .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#b5b5b5;font-size:11px;letter-spacing:.25em}
+.arch.has-img .ph{display:none}
+.vtext{position:absolute;left:calc(100% + 14px);bottom:0;writing-mode:vertical-rl;font-size:9px;letter-spacing:.32em;color:#777;white-space:nowrap}
+
+.menu{position:absolute;left:calc(50% + 232px);top:598px;width:212px;list-style:none}
+.menu li{display:flex;align-items:center;gap:10px;height:43px;font-size:11px;color:#777}
+.menu li i{flex:1;border-top:1px dashed var(--line)}
+.menu li b{font-size:17px;font-weight:600;color:#777;letter-spacing:-.01em}
+
+.widget{position:fixed;background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.05);z-index:10}
+.w-head{display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:36px;
+  border-bottom:1px dashed var(--line);font-size:9px;letter-spacing:.3em;color:#777;font-weight:600}
+.w-head .tools{display:flex;gap:10px;align-items:center}
+.w-head svg{width:14px;height:14px;stroke:#444;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.widget.collapsed .w-body{display:none}
+.widget.collapsed .w-head{border-bottom-color:transparent}
+
+/* 캘린더 */
+.cal{right:36px;top:135px;width:210px}
+.cal .w-body{padding:10px 10px 12px}
+.cal-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px dashed var(--line);margin:0 -10px;padding:0 13px 6px}
+.cal-month{display:flex;align-items:baseline;gap:6px}
+.cal-month .num{font-size:30px;font-weight:800;letter-spacing:-.03em}
+.cal-month .en{font-size:8px;font-weight:700;letter-spacing:.2em;line-height:1.35}
+.cal-month .en small{display:block;font-weight:500;color:#999;font-size:8px}
+.nav{display:flex;gap:4px}
+.nav button{width:19px;height:19px;border:1px solid #ddd;border-radius:50%;display:grid;place-items:center}
+.nav svg{width:9px;height:9px;stroke:#555;fill:none;stroke-width:2}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px;margin-top:6px;text-align:center}
+.grid .dow{font-size:7px;color:#999;height:20px;line-height:20px}
+.grid .d{font-size:9px;height:24.5px;display:grid;place-items:center;color:#222}
+.grid .d.wk{color:#888}
+.grid .d span{width:20px;height:20px;display:grid;place-items:center;border-radius:50%}
+.grid .d.today span{background:#2a2a2a;color:#fff;font-weight:700}
+.dday{margin:8px -10px 0;border-top:1px solid #eee;padding:10px 10px 0}
+.dday:empty{display:none}
+.dday-main{background:#f1f1f1;border-radius:12px;padding:10px 11px;display:flex;align-items:center;gap:6px;height:37px;margin-bottom:6px}
+.dday-main .k{font-size:9px;font-weight:600}
+.dday-main .n{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.dday-main .t{margin-left:3px;line-height:1.25;min-width:0}
+.dday-main .t b{display:block;font-size:8.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dday-main .t small{font-size:7px;color:#999;letter-spacing:.12em}
+.ev{display:flex;align-items:center;gap:8px;padding:7px 0 6px;border-bottom:1px dashed #e4e4e4;font-size:8px}
+.ev:last-child{border-bottom:0}
+.ev em{font-style:normal;border:1px solid #ddd;border-radius:10px;padding:2px 8px;font-size:7.5px;font-weight:600;min-width:34px;text-align:center}
+.ev span{flex:1}
+.ev time{color:#999;font-size:8px}
+
+/* 뮤직 */
+.music{left:12px;bottom:6px;width:290px}
+.music .w-head{height:44px;padding:0 14px}
+.music .w-body{padding:14px}
+.track{display:flex;align-items:center;gap:13px}
+.thumb{position:relative;width:54px;height:54px;border-radius:50%;overflow:hidden;background:#cfcfcf;flex:none;
+  display:grid;place-items:center;font-weight:700;color:#fff;font-size:20px}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08);z-index:2}
+.thumb.spin{animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.meta{min-width:0}
+.meta .name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta .by{font-size:11px;color:#888;margin-top:2px}
+.bar{display:flex;align-items:center;gap:8px;margin-top:15px;font-size:10px;color:#555;font-variant-numeric:tabular-nums}
+.bar input{flex:1}
+input[type=range]{-webkit-appearance:none;appearance:none;height:3px;border-radius:3px;outline:0;cursor:pointer;
+  background:linear-gradient(90deg,#2a2a2a var(--p,0%),#d3d3d3 var(--p,0%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:#2a2a2a}
+input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:50%;background:#2a2a2a}
+.ctrl{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.ctrl .mid{display:flex;align-items:center;gap:16px}
+.ctrl .skip svg{width:12px;height:12px;fill:#222}
+.play{width:36px;height:36px;border-radius:50%;background:#2a2a2a;display:grid;place-items:center}
+.play svg{width:13px;height:13px;fill:#fff}
+.vol{display:flex;align-items:center;gap:8px;width:92px}
+.vol svg{width:11px;height:11px;fill:#777;flex:none}
+.vol input{width:70px}
+#yt{position:fixed;left:-9999px;top:0;width:200px;height:200px;opacity:0;pointer-events:none}
+
+@media (max-width:1000px){
+  body{padding:48px 16px 330px}
+  .title,.stage,.menu{position:static;transform:none}
+  .title{margin:8px 0 20px}
+  .stage{margin:0 auto}
+  .menu{width:100%;max-width:336px;margin:30px auto 0}
+  .vtext{display:none}
+  .cal{position:relative;right:auto;top:auto;margin:30px auto 0}
+  .music{left:8px;right:8px;width:auto;max-width:360px;bottom:8px}
+  .heart{right:20px}
+}
+</style>
+<script src="data.js"></script>
+</head>
+<body>
+
+<a class="heart" href="admin.html" aria-label="admin" title="">♡</a>
+
+<h1 class="title" id="title"></h1>
+
+<div class="stage">
+  <div class="arch" id="arch">
+    <div class="ph">MAIN IMAGE</div>
+    <img id="mainImg" alt="" hidden>
+    <div class="vtext" id="vtext"></div>
+  </div>
+</div>
+
+<ul class="menu" id="menu"></ul>
+
+<section class="widget cal" id="cal">
+  <div class="w-head"><span>CALENDAR</span>
+    <div class="tools"><button data-toggle aria-label="접기"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button></div>
+  </div>
+  <div class="w-body">
+    <div class="cal-top">
+      <div class="cal-month"><span class="num" id="cNum"></span><span class="en"><span id="cMon"></span><small id="cYear"></small></span></div>
+      <div class="nav">
+        <button id="prev" aria-label="이전 달"><svg viewBox="0 0 10 10"><path d="M6.5 1.5 3 5l3.5 3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button id="next" aria-label="다음 달"><svg viewBox="0 0 10 10"><path d="M3.5 1.5 7 5 3.5 8.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="dday" id="dday"></div>
+  </div>
+</section>
+
+<section class="widget music" id="music">
+  <div class="w-head"><span>MUSIC</span>
+    <div class="tools">
+      <button id="open" aria-label="유튜브에서 열기"><svg viewBox="0 0 16 16"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5"/></svg></button>
+      <button data-toggle aria-label="접기"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button>
+    </div>
+  </div>
+  <div class="w-body">
+    <div class="track">
+      <div class="thumb" id="thumb"></div>
+      <div class="meta"><div class="name" id="tName"></div><div class="by" id="tBy"></div></div>
+    </div>
+    <div class="bar"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0"><span id="dur">0:00</span></div>
+    <div class="ctrl">
+      <div class="mid">
+        <button class="skip" id="back" aria-label="이전"><svg viewBox="0 0 12 12"><path d="M2 1.5h1.4v9H2zM10.5 1.5v9L4.5 6z"/></svg></button>
+        <button class="play" id="play" aria-label="재생"><svg id="ico" viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg></button>
+        <button class="skip" id="fwd" aria-label="다음"><svg viewBox="0 0 12 12"><path d="M8.6 1.5H10v9H8.6zM1.5 1.5v9L7.5 6z"/></svg></button>
+      </div>
+      <div class="vol"><svg viewBox="0 0 12 12"><path d="M1 4.5h2L6 2v8L3 7.5H1z"/></svg><input type="range" id="vol" min="0" max="100"></div>
+    </div>
+  </div>
+  <div id="yt"><div id="ytp"></div></div>
+</section>
+
+<script>
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,'0');
+
+/* ===== 데이터 로드: data.js 와 이 브라우저의 임시 저장본 중 더 최신인 것 ===== */
+function loadData(){
+  const base = window.SITE_DATA || {};
+  let d = base;
+  try{
+    const ls = JSON.parse(localStorage.getItem('sc_data') || 'null');
+    if (ls && (ls.updatedAt||0) > (base.updatedAt||0)) d = ls;
+  }catch(e){}
+  return Object.assign({title:[],menu:[],playlist:[],ddays:[],volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
+}
+const DATA = loadData();
+
+/* ===== 타이틀/메뉴/이미지 ===== */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#title').innerHTML = DATA.title.map(esc).join('<br>');
+document.title = DATA.title.join(' ') || 'Home';
+$('#vtext').textContent = DATA.verticalText;
+$('#menu').innerHTML = DATA.menu.map((m,i)=>`<li>${pad(i+1)}<i></i><b>${esc(m)}</b></li>`).join('');
+if (DATA.mainImage){ const img=$('#mainImg'); img.src=DATA.mainImage; img.hidden=false; $('#arch').classList.add('has-img'); }
+
+/* ===== 위젯 접기 ===== */
+document.querySelectorAll('[data-toggle]').forEach(b=>{
+  b.onclick = () => b.closest('.widget').classList.toggle('collapsed');
+});
+
+/* ===== 캘린더 ===== */
+if (DATA.showCalendar === false) $('#cal').style.display = 'none';
+const today = new Date(); today.setHours(0,0,0,0);
+let view = new Date(today.getFullYear(), today.getMonth(), 1);
+const MON = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+
+function renderCal(){
+  const y = view.getFullYear(), m = view.getMonth();
+  $('#cNum').textContent = m+1; $('#cMon').textContent = MON[m]; $('#cYear').textContent = y;
+  let h = ['일','월','화','수','목','금','토'].map(d=>`<div class="dow">${d}</div>`).join('');
+  const first = new Date(y,m,1).getDay(), last = new Date(y,m+1,0).getDate();
+  for(let i=0;i<first;i++) h += '<div class="d"></div>';
+  for(let d=1; d<=last; d++){
+    const wd = new Date(y,m,d).getDay();
+    const isT = (y===today.getFullYear() && m===today.getMonth() && d===today.getDate());
+    h += `<div class="d ${wd===0||wd===6?'wk':''} ${isT?'today':''}"><span>${d}</span></div>`;
+  }
+  $('#grid').innerHTML = h;
+}
+$('#prev').onclick = () => { view.setMonth(view.getMonth()-1); renderCal(); };
+$('#next').onclick = () => { view.setMonth(view.getMonth()+1); renderCal(); };
+renderCal();
+
+/* ===== 디데이 (관리자 페이지에서 추가한 것만 표시) ===== */
+(function(){
+  const since = [], until = [];
+  (DATA.ddays||[]).forEach(e=>{
+    if(!e.date) return;
+    const p = e.date.split('-').map(Number);
+    if(p.length<3 || p.some(isNaN)) return;
+    const [Y,M,D] = p;
+    if (e.type === 'since'){
+      const n = Math.floor((today - new Date(Y,M-1,D))/864e5) + 1;
+      since.push(`<div class="dday-main"><span class="k">D+</span><span class="n">${n}</span>
+        <span class="t"><b>${esc(e.label||'')}</b><small>${Y}.${pad(M)}.${pad(D)} ~</small></span></div>`);
+    } else {
+      let t = new Date(Y,M-1,D);
+      if (e.repeat){
+        t = new Date(today.getFullYear(), M-1, D);
+        if (t < today) t = new Date(today.getFullYear()+1, M-1, D);
+      } else if (t < today) return;
+      until.push({name:e.label||'', diff:Math.round((t-today)/864e5), md:`${pad(M)}.${pad(D)}`});
+    }
+  });
+  until.sort((a,b)=>a.diff-b.diff);
+  const evs = until.slice(0,3).map(e=>
+    `<div class="ev"><em>${e.diff===0?'D-DAY':'D-'+e.diff}</em><span>${esc(e.name)}</span><time>${e.md}</time></div>`).join('');
+  $('#dday').innerHTML = since.join('') + evs;
+})();
+
+/* ===== 뮤직 (YouTube IFrame API) ===== */
+const tracks = (DATA.playlist||[]).length ? DATA.playlist : [{url:'',title:'',artist:'',thumb:''}];
+let idx = 0, player = null, ready = false, playing = false;
+const ytId = u => ((u||'').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/)||[])[1];
+const fmt = s => { s=Math.floor(s||0); return Math.floor(s/60)+':'+pad(s%60); };
+
+function setThumb(src){
+  const t = $('#thumb'); t.innerHTML = '';
+  if (src){ const i = document.createElement('img'); i.src = src; t.appendChild(i); t.style.background=''; }
+  else { t.textContent = ((tracks[idx].title||'S')[0]).toUpperCase(); t.style.background='#bdbdbd'; }
+}
+function setSeek(v){ const e=$('#seek'); e.value=v; e.style.setProperty('--p',(v/10)+'%'); }
+function loadMeta(){
+  const t = tracks[idx];
+  $('#tName').textContent = t.title; $('#tBy').textContent = t.artist;
+  setThumb(t.thumb || '');
+  $('#open').style.display = t.url ? '' : 'none';
+  $('#open').onclick = () => window.open(t.url,'_blank');
+  $('#cur').textContent='0:00'; $('#dur').textContent='0:00'; setSeek(0);
+}
+function setIcon(p){
+  playing = p;
+  $('#ico').innerHTML = p ? '<path d="M2.5 1.5h2.6v9H2.5zM6.9 1.5h2.6v9H6.9z"/>' : '<path d="M3 1.5v9l7.5-4.5z"/>';
+  $('#thumb').classList.toggle('spin', p);
+}
+
+window.onYouTubeIframeAPIReady = () => {
+  player = new YT.Player('ytp', {
+    width:200, height:200, videoId: ytId(tracks[idx].url),
+    playerVars:{ playsinline:1, controls:0, rel:0 },
+    events:{
+      onReady: () => { ready = true; player.setVolume(DATA.volume); },
+      onStateChange: e => {
+        if (e.data === YT.PlayerState.PLAYING){ setIcon(true); $('#dur').textContent = fmt(player.getDuration()); }
+        else if (e.data === YT.PlayerState.PAUSED) setIcon(false);
+        else if (e.data === YT.PlayerState.ENDED){ tracks.length>1 ? go(1) : (setIcon(false), setSeek(0)); }
+      }
+    }
+  });
+};
+if (tracks.some(t=>ytId(t.url))){
+  const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
+}
+
+setInterval(()=>{
+  if(!ready || !playing) return;
+  const c = player.getCurrentTime(), d = player.getDuration();
+  if(d){ $('#cur').textContent = fmt(c); setSeek(c/d*1000); }
+}, 400);
+
+$('#play').onclick = () => {
+  if(!ready || !ytId(tracks[idx].url)) return;
+  playing ? player.pauseVideo() : player.playVideo();
+};
+$('#seek').oninput = e => {
+  const v = +e.target.value; setSeek(v);
+  if(ready){ const d = player.getDuration(); if(d) player.seekTo(d*v/1000, true); }
+};
+function go(step){
+  idx = (idx + step + tracks.length) % tracks.length;
+  loadMeta();
+  const id = ytId(tracks[idx].url);
+  if(ready && id) player.loadVideoById(id);
+}
+$('#back').onclick = () => { if (ready && player.getCurrentTime() > 3) player.seekTo(0,true); else go(-1); };
+$('#fwd').onclick = () => go(1);
+
+const vol = $('#vol'); vol.value = DATA.volume; vol.style.setProperty('--p', DATA.volume+'%');
+vol.oninput = e => { vol.style.setProperty('--p', e.target.value+'%'); if(ready) player.setVolume(+e.target.value); };
+
+loadMeta();
+</script>
+</body>
+</html>
