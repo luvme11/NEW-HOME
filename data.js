@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792265265249,
+  "updatedAt": 1792265347001,
   "title": [
     "LOVE",
     "ME"
@@ -57,6 +57,12 @@ window.SITE_DATA = {
         "name": "선유이",
         "note": "Pair 임찬희",
         "image": "images/oc-1792264710015-0.jpg",
+        "soon": true
+      },
+      {
+        "name": "츠키시로 시오리",
+        "note": "月城 しおり",
+        "image": "images/oc-1792265344606-1.jpg",
         "soon": true
       }
     ]
