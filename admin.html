@@ -105,7 +105,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <textarea id="title"></textarea>
     <label class="f">세로 문구</label>
     <input type="text" id="vtext">
-    <label class="f">오른쪽 목록 <small>01, 02, 03… 순서대로 표시</small></label>
+    <label class="f">오른쪽 목록 <small>왼쪽 = 이름, 오른쪽 = 이동 주소 (OC 페이지는 <code>#oc</code>, 비우면 눌리지 않아요)</small></label>
     <div id="menuList"></div>
     <button class="btn sm ghost" id="menuAdd">+ 항목 추가</button>
   </section>
@@ -125,6 +125,18 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
         <p class="hint">올린 이미지는 자동으로 가로 1200px 이내로 줄여서 data.js 안에 저장돼요. 파일로 따로 관리하려면 저장소에 이미지를 올리고 경로를 적으세요.</p>
       </div>
     </div>
+  </section>
+
+  <section class="card">
+    <h2>OC 페이지</h2>
+    <div class="row" style="gap:10px">
+      <div style="flex:1"><label class="f" style="margin-top:0">제목</label><input type="text" id="ocTitle"></div>
+      <div style="flex:1.4"><label class="f" style="margin-top:0">부제목</label><input type="text" id="ocSub"></div>
+    </div>
+    <label class="f">캐릭터 <small>No.01부터 순서대로 카드가 표시돼요</small></label>
+    <div id="ocList"></div>
+    <button class="btn sm ghost" id="ocAdd">+ 캐릭터 추가</button>
+    <p class="hint">메인 오른쪽 목록의 이동 칸에 <code>#oc</code>를 적으면 이 페이지로 연결돼요. (이름이 OC면 기본으로 연결돼 있어요)</p>
   </section>
 
   <section class="card">
@@ -218,6 +230,14 @@ const $ = s => document.querySelector(s);
 const KEY = 'sc_data';
 const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],favicon:'',pin:''};
 
+function norm(d){
+  d.menu = (d.menu||[]).map(m => typeof m === 'string'
+    ? {label:m, href:/^oc$/i.test(m.trim()) ? '#oc' : ''}
+    : {label:m.label||'', href:m.href||''});
+  d.oc = Object.assign({title:'OC', subtitle:'ORIGINAL CHARACTERS', characters:[]}, d.oc || {});
+  if (!Array.isArray(d.oc.characters)) d.oc.characters = [];
+  return d;
+}
 function load(){
   const base = window.SITE_DATA || {};
   let d = base;
@@ -225,7 +245,7 @@ function load(){
     const ls = JSON.parse(localStorage.getItem(KEY) || 'null');
     if (ls && (ls.updatedAt||0) > (base.updatedAt||0)) d = ls;
   }catch(e){}
-  return Object.assign({}, DEF, JSON.parse(JSON.stringify(d)));
+  return norm(Object.assign({}, DEF, JSON.parse(JSON.stringify(d))));
 }
 let D = load();
 
@@ -291,15 +311,16 @@ function renderMenu(){
   box.innerHTML = D.menu.map((m,i)=>`
     <div class="row" style="margin-bottom:8px">
       <span style="font-size:11px;color:#999;width:18px">${String(i+1).padStart(2,'0')}</span>
-      <input type="text" data-i="${i}" value="${esc(m)}">
+      <input type="text" data-k="label" data-i="${i}" value="${esc(m.label)}" placeholder="이름" style="flex:1">
+      <input type="text" data-k="href" data-i="${i}" value="${esc(m.href)}" placeholder="이동 (#oc 또는 주소)" style="flex:1.2">
       <button class="ib" data-up="${i}">↑</button><button class="ib" data-dn="${i}">↓</button><button class="ib" data-rm="${i}">✕</button>
     </div>`).join('');
-  box.querySelectorAll('input').forEach(el=> el.oninput = e => { D.menu[+el.dataset.i] = e.target.value; saveSoon(); });
+  box.querySelectorAll('input').forEach(el=> el.oninput = e => { D.menu[+el.dataset.i][el.dataset.k] = e.target.value.trim(); saveSoon(); });
   box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(D.menu,+b.dataset.up,-1); save(); renderMenu(); });
   box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(D.menu,+b.dataset.dn,1); save(); renderMenu(); });
   box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ D.menu.splice(+b.dataset.rm,1); save(); renderMenu(); });
 }
-$('#menuAdd').onclick = () => { D.menu.push(''); save(); renderMenu(); };
+$('#menuAdd').onclick = () => { D.menu.push({label:'', href:''}); save(); renderMenu(); };
 
 /* ---------- 메인 이미지 ---------- */
 function renderMain(){
@@ -357,6 +378,51 @@ $('#favFile').onchange = async e => {
 };
 $('#favUrl').oninput = e => { D.favicon = e.target.value.trim(); saveSoon(); $('#favPrev').innerHTML = D.favicon ? `<img src="${esc(D.favicon)}" alt="" style="width:100%;height:100%;object-fit:cover">` : '♡'; applyFav(); };
 $('#favDel').onclick = () => { D.favicon=''; save(); renderFav(); };
+
+/* ---------- OC 페이지 ---------- */
+function renderOc(){
+  $('#ocTitle').value = D.oc.title; $('#ocSub').value = D.oc.subtitle;
+  $('#ocTitle').oninput = e => { D.oc.title = e.target.value; saveSoon(); };
+  $('#ocSub').oninput = e => { D.oc.subtitle = e.target.value; saveSoon(); };
+  const box = $('#ocList'), list = D.oc.characters;
+  if(!list.length){ box.innerHTML = '<div class="empty">등록된 캐릭터가 없어요</div>'; return; }
+  box.innerHTML = list.map((c,i)=>`
+    <div class="item">
+      <div class="item-head">No.${String(i+1).padStart(2,'0')}<span class="sp"></span>
+        <button class="ib" data-up="${i}">↑</button><button class="ib" data-dn="${i}">↓</button><button class="ib" data-rm="${i}">✕</button></div>
+      <div class="imgrow" style="gap:12px">
+        <div style="width:84px;height:112px;border-radius:10px;background:#ececec;overflow:hidden;display:grid;place-items:center;color:#bbb;font-size:9px;letter-spacing:.15em;flex:none">${c.image ? `<img src="${esc(c.image)}" alt="" style="width:100%;height:100%;object-fit:cover">` : 'IMAGE'}</div>
+        <div class="col">
+          <div class="row" style="gap:8px">
+            <div style="flex:1"><input type="text" data-k="name" data-i="${i}" value="${esc(c.name)}" placeholder="이름"></div>
+            <div style="flex:1"><input type="text" data-k="pair" data-i="${i}" value="${esc(c.pair)}" placeholder="Pair (예: SANTA)"></div>
+          </div>
+          <div class="row" style="gap:8px;margin-top:8px">
+            <button class="btn sm" data-img="${i}">사진 올리기</button>
+            <button class="btn sm danger" data-imgdel="${i}">삭제</button>
+          </div>
+          <input type="text" style="margin-top:8px" data-k="image" data-i="${i}" value="${c.image && !c.image.startsWith('data:') ? esc(c.image) : ''}" placeholder="또는 이미지 주소 / 경로">
+          <label class="chk" style="margin-top:8px"><input type="checkbox" data-soon="${i}" ${c.soon?'checked':''}> COMING SOON 표시</label>
+        </div>
+      </div>
+    </div>`).join('');
+  box.querySelectorAll('input[data-k]').forEach(el=> el.oninput = e => { list[+el.dataset.i][el.dataset.k] = e.target.value; saveSoon(); });
+  box.querySelectorAll('[data-soon]').forEach(el=> el.onchange = e => { list[+el.dataset.soon].soon = e.target.checked; save(); });
+  box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(list,+b.dataset.up,-1); save(); renderOc(); });
+  box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(list,+b.dataset.dn,1); save(); renderOc(); });
+  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ list.splice(+b.dataset.rm,1); save(); renderOc(); });
+  box.querySelectorAll('[data-imgdel]').forEach(b=> b.onclick = ()=>{ list[+b.dataset.imgdel].image=''; save(); renderOc(); });
+  box.querySelectorAll('[data-img]').forEach(b=> b.onclick = ()=>{
+    const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
+    inp.onchange = async e => {
+      const f = e.target.files[0]; if(!f) return;
+      try{ list[+b.dataset.img].image = await fileToData(f, 700, .85); save(); renderOc(); toast('사진을 적용했어요'); }
+      catch(err){ toast('이미지를 읽지 못했어요'); }
+    };
+    inp.click();
+  });
+}
+$('#ocAdd').onclick = () => { D.oc.characters.push({name:'', pair:'', image:'', soon:true}); save(); renderOc(); };
 
 /* ---------- 음악 ---------- */
 function renderTracks(){
@@ -492,18 +558,18 @@ $('#impFile').onchange = async e => {
   try{
     let t = (await f.text()).trim();
     t = t.replace(/^window\.SITE_DATA\s*=\s*/, '').replace(/;\s*$/, '');
-    D = Object.assign({}, DEF, JSON.parse(t)); save(); initAll(); toast('불러왔어요');
+    D = norm(Object.assign({}, DEF, JSON.parse(t))); save(); initAll(); toast('불러왔어요');
   }catch(err){ toast('파일 형식이 올바르지 않아요'); }
   e.target.value = '';
 };
 $('#reset').onclick = () => {
   if(!confirm('이 브라우저에 임시 저장된 내용을 지울까요?\n(저장소의 data.js 내용으로 돌아가요)')) return;
-  localStorage.removeItem(KEY); D = Object.assign({}, DEF, JSON.parse(JSON.stringify(window.SITE_DATA||{})));
+  localStorage.removeItem(KEY); D = norm(Object.assign({}, DEF, JSON.parse(JSON.stringify(window.SITE_DATA||{}))));
   initAll(); $('#status').textContent=''; toast('초기화했어요');
 };
 
 function initAll(){
-  bindBasic(); renderMenu(); renderMain(); renderFav(); renderTracks(); bindVol();
+  bindBasic(); renderMenu(); renderMain(); renderFav(); renderOc(); renderTracks(); bindVol();
   $('#showCal').checked = D.showCalendar !== false; renderDD(); renderSc(); renderPin();
 }
 /* ---------- GitHub 바로 게시 ---------- */
@@ -574,6 +640,10 @@ $('#pub').onclick = async () => {
     const up = async (dataUrl, name) => { await ghPut('images/'+name, dataUrl.split(',')[1], 'Upload '+name); return 'images/'+name; };
     if (D.mainImage.startsWith('data:')) D.mainImage = await up(D.mainImage, `main-${ts}.jpg`);
     if ((D.favicon||'').startsWith('data:')) D.favicon = await up(D.favicon, `favicon-${ts}.png`);
+    for (let i=0; i<D.oc.characters.length; i++){
+      const c = D.oc.characters[i];
+      if ((c.image||'').startsWith('data:')) c.image = await up(c.image, `oc-${ts}-${i}.jpg`);
+    }
     for (let i=0; i<D.playlist.length; i++){
       const t = D.playlist[i];
       if ((t.thumb||'').startsWith('data:')) t.thumb = await up(t.thumb, `thumb-${ts}-${i}.jpg`);
