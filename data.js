@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792270963786,
+  "updatedAt": 1792271015006,
   "title": [
     "LOVE",
     "ME"
@@ -193,7 +193,7 @@ window.SITE_DATA = {
     "family": {
       "groups": [
         {
-          "title": "Family Site",
+          "title": "Site",
           "sites": [
             {
               "title": "Text Editor",
@@ -245,42 +245,6 @@ window.SITE_DATA = {
             "outfit": "tanned skin, tan skin, medium tan skin, warm brown skin, dark skin,\nsun-kissed complexion, golden brown skin, reddish skin, pink skin,\n\nblonde hair, brown hair, black hair, blue hair,\nbright purple hair, lavender hair, pink hair,\n\nlong hair, shoulder-length hair, ponytail,\nlong mullet, long wolf cut, long nape,\ncenter part, curtain bangs, slicked back hair,\nstraight neat hair, bowl cut,\n\nlarge eyes, round eyes, wide eyes,\nsparkling eyes, cute eyes, innocent eyes,\nsharp upturned eyes, fox eyes,\nbright blue eyes, green eyes, red eyes,\n\nsmall nose, button nose, short nose,\ntiny nose, flat nose, upturned nose,\n\nround face, baby face, chubby face,\nvery sharp V-shaped jaw, extremely pointed chin,\ncute face, feminine face,\ngeneric handsome anime boy, bishounen face,\n\nfull lips, thick lips,\nopen mouth, cheerful expression,\nblushing, innocent expression,\n\nsmile, smiling, grin, grinning,\nsmirk, smirking, sly smile,\nfaint smile, gentle smile, soft smile, warm smile,\nhappy expression, playful smile, teasing smile,\nopen-mouth smile, showing teeth, laughing,\n\nstraight blunt bangs, full bangs,\nbowl cut, comma hair,\nflat center part, perfectly symmetrical curtain hair,\nflat hair, flat crown,\nslicked back hair, fully exposed forehead,\nshort cropped hair, undercut,\nmullet, wolf cut, long nape,\nshoulder-length hair, long straight hair"
           },
           "couple": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, cropped, error,\nbad composition, bad anatomy, bad proportions,\nbad hands, bad fingers, missing fingers, extra fingers,\nextra hands, extra arms, extra legs,\ntext, watermark, username, artist name, copyright name,\n\ntan skin, tanned skin, medium tan skin,\ndark tan skin, deeply tanned skin,\nbrown skin, warm brown skin,\ngolden brown skin, bronze skin,\nsun-kissed skin, sun-tanned skin,\ndark skin, deep brown complexion,\norange skin, reddish brown skin,\noverly warm skin tone,\n\nwashed-out skin, desaturated skin,\noverexposed skin, whitewashed complexion,\n\nsmile, smiling,\ngrin, grinning,\nsmirk, smirking,\nfaint smile, sly smile,\ngentle smile, soft smile, warm smile,\nplayful smile, teasing smile,\ncheerful expression, happy expression,\nopen-mouth smile, showing teeth, laughing,\nblushing,\n\ngentle expression, kind expression,\nsoft expression, sweet expression,\ninnocent expression, shy expression,\ncute expression, friendly expression,\npuppy eyes, innocent eyes,\ntimid, bashful, boyish innocence,\ncute boy, soft boy, pretty boy,\n\nlarge eyes, round eyes, wide eyes,\nsparkling eyes, cute eyes,\nsharp upturned eyes, fox eyes,\nblue eyes, green eyes, red eyes,\n\nsmall nose, short nose, tiny nose,\nbutton nose, flat nose, upturned nose,\n\nround face, baby face, chubby face,\nextremely pointed chin,\nvery sharp V-shaped jaw,\nfeminine face, bishounen face,\n\nfull lips, thick lips, plump lips,\nglossy lips, lip gloss, lipstick,\nbright pink lips, red lips,\nparted lips,\n\nblonde hair, brown hair, black hair,\nblue hair, bright purple hair,\nlavender hair, pink hair,\n\nlong hair, shoulder-length hair,\nponytail, long mullet, long wolf cut,\nlong nape, center part, curtain bangs,\nslicked back hair, bowl cut,\nneat straight hairstyle,\n\nround glasses, circular glasses,\noval glasses, tiny glasses,\nrimless glasses, sunglasses,\ncat-eye glasses,\n\n3d, 3d render, 3dcg, cgi,\ngame cg, game character render,\n3d anime, 3d model,\nunreal engine, blender render,\n\nthird person, extra person,\nbackground person, crowd,\nduplicate person, cloned character,\nextra face, extra head, extra body"
-        },
-        {
-          "tag": "더블",
-          "label": "ARCH",
-          "a": {
-            "role": "OC",
-            "name": "더스티",
-            "image": "",
-            "look": "",
-            "outfit": ""
-          },
-          "b": {
-            "role": "PAIR",
-            "name": "블루",
-            "image": "",
-            "look": "",
-            "outfit": ""
-          }
-        },
-        {
-          "tag": "서서",
-          "label": "Sizz",
-          "a": {
-            "role": "OC",
-            "name": "서하리",
-            "image": "",
-            "look": "",
-            "outfit": ""
-          },
-          "b": {
-            "role": "PAIR",
-            "name": "서해영",
-            "image": "",
-            "look": "",
-            "outfit": ""
-          }
         }
       ]
     },
