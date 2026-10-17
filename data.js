@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792279598696,
+  "updatedAt": 1792279607814,
   "title": [
     "LOVE",
     "ME"
@@ -44,7 +44,7 @@ window.SITE_DATA = {
       "title": "홈 수정",
       "memo": "- 관리자가 아니면 하트 안 눌리게 변경할 수 있는지 여부 확인",
       "repeat": false,
-      "done": false
+      "done": true
     },
     {
       "date": "2026-10-18",
