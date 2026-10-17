@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792266106786,
+  "updatedAt": 1792266175270,
   "title": [
     "LOVE",
     "ME"
@@ -79,7 +79,7 @@ window.SITE_DATA = {
       {
         "name": "찬희유이",
         "note": "임찬희 x 선유이",
-        "image": "images/pair-1792266104381-0.jpg",
+        "image": "images/pair-1792266172807-0.jpg",
         "soon": true,
         "since": "2026-10-01",
         "siteName": "luvinfo",
