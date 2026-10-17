@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792279654626,
+  "updatedAt": 1792279668618,
   "title": [
     "LOVE",
     "ME"
@@ -51,6 +51,13 @@ window.SITE_DATA = {
       "time": "",
       "title": "갠홈 두 개 제작",
       "memo": "- 구도/룩/기본 프롬프트 올리는 갠홈\n- 로라 정보/게시판(글 쓰기) 가능한 갠홈",
+      "repeat": false
+    },
+    {
+      "date": "2026-10-18",
+      "time": "",
+      "title": "페소 짜기",
+      "memo": "- 작전명 순정 관련 드림 페소",
       "repeat": false
     }
   ],
