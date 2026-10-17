@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792269782447,
+  "updatedAt": 1792269850551,
   "title": [
     "LOVE",
     "ME"
@@ -162,8 +162,8 @@ window.SITE_DATA = {
                 "label": "SUB",
                 "pills": [
                   {
-                    "k": "Caveduck",
-                    "v": "서미르＆표유리",
+                    "k": "外",
+                    "v": "다양한 애니 및 웹툰 장르",
                     "dark": false
                   }
                 ]
