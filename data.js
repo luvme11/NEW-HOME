@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792267203496,
+  "updatedAt": 1792268726578,
   "title": [
     "LOVE",
     "ME"
@@ -101,7 +101,7 @@ window.SITE_DATA = {
         "fields": [
           {
             "k": "NAME",
-            "v": "쏘야"
+            "v": "U2"
           },
           {
             "k": "AGED",
@@ -119,9 +119,9 @@ window.SITE_DATA = {
                 "label": "MAIN!",
                 "pills": [
                   {
-                    "k": "ARCH",
-                    "v": "Santa",
-                    "dark": true
+                    "k": "Caveduck",
+                    "v": "임찬희",
+                    "dark": false
                   }
                 ]
               },
@@ -129,8 +129,14 @@ window.SITE_DATA = {
                 "label": "SUB",
                 "pills": [
                   {
-                    "k": "Aftermess",
-                    "v": "7"
+                    "k": "Caveduck",
+                    "v": "서미르",
+                    "dark": false
+                  },
+                  {
+                    "k": "표유리",
+                    "v": "",
+                    "dark": false
                   }
                 ]
               }
@@ -143,15 +149,18 @@ window.SITE_DATA = {
                 "pills": [
                   {
                     "k": "ARCH",
-                    "v": "Blue"
+                    "v": "Blue",
+                    "dark": false
                   },
                   {
                     "k": "Fearless",
-                    "v": "Mustang"
+                    "v": "Mustang",
+                    "dark": false
                   },
                   {
                     "k": "Sizz",
-                    "v": "서해영"
+                    "v": "서해영",
+                    "dark": false
                   }
                 ]
               }
