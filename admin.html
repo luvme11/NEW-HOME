@@ -128,6 +128,19 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
   </section>
 
   <section class="card">
+    <h2>파비콘 (브라우저 탭 아이콘)</h2>
+    <div class="row" style="gap:14px;align-items:center">
+      <div id="favPrev" style="width:48px;height:48px;border-radius:12px;background:#ececec;overflow:hidden;display:grid;place-items:center;color:#bbb;font-size:18px;flex:none">♡</div>
+      <button class="btn sm" id="favUp">사진 올리기</button>
+      <button class="btn sm danger" id="favDel">삭제</button>
+      <input type="file" id="favFile" accept="image/*">
+    </div>
+    <label class="f">또는 이미지 주소 / 경로</label>
+    <input type="text" id="favUrl" placeholder="https://… 또는 images/favicon.png">
+    <p class="hint">올린 사진은 가운데를 기준으로 정사각형 64×64 PNG로 자동 변환돼요. 게시 후에도 탭 아이콘은 브라우저가 기억하고 있어서 바뀌는 데 시간이 걸릴 수 있어요.</p>
+  </section>
+
+  <section class="card">
     <h2>음악 (YouTube)</h2>
     <div id="trackList"></div>
     <button class="btn sm ghost" id="trackAdd">+ 곡 추가</button>
@@ -203,7 +216,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
 <script>
 const $ = s => document.querySelector(s);
 const KEY = 'sc_data';
-const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],pin:''};
+const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],favicon:'',pin:''};
 
 function load(){
   const base = window.SITE_DATA || {};
@@ -305,6 +318,46 @@ $('#mainFile').onchange = async e => {
 $('#mainUrl').oninput = e => { D.mainImage = e.target.value.trim(); saveSoon(); $('#mainPrev').innerHTML = D.mainImage ? `<img src="${esc(D.mainImage)}" alt="">` : 'MAIN'; };
 $('#mainDel').onclick = () => { D.mainImage=''; save(); renderMain(); };
 
+/* ---------- 파비콘 ---------- */
+function fileToPng(file, size){
+  return new Promise((res, rej)=>{
+    const fr = new FileReader();
+    fr.onerror = rej;
+    fr.onload = () => {
+      const img = new Image();
+      img.onerror = rej;
+      img.onload = () => {
+        const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height, s = Math.min(w,h);
+        const c = document.createElement('canvas'); c.width = c.height = size;
+        c.getContext('2d').drawImage(img, (w-s)/2, (h-s)/2, s, s, 0, 0, size, size);
+        res(c.toDataURL('image/png'));
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+function applyFav(){
+  let l = document.querySelector('link[rel="icon"]');
+  if(!l){ l = document.createElement('link'); l.rel = 'icon'; document.head.appendChild(l); }
+  if (D.favicon) l.href = D.favicon; else l.removeAttribute('href');
+}
+function renderFav(){
+  $('#favPrev').innerHTML = D.favicon ? `<img src="${esc(D.favicon)}" alt="" style="width:100%;height:100%;object-fit:cover">` : '♡';
+  $('#favUrl').value = (D.favicon||'').startsWith('data:') ? '' : (D.favicon||'');
+  $('#favUrl').placeholder = (D.favicon||'').startsWith('data:') ? '(업로드한 이미지 사용 중)' : 'https://… 또는 images/favicon.png';
+  applyFav();
+}
+$('#favUp').onclick = () => $('#favFile').click();
+$('#favFile').onchange = async e => {
+  const f = e.target.files[0]; if(!f) return;
+  try{ D.favicon = await fileToPng(f, 64); save(); renderFav(); toast('파비콘을 적용했어요'); }
+  catch(err){ toast('이미지를 읽지 못했어요'); }
+  e.target.value = '';
+};
+$('#favUrl').oninput = e => { D.favicon = e.target.value.trim(); saveSoon(); $('#favPrev').innerHTML = D.favicon ? `<img src="${esc(D.favicon)}" alt="" style="width:100%;height:100%;object-fit:cover">` : '♡'; applyFav(); };
+$('#favDel').onclick = () => { D.favicon=''; save(); renderFav(); };
+
 /* ---------- 음악 ---------- */
 function renderTracks(){
   const box = $('#trackList');
@@ -389,10 +442,14 @@ function renderSc(){
       </div>
       <input type="text" style="margin-top:8px" data-k="title" data-i="${i}" value="${esc(e.title)}" placeholder="일정 제목">
       <textarea style="margin-top:8px;min-height:44px" data-k="memo" data-i="${i}" placeholder="메모 (선택)">${esc(e.memo)}</textarea>
-      <label class="chk" style="margin-top:8px"><input type="checkbox" data-rep="${i}" ${e.repeat?'checked':''}> 매년 반복 (생일·기념일)</label>
+      <div class="row" style="gap:18px;margin-top:8px;flex-wrap:wrap">
+        <label class="chk"><input type="checkbox" data-done="${i}" ${e.done?'checked':''}> 완료 (줄 긋기)</label>
+        <label class="chk"><input type="checkbox" data-rep="${i}" ${e.repeat?'checked':''}> 매년 반복 (생일·기념일)</label>
+      </div>
     </div>`).join('');
   box.querySelectorAll('[data-k]').forEach(el=> el.oninput = e => { D.schedule[+el.dataset.i][el.dataset.k] = e.target.value; saveSoon(); });
   box.querySelectorAll('[data-rep]').forEach(el=> el.onchange = e => { D.schedule[+el.dataset.rep].repeat = e.target.checked; save(); });
+  box.querySelectorAll('[data-done]').forEach(el=> el.onchange = e => { D.schedule[+el.dataset.done].done = e.target.checked; save(); });
   box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ D.schedule.splice(+b.dataset.rm,1); save(); renderSc(); });
 }
 $('#scAdd').onclick = () => {
@@ -412,9 +469,10 @@ $('#pinSet').onclick = () => {
 };
 $('#pinDel').onclick = () => { D.pin=''; save(); renderPin(); toast('잠금을 해제했어요'); };
 if (D.pin && sessionStorage.getItem('sc_ok') !== D.pin) $('#lock').classList.add('on');
+else localStorage.setItem('sc_owner', '1');
 $('#lockForm').onsubmit = e => {
   e.preventDefault();
-  if (hash($('#lockPw').value) === D.pin){ sessionStorage.setItem('sc_ok', D.pin); $('#lock').classList.remove('on'); }
+  if (hash($('#lockPw').value) === D.pin){ sessionStorage.setItem('sc_ok', D.pin); localStorage.setItem('sc_owner', '1'); $('#lock').classList.remove('on'); }
   else { $('#lockErr').textContent = '비밀번호가 달라요'; $('#lockPw').value=''; }
 };
 
@@ -445,7 +503,7 @@ $('#reset').onclick = () => {
 };
 
 function initAll(){
-  bindBasic(); renderMenu(); renderMain(); renderTracks(); bindVol();
+  bindBasic(); renderMenu(); renderMain(); renderFav(); renderTracks(); bindVol();
   $('#showCal').checked = D.showCalendar !== false; renderDD(); renderSc(); renderPin();
 }
 /* ---------- GitHub 바로 게시 ---------- */
@@ -515,6 +573,7 @@ $('#pub').onclick = async () => {
     const ts = Date.now();
     const up = async (dataUrl, name) => { await ghPut('images/'+name, dataUrl.split(',')[1], 'Upload '+name); return 'images/'+name; };
     if (D.mainImage.startsWith('data:')) D.mainImage = await up(D.mainImage, `main-${ts}.jpg`);
+    if ((D.favicon||'').startsWith('data:')) D.favicon = await up(D.favicon, `favicon-${ts}.png`);
     for (let i=0; i<D.playlist.length; i++){
       const t = D.playlist[i];
       if ((t.thumb||'').startsWith('data:')) t.thumb = await up(t.thumb, `thumb-${ts}-${i}.jpg`);
