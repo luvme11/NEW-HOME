@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792277034652,
+  "updatedAt": 1792277048241,
   "title": [
     "LOVE",
     "ME"
@@ -44,7 +44,7 @@ window.SITE_DATA = {
       "title": "홈 수정",
       "memo": "",
       "repeat": false,
-      "done": false
+      "done": true
     }
   ],
   "favicon": "images/favicon-1792265260687.png",
