@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792269759996,
+  "updatedAt": 1792269782447,
   "title": [
     "LOVE",
     "ME"
@@ -154,6 +154,16 @@ window.SITE_DATA = {
                   {
                     "k": "Main",
                     "v": "약한영웅 금성제",
+                    "dark": false
+                  }
+                ]
+              },
+              {
+                "label": "SUB",
+                "pills": [
+                  {
+                    "k": "Caveduck",
+                    "v": "서미르＆표유리",
                     "dark": false
                   }
                 ]
