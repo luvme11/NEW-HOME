@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--ink:#2a2a2a;--sub:#8a8a8a;--line:#e3e3e3;--bg:#f5f5f5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard Variable',system-ui,sans-serif;color:var(--ink);background:var(--bg);padding-bottom:80px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+.top{position:sticky;top:0;z-index:20;background:rgba(245,245,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:760px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top .back{font-size:13px;color:#666;margin-right:auto}
+.status{font-size:12px;color:#7a7a7a}
+.btn{height:34px;padding:0 14px;border-radius:17px;border:1px solid #d6d6d6;background:#fff;font-size:12.5px;font-weight:600}
+.btn:hover{border-color:#999}
+.btn.pri{background:#2a2a2a;border-color:#2a2a2a;color:#fff}
+.btn.sm{height:28px;padding:0 11px;font-size:11.5px}
+.btn.ghost{border-style:dashed}
+.btn.danger{color:#c0392b}
+
+main{max-width:760px;margin:0 auto;padding:22px 18px}
+h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:6px 0 4px}
+.lead{font-size:12.5px;color:var(--sub);margin-bottom:20px;line-height:1.6}
+.card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 4px 18px rgba(0,0,0,.05)}
+.card h2{font-size:10px;letter-spacing:.28em;color:#777;font-weight:700;padding-bottom:12px;border-bottom:1px dashed var(--line);margin-bottom:16px}
+label.f{display:block;font-size:12px;font-weight:600;margin:12px 0 5px;color:#444}
+label.f:first-of-type{margin-top:0}
+label.f small{font-weight:400;color:var(--sub);margin-left:4px}
+input[type=text],input[type=date],input[type=password],input[type=url],textarea,select{
+  width:100%;border:1px solid #dcdcdc;border-radius:10px;padding:9px 11px;font-size:13.5px;background:#fff;outline:0}
+input:focus,textarea:focus,select:focus{border-color:#2a2a2a}
+textarea{resize:vertical;min-height:62px;line-height:1.5}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{min-width:0}
+.item{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#fcfcfc}
+.item-head{display:flex;gap:6px;align-items:center;margin-bottom:10px;font-size:11px;color:#888;font-weight:600;letter-spacing:.1em}
+.item-head .sp{flex:1}
+.ib{width:26px;height:26px;border-radius:50%;border:1px solid #ddd;background:#fff;font-size:11px;line-height:1}
+.ib:hover{border-color:#888}
+.hint{font-size:11.5px;color:var(--sub);margin-top:6px;line-height:1.55}
+.empty{font-size:12.5px;color:#aaa;text-align:center;padding:14px 0}
+.chk{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:#2a2a2a}
+
+.preview-arch{width:150px;height:220px;border-radius:75px 75px 0 0;background:#ececec;overflow:hidden;display:grid;place-items:center;color:#bbb;font-size:10px;letter-spacing:.2em;flex:none}
+.preview-arch img{width:100%;height:100%;object-fit:cover}
+.preview-thumb{width:56px;height:56px;border-radius:50%;background:#ccc;overflow:hidden;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;position:relative}
+.preview-thumb img{width:100%;height:100%;object-fit:cover}
+.preview-thumb::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#fff}
+.imgrow{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.imgrow .col{flex:1;min-width:200px}
+input[type=file]{display:none}
+input[type=range]{width:100%;accent-color:#2a2a2a}
+
+ol.steps{padding-left:18px;font-size:13px;line-height:1.9;color:#444}
+code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
+
+#lock{position:fixed;inset:0;background:var(--bg);z-index:100;display:none;place-items:center}
+#lock.on{display:grid}
+.lockbox{background:#fff;border-radius:20px;padding:28px;width:min(320px,90vw);text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.lockbox .h{font-size:20px;color:#c9c9c9;margin-bottom:12px}
+.lockbox input{text-align:center;margin:10px 0}
+.lockbox .err{color:#c0392b;font-size:12px;height:16px;margin-bottom:6px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#2a2a2a;color:#fff;padding:10px 18px;border-radius:20px;font-size:12.5px;opacity:0;transition:.25s;pointer-events:none;z-index:200}
+#toast.on{opacity:1;transform:translateX(-50%)}
+</style>
+<script src="data.js"></script>
+</head>
+<body>
+
+<div id="lock">
+  <form class="lockbox" id="lockForm">
+    <div class="h">♡</div>
+    <div style="font-size:13px;color:#666">비밀번호를 입력하세요</div>
+    <input type="password" id="lockPw" autocomplete="off" autofocus>
+    <div class="err" id="lockErr"></div>
+    <button class="btn pri" style="width:100%">입장</button>
+  </form>
+</div>
+
+<div class="top"><div class="top-in">
+  <a class="back" href="index.html">← 메인 보기</a>
+  <span class="status" id="status"></span>
+  <button class="btn" id="imp">불러오기</button>
+  <button class="btn pri" id="exp">data.js 내보내기</button>
+  <input type="file" id="impFile" accept=".js,.json">
+</div></div>
+
+<main>
+  <h1>관리자</h1>
+  <p class="lead">여기서 고친 내용은 이 브라우저에 바로 저장되어 메인에서 미리 볼 수 있어요.<br>
+  다른 사람에게도 보이게 하려면 <b>data.js 내보내기</b>로 받은 파일을 GitHub 저장소의 <code>data.js</code>와 교체해 주세요.</p>
+
+  <section class="card">
+    <h2>기본</h2>
+    <label class="f">타이틀 <small>줄바꿈 = 다음 줄</small></label>
+    <textarea id="title"></textarea>
+    <label class="f">세로 문구</label>
+    <input type="text" id="vtext">
+    <label class="f">오른쪽 목록 <small>01, 02, 03… 순서대로 표시</small></label>
+    <div id="menuList"></div>
+    <button class="btn sm ghost" id="menuAdd">+ 항목 추가</button>
+  </section>
+
+  <section class="card">
+    <h2>메인 이미지</h2>
+    <div class="imgrow">
+      <div class="preview-arch" id="mainPrev">MAIN</div>
+      <div class="col">
+        <div class="row">
+          <button class="btn sm" id="mainUp">이미지 올리기</button>
+          <button class="btn sm danger" id="mainDel">삭제</button>
+          <input type="file" id="mainFile" accept="image/*">
+        </div>
+        <label class="f">또는 이미지 주소 / 파일 경로</label>
+        <input type="text" id="mainUrl" placeholder="https://… 또는 images/main.png">
+        <p class="hint">올린 이미지는 자동으로 가로 1200px 이내로 줄여서 data.js 안에 저장돼요. 파일로 따로 관리하려면 저장소에 이미지를 올리고 경로를 적으세요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>음악 (YouTube)</h2>
+    <div id="trackList"></div>
+    <button class="btn sm ghost" id="trackAdd">+ 곡 추가</button>
+    <label class="f" style="margin-top:18px">기본 볼륨 <small id="volLabel"></small></label>
+    <input type="range" id="vol" min="0" max="100">
+  </section>
+
+  <section class="card">
+    <h2>캘린더 · 디데이</h2>
+    <label class="chk"><input type="checkbox" id="showCal"> 캘린더 위젯 보이기</label>
+    <label class="f" style="margin-top:18px">디데이 목록 <small>비어 있으면 아무것도 표시되지 않아요</small></label>
+    <div id="ddList"></div>
+    <div class="row">
+      <button class="btn sm ghost" id="ddSince">+ 만난 날 (D+)</button>
+      <button class="btn sm ghost" id="ddUntil">+ 다가오는 날 (D-)</button>
+    </div>
+    <p class="hint">D+ : 시작일부터 며칠째인지 표시 (시작일 = 1일)<br>D- : 남은 일수 표시, 가까운 순서로 최대 3개. “매년 반복”을 켜면 기념일·생일 등에 편해요.</p>
+  </section>
+
+  <section class="card">
+    <h2>관리자 잠금 (선택)</h2>
+    <div class="row">
+      <input type="password" id="pin" placeholder="새 비밀번호" autocomplete="new-password">
+      <button class="btn sm pri" id="pinSet">설정</button>
+      <button class="btn sm" id="pinDel">해제</button>
+    </div>
+    <p class="hint" id="pinState"></p>
+    <p class="hint">GitHub Pages 같은 정적 사이트라 진짜 보안은 아니에요. 지나가다 들어오는 걸 막는 가벼운 잠금 정도로만 생각해 주세요.</p>
+  </section>
+
+  <section class="card">
+    <h2>GitHub에 반영하는 법</h2>
+    <ol class="steps">
+      <li>이 페이지에서 내용을 고친다 (자동 저장)</li>
+      <li>상단 <b>data.js 내보내기</b>를 눌러 파일을 받는다</li>
+      <li>저장소의 <code>data.js</code>를 받은 파일로 교체하고 커밋한다</li>
+      <li>1~2분 뒤 사이트에 반영돼요</li>
+    </ol>
+    <div style="margin-top:14px"><button class="btn sm danger" id="reset">이 브라우저의 임시 저장 지우기</button></div>
+  </section>
+</main>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const KEY = 'sc_data';
+const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],pin:''};
+
+function load(){
+  const base = window.SITE_DATA || {};
+  let d = base;
+  try{
+    const ls = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (ls && (ls.updatedAt||0) > (base.updatedAt||0)) d = ls;
+  }catch(e){}
+  return Object.assign({}, DEF, JSON.parse(JSON.stringify(d)));
+}
+let D = load();
+
+/* ---------- 저장 ---------- */
+let tmr;
+function save(){
+  D.updatedAt = Date.now();
+  try{
+    localStorage.setItem(KEY, JSON.stringify(D));
+    $('#status').textContent = '✓ 이 브라우저에 저장됨';
+  }catch(e){
+    $('#status').textContent = '⚠ 저장 공간 부족 — 이미지를 줄여 주세요';
+  }
+}
+const saveSoon = () => { clearTimeout(tmr); tmr = setTimeout(save, 250); };
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2200); }
+const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- 간단 해시 (가벼운 잠금용) ---------- */
+function hash(str){
+  let h1=0xdeadbeef, h2=0x41c6ce57;
+  for(let i=0;i<str.length;i++){ const c=str.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);
+}
+
+/* ---------- 이미지 → 압축된 dataURL ---------- */
+function fileToData(file, maxSide, q){
+  return new Promise((res, rej)=>{
+    const fr = new FileReader();
+    fr.onerror = rej;
+    fr.onload = () => {
+      const img = new Image();
+      img.onerror = rej;
+      img.onload = () => {
+        const r = Math.min(1, maxSide / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.width*r); c.height = Math.round(img.height*r);
+        const g = c.getContext('2d');
+        g.fillStyle = '#fff'; g.fillRect(0,0,c.width,c.height);
+        g.drawImage(img,0,0,c.width,c.height);
+        res(c.toDataURL('image/jpeg', q));
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+/* ---------- 기본 ---------- */
+function bindBasic(){
+  $('#title').value = D.title.join('\n');
+  $('#title').oninput = e => { D.title = e.target.value.split('\n'); saveSoon(); };
+  $('#vtext').value = D.verticalText;
+  $('#vtext').oninput = e => { D.verticalText = e.target.value; saveSoon(); };
+}
+function moveItem(arr,i,d){ const j=i+d; if(j<0||j>=arr.length) return; [arr[i],arr[j]]=[arr[j],arr[i]]; }
+
+function renderMenu(){
+  const box = $('#menuList');
+  if(!D.menu.length){ box.innerHTML = '<div class="empty">항목이 없어요</div>'; return; }
+  box.innerHTML = D.menu.map((m,i)=>`
+    <div class="row" style="margin-bottom:8px">
+      <span style="font-size:11px;color:#999;width:18px">${String(i+1).padStart(2,'0')}</span>
+      <input type="text" data-i="${i}" value="${esc(m)}">
+      <button class="ib" data-up="${i}">↑</button><button class="ib" data-dn="${i}">↓</button><button class="ib" data-rm="${i}">✕</button>
+    </div>`).join('');
+  box.querySelectorAll('input').forEach(el=> el.oninput = e => { D.menu[+el.dataset.i] = e.target.value; saveSoon(); });
+  box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(D.menu,+b.dataset.up,-1); save(); renderMenu(); });
+  box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(D.menu,+b.dataset.dn,1); save(); renderMenu(); });
+  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ D.menu.splice(+b.dataset.rm,1); save(); renderMenu(); });
+}
+$('#menuAdd').onclick = () => { D.menu.push(''); save(); renderMenu(); };
+
+/* ---------- 메인 이미지 ---------- */
+function renderMain(){
+  const p = $('#mainPrev');
+  p.innerHTML = D.mainImage ? `<img src="${esc(D.mainImage)}" alt="">` : 'MAIN';
+  $('#mainUrl').value = D.mainImage.startsWith('data:') ? '' : D.mainImage;
+  $('#mainUrl').placeholder = D.mainImage.startsWith('data:') ? '(업로드한 이미지 사용 중)' : 'https://… 또는 images/main.png';
+}
+$('#mainUp').onclick = () => $('#mainFile').click();
+$('#mainFile').onchange = async e => {
+  const f = e.target.files[0]; if(!f) return;
+  try{ D.mainImage = await fileToData(f, 1200, .86); save(); renderMain(); toast('이미지를 적용했어요'); }
+  catch(err){ toast('이미지를 읽지 못했어요'); }
+  e.target.value = '';
+};
+$('#mainUrl').oninput = e => { D.mainImage = e.target.value.trim(); saveSoon(); $('#mainPrev').innerHTML = D.mainImage ? `<img src="${esc(D.mainImage)}" alt="">` : 'MAIN'; };
+$('#mainDel').onclick = () => { D.mainImage=''; save(); renderMain(); };
+
+/* ---------- 음악 ---------- */
+function renderTracks(){
+  const box = $('#trackList');
+  if(!D.playlist.length){ box.innerHTML = '<div class="empty">등록된 곡이 없어요</div>'; return; }
+  box.innerHTML = D.playlist.map((t,i)=>`
+    <div class="item">
+      <div class="item-head">TRACK ${String(i+1).padStart(2,'0')}<span class="sp"></span>
+        <button class="ib" data-up="${i}">↑</button><button class="ib" data-dn="${i}">↓</button><button class="ib" data-rm="${i}">✕</button></div>
+      <label class="f">유튜브 링크</label>
+      <input type="text" data-k="url" data-i="${i}" value="${esc(t.url)}" placeholder="https://www.youtube.com/watch?v=…">
+      <div class="row" style="margin-top:12px;gap:10px">
+        <div style="flex:1"><label class="f" style="margin-top:0">곡 제목</label><input type="text" data-k="title" data-i="${i}" value="${esc(t.title)}"></div>
+        <div style="flex:1"><label class="f" style="margin-top:0">아티스트 / 계정</label><input type="text" data-k="artist" data-i="${i}" value="${esc(t.artist)}"></div>
+      </div>
+      <label class="f">썸네일 사진 <small>비우면 제목 첫 글자가 표시돼요</small></label>
+      <div class="row" style="gap:12px">
+        <div class="preview-thumb">${t.thumb ? `<img src="${esc(t.thumb)}" alt="">` : esc((t.title||'S')[0].toUpperCase())}</div>
+        <button class="btn sm" data-thumb="${i}">사진 올리기</button>
+        <button class="btn sm danger" data-thumbdel="${i}">삭제</button>
+        <input type="text" data-k="thumb" data-i="${i}" value="${t.thumb&&!t.thumb.startsWith('data:')?esc(t.thumb):''}" placeholder="또는 사진 주소 / 경로">
+      </div>
+    </div>`).join('');
+  box.querySelectorAll('input[data-k]').forEach(el=> el.oninput = e => {
+    D.playlist[+el.dataset.i][el.dataset.k] = e.target.value.trim ? (el.dataset.k==='title'||el.dataset.k==='artist' ? e.target.value : e.target.value.trim()) : e.target.value;
+    saveSoon();
+    if(el.dataset.k==='thumb'){ const pv = el.closest('.row').querySelector('.preview-thumb'); const v=D.playlist[+el.dataset.i].thumb; pv.innerHTML = v ? `<img src="${esc(v)}" alt="">` : esc((D.playlist[+el.dataset.i].title||'S')[0].toUpperCase()); }
+  });
+  box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(D.playlist,+b.dataset.up,-1); save(); renderTracks(); });
+  box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(D.playlist,+b.dataset.dn,1); save(); renderTracks(); });
+  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ D.playlist.splice(+b.dataset.rm,1); save(); renderTracks(); });
+  box.querySelectorAll('[data-thumb]').forEach(b=> b.onclick = ()=>{
+    const inp = document.createElement('input'); inp.type='file'; inp.accept='image/*';
+    inp.onchange = async e => {
+      const f = e.target.files[0]; if(!f) return;
+      try{ D.playlist[+b.dataset.thumb].thumb = await fileToData(f, 240, .85); save(); renderTracks(); toast('썸네일을 적용했어요'); }
+      catch(err){ toast('이미지를 읽지 못했어요'); }
+    };
+    inp.click();
+  });
+  box.querySelectorAll('[data-thumbdel]').forEach(b=> b.onclick = ()=>{ D.playlist[+b.dataset.thumbdel].thumb=''; save(); renderTracks(); });
+}
+$('#trackAdd').onclick = () => { D.playlist.push({url:'',title:'',artist:'',thumb:''}); save(); renderTracks(); };
+function bindVol(){
+  const v = $('#vol'); v.value = D.volume; $('#volLabel').textContent = D.volume + '%';
+  v.oninput = e => { D.volume = +e.target.value; $('#volLabel').textContent = D.volume + '%'; saveSoon(); };
+}
+
+/* ---------- 캘린더 / 디데이 ---------- */
+function renderDD(){
+  const box = $('#ddList');
+  if(!D.ddays.length){ box.innerHTML = '<div class="empty">추가한 디데이가 없어요</div>'; return; }
+  box.innerHTML = D.ddays.map((e,i)=>`
+    <div class="item">
+      <div class="item-head">${e.type==='since'?'D+ 만난 날':'D- 다가오는 날'}<span class="sp"></span>
+        <button class="ib" data-up="${i}">↑</button><button class="ib" data-dn="${i}">↓</button><button class="ib" data-rm="${i}">✕</button></div>
+      <div class="row" style="gap:10px">
+        <div style="flex:1.2"><input type="text" data-k="label" data-i="${i}" value="${esc(e.label)}" placeholder="${e.type==='since'?'#해시태그 또는 이름':'이름 (예: 1주년)'}"></div>
+        <div style="flex:1"><input type="date" data-k="date" data-i="${i}" value="${esc(e.date)}"></div>
+      </div>
+      ${e.type==='until' ? `<label class="chk" style="margin-top:10px"><input type="checkbox" data-rep="${i}" ${e.repeat?'checked':''}> 매년 반복</label>` : ''}
+    </div>`).join('');
+  box.querySelectorAll('input[data-k]').forEach(el=> el.oninput = e => { D.ddays[+el.dataset.i][el.dataset.k] = e.target.value; saveSoon(); });
+  box.querySelectorAll('[data-rep]').forEach(el=> el.onchange = e => { D.ddays[+el.dataset.rep].repeat = e.target.checked; save(); });
+  box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ moveItem(D.ddays,+b.dataset.up,-1); save(); renderDD(); });
+  box.querySelectorAll('[data-dn]').forEach(b=> b.onclick = ()=>{ moveItem(D.ddays,+b.dataset.dn,1); save(); renderDD(); });
+  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ D.ddays.splice(+b.dataset.rm,1); save(); renderDD(); });
+}
+$('#ddSince').onclick = () => { D.ddays.push({type:'since',label:'',date:''}); save(); renderDD(); };
+$('#ddUntil').onclick = () => { D.ddays.push({type:'until',label:'',date:'',repeat:true}); save(); renderDD(); };
+$('#showCal').onchange = e => { D.showCalendar = e.target.checked; save(); };
+
+/* ---------- 잠금 ---------- */
+function renderPin(){ $('#pinState').textContent = D.pin ? '현재: 잠금 사용 중' : '현재: 잠금 없음'; }
+$('#pinSet').onclick = () => {
+  const v = $('#pin').value; if(!v){ toast('비밀번호를 입력해 주세요'); return; }
+  D.pin = hash(v); $('#pin').value=''; save(); renderPin(); toast('잠금을 설정했어요 (내보내기 후 반영)');
+};
+$('#pinDel').onclick = () => { D.pin=''; save(); renderPin(); toast('잠금을 해제했어요'); };
+if (D.pin && sessionStorage.getItem('sc_ok') !== D.pin) $('#lock').classList.add('on');
+$('#lockForm').onsubmit = e => {
+  e.preventDefault();
+  if (hash($('#lockPw').value) === D.pin){ sessionStorage.setItem('sc_ok', D.pin); $('#lock').classList.remove('on'); }
+  else { $('#lockErr').textContent = '비밀번호가 달라요'; $('#lockPw').value=''; }
+};
+
+/* ---------- 내보내기 / 불러오기 / 초기화 ---------- */
+$('#exp').onclick = () => {
+  save();
+  const txt = 'window.SITE_DATA = ' + JSON.stringify(D, null, 2) + ';\n';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([txt], {type:'text/javascript'}));
+  a.download = 'data.js'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+  toast('data.js를 받았어요 — 저장소 파일과 교체해 주세요');
+};
+$('#imp').onclick = () => $('#impFile').click();
+$('#impFile').onchange = async e => {
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    let t = (await f.text()).trim();
+    t = t.replace(/^window\.SITE_DATA\s*=\s*/, '').replace(/;\s*$/, '');
+    D = Object.assign({}, DEF, JSON.parse(t)); save(); initAll(); toast('불러왔어요');
+  }catch(err){ toast('파일 형식이 올바르지 않아요'); }
+  e.target.value = '';
+};
+$('#reset').onclick = () => {
+  if(!confirm('이 브라우저에 임시 저장된 내용을 지울까요?\n(저장소의 data.js 내용으로 돌아가요)')) return;
+  localStorage.removeItem(KEY); D = Object.assign({}, DEF, JSON.parse(JSON.stringify(window.SITE_DATA||{})));
+  initAll(); $('#status').textContent=''; toast('초기화했어요');
+};
+
+function initAll(){
+  bindBasic(); renderMenu(); renderMain(); renderTracks(); bindVol();
+  $('#showCal').checked = D.showCalendar !== false; renderDD(); renderPin();
+}
+initAll();
+</script>
+</body>
+</html>
