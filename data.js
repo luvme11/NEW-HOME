@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792279607814,
+  "updatedAt": 1792279654626,
   "title": [
     "LOVE",
     "ME"
@@ -42,9 +42,9 @@ window.SITE_DATA = {
       "date": "2026-10-18",
       "time": "",
       "title": "홈 수정",
-      "memo": "- 관리자가 아니면 하트 안 눌리게 변경할 수 있는지 여부 확인",
+      "memo": "- 관리자가 아니면 하트 안 눌리게 변경할 수 있는지 여부 확인\n- 일정 메모의 경우 해당 제목을 꾹 누르면 팝업창으로 작게 보이는 게 구현이 가능한지 (메인에선 안 보이게 구현하고 싶음)",
       "repeat": false,
-      "done": true
+      "done": false
     },
     {
       "date": "2026-10-18",
