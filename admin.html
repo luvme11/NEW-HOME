@@ -72,7 +72,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
 #toast.on{opacity:1;transform:translateX(-50%)}
 </style>
 <script src="data.js"></script>
-<style>body[data-mode="sec"] .mainonly{display:none !important}body:not([data-mode="sec"]) .seconly{display:none !important}</style>
+<style>.meonly{display:none}body[data-p="me"] .meonly{display:block !important}body[data-p="me"] .noMe{display:none !important}body[data-mode="sec"] .mainonly{display:none !important}body:not([data-mode="sec"]) .seconly{display:none !important}</style>
 </head>
 <body>
 
@@ -139,7 +139,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     </div>
   </section>
 
-  <section class="card seconly">
+  <section class="card seconly noMe">
     <h2 id="secH">PAGE</h2>
     <div class="row" style="gap:10px">
       <div style="flex:1"><label class="f" style="margin-top:0">제목</label><input type="text" id="ocTitle"></div>
@@ -148,6 +148,40 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <label class="f">카드 <small>No.01부터 순서대로 표시돼요</small></label>
     <div id="ocList"></div>
     <button class="btn sm ghost" id="ocAdd">+ 카드 추가</button>
+  </section>
+
+  <section class="card meonly">
+    <h2>PROFILE 페이지</h2>
+    <div class="row" style="gap:10px">
+      <div style="flex:1"><label class="f" style="margin-top:0">제목</label><input type="text" id="meT"></div>
+      <div style="flex:1.4"><label class="f" style="margin-top:0">부제목</label><input type="text" id="meS"></div>
+    </div>
+    <label class="f">프로필 사진 · 이름 · 아이디</label>
+    <div class="row" style="gap:10px">
+      <div class="preview-thumb" id="meAv" style="width:64px;height:64px"></div>
+      <div style="flex:none"><button class="btn sm" id="meAvUp">사진 올리기</button> <button class="btn sm danger" id="meAvDel">삭제</button></div>
+      <input type="text" id="meN" placeholder="이름 (xoya)"><input type="text" id="meH" placeholder="@아이디">
+    </div>
+
+    <h2 style="margin-top:26px">TAB 1 · ABOUT</h2>
+    <label class="f">프로필 <small>한 줄에 하나, <code>항목=내용</code> (예: NAME=쏘야)</small></label>
+    <textarea id="aFields"></textarea>
+    <label class="f">안내 알약 <small>한 줄 = 한 행 · 묶음은 <code>/</code> · <code>이름: 라벨=값, 라벨=값</code> · 값 끝에 <code>*</code> = 진한 알약</small></label>
+    <textarea id="aRows" placeholder="MAIN!: ARCH=Santa* / SUB: Aftermess=7&#10;AND?: ARCH=Blue, Fearless=Mustang"></textarea>
+    <p class="hint">라벨·값 안에는 , / : = 를 쓰지 마세요.</p>
+    <label class="f">안내 문구 <small>한 줄에 하나 · <code>==강조==</code> 로 회색 형광펜</small></label>
+    <textarea id="aBul"></textarea>
+    <label class="f">NG <small>한 줄에 하나</small></label>
+    <textarea id="aNg"></textarea>
+
+    <h2 style="margin-top:26px">TAB 2 · FAMILY</h2>
+    <div id="famBox"></div>
+    <button class="btn sm ghost" id="famAddG">+ 그룹 추가</button>
+
+    <h2 style="margin-top:26px">TAB 3 · PROMPT</h2>
+    <p class="hint" style="margin:0 0 10px">카드마다 왼쪽(OC)·오른쪽(PAIR) 이미지와 외형/의상 프롬프트를 넣으면 버튼을 눌러 복사할 수 있어요.</p>
+    <div id="prBox"></div>
+    <button class="btn sm ghost" id="prAdd">+ 카드 추가</button>
   </section>
 
   <section class="card mainonly">
@@ -243,6 +277,16 @@ const SEC = new URLSearchParams(location.search).get('p');
 const MODE = SECS.includes(SEC) ? 'sec' : 'main';
 document.body.dataset.mode = MODE;
 const SEC_DEF = {oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS'}, pair:{title:'Pair',subtitle:'DREAM & PAIRS'}, me:{title:'Me',subtitle:'ABOUT ME'}};
+const pcd=(t,l,a,b)=>({tag:t,label:l,a:{role:'OC',name:a,image:'',look:'',outfit:''},b:{role:'PAIR',name:b,image:'',look:'',outfit:''}});
+const ME_DEF={v:2,title:'Profile',subtitle:'ABOUT THE ACCOUNT',avatar:'',name:'xoya',handle:'@xxxoyaaa',
+ about:{profile:{title:'프로필',label:'PROFILE',fields:[{k:'NAME',v:'쏘야'},{k:'AGED',v:'성인 여성'}]},
+  notice:{title:'안내',label:'Notice',rows:[
+    {groups:[{label:'MAIN!',pills:[{k:'ARCH',v:'Santa',dark:true}]},{label:'SUB',pills:[{k:'Aftermess',v:'7'}]}]},
+    {groups:[{label:'AND?',pills:[{k:'ARCH',v:'Blue'},{k:'Fearless',v:'Mustang'},{k:'Sizz',v:'서해영'}]}]}],
+   bullets:['==유동적인 성향==으로 배려 요구치 않습니다','트친소 알티로 인한 유입마저 곤란하신 분 연결 어렵습니다','계정 방치 및 교류 없는 단순 맞구독 비정기적 정리하며 ==재연결 OK==']},
+  ng:{title:'NG',label:'NOTICE',items:['산타 한정 성향 예민하신 분','언급 없는 페어의 배려 요구','성향 억측','ff 100 ↑']}},
+ family:{groups:[{title:'Family Site',sites:[{title:'Text Editor',desc:'발췌 기능 포함 글자 편집기'},{title:'winter.santarchive.com',desc:'겨울 놀이동산 3D 안내'},{title:'santa.naru.pub',desc:'기존 성향글'},{title:'[Legacy] 프롬프트',desc:''}]}]},
+ prompt:{cards:[pcd('탱글','ARCH','사이다','산타'),pcd('724','Aftermess','엑스','세븐'),pcd('더블','ARCH','더스티','블루'),pcd('서서','Sizz','서하리','서해영')]}};
 const KEY = 'sc_data';
 const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],favicon:'',pin:''};
 
@@ -251,6 +295,7 @@ function norm(d){
     ? {label:m, href:SECS.includes(m.trim().toLowerCase()) ? '#'+m.trim().toLowerCase() : ''}
     : {label:m.label||'', href:m.href||''});
   SECS.forEach(k => {
+    if (k === 'me'){ d.me = normMe(d.me); return; }
     d[k] = Object.assign({title:SEC_DEF[k].title, subtitle:SEC_DEF[k].subtitle, characters:[]}, d[k] || {});
     if (!Array.isArray(d[k].characters)) d[k].characters = [];
     d[k].characters = d[k].characters.map(c => ({name:c.name||'', note: c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : ''), image:c.image||'', soon:!!c.soon, since:c.since||'', siteName:c.siteName||'', url:c.url||''}));
@@ -400,7 +445,7 @@ $('#favUrl').oninput = e => { D.favicon = e.target.value.trim(); saveSoon(); $('
 $('#favDel').onclick = () => { D.favicon=''; save(); renderFav(); };
 
 /* ---------- 섹션 페이지 (OC / Pair / Me) ---------- */
-function renderOc(){ if (MODE !== 'sec') return; renderSecInner(); }
+function renderOc(){ if (MODE !== 'sec' || SEC === 'me') return; renderSecInner(); }
 function renderSecInner(){
   $('#ocTitle').value = D[SEC].title; $('#ocSub').value = D[SEC].subtitle;
   $('#ocTitle').oninput = e => { D[SEC].title = e.target.value; saveSoon(); };
@@ -447,6 +492,93 @@ function renderSecInner(){
   });
 }
 $('#ocAdd').onclick = () => { D[SEC].characters.push({name:'', note:'', image:'', soon:true, since:'', siteName:'', url:''}); save(); renderSecInner(); };
+
+/* ---------- ME (Profile) ---------- */
+function normMe(m){
+  m = m || {};
+  const base = JSON.parse(JSON.stringify(ME_DEF));
+  if (m.v !== 2) return Object.assign(base, m.characters ? {characters:m.characters} : {});
+  const o = Object.assign(base, m);
+  o.family.groups.forEach(g => g.sites = g.sites || []);
+  return o;
+}
+const gp = (o,p) => p.split('.').reduce((a,k) => a == null ? a : a[k], o);
+const sp = (o,p,v) => { const k = p.split('.'), l = k.pop(); k.reduce((a,x) => a[x], o)[l] = v; };
+const lines = v => v.split('\n').map(x => x.trim()).filter(Boolean);
+const kv = l => { const i = l.indexOf('='); return {k: i < 0 ? l : l.slice(0,i).trim(), v: i < 0 ? '' : l.slice(i+1).trim()}; };
+const parseRow = s => ({groups: s.split('/').map(g => {
+  const i = g.indexOf(':'), label = i < 0 ? '' : g.slice(0,i).trim();
+  return {label, pills: (i < 0 ? g : g.slice(i+1)).split(',').map(x => x.trim()).filter(Boolean).map(x => {
+    const p = kv(x), dark = /\*$/.test(p.k) || /\*$/.test(p.v);
+    return {k:p.k.replace(/\*$/,''), v:p.v.replace(/\*$/,''), dark};
+  })};
+})});
+const rowTxt = r => r.groups.map(g => g.label + ': ' + g.pills.map(p => p.k + '=' + p.v + (p.dark ? '*' : '')).join(', ')).join(' / ');
+function meImgs(m){
+  const r = [], add = (o,k) => { if ((o[k]||'').startsWith('data:')) r.push([o,k]); };
+  add(m,'avatar'); m.family.groups.forEach(g => g.sites.forEach(s => add(s,'image'))); m.prompt.cards.forEach(c => { add(c.a,'image'); add(c.b,'image'); });
+  return r;
+}
+function pickImg(max, cb){
+  const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*';
+  i.onchange = async e => { const f = e.target.files[0]; if(!f) return;
+    try{ cb(await fileToData(f, max, .85)); save(); toast('사진을 적용했어요'); }catch(x){ toast('이미지를 읽지 못했어요'); } };
+  i.click();
+}
+const hb = (arr,i) => `<button class="ib" data-mv="${arr}.${i}" data-d="-1">↑</button><button class="ib" data-mv="${arr}.${i}" data-d="1">↓</button><button class="ib" data-rm="${arr}.${i}">✕</button>`;
+const imgCtl = (path,w,h) => { const v = gp(D.me, path) || '';
+  return `<div style="width:${w}px;height:${h}px;border-radius:8px;background:#ececec;overflow:hidden;flex:none">${v ? `<img src="${esc(v)}" alt="" style="width:100%;height:100%;object-fit:cover">` : ''}</div>
+  <div class="col" style="min-width:0"><button class="btn sm" data-up="${path}">사진 올리기</button> <button class="btn sm danger" data-del="${path}">삭제</button></div>`; };
+function bindMe(box, re){
+  box.querySelectorAll('[data-p]').forEach(el => el.oninput = e => { sp(D.me, el.dataset.p, e.target.value); saveSoon(); });
+  box.querySelectorAll('[data-up]').forEach(b => b.onclick = () => pickImg(700, v => { sp(D.me, b.dataset.up, v); re(); }));
+  box.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { sp(D.me, b.dataset.del, ''); save(); re(); });
+  box.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { const k = b.dataset.rm.split('.'), i = +k.pop(); gp(D.me, k.join('.')).splice(i,1); save(); re(); });
+  box.querySelectorAll('[data-mv]').forEach(b => b.onclick = () => { const k = b.dataset.mv.split('.'), i = +k.pop(); moveItem(gp(D.me, k.join('.')), i, +b.dataset.d); save(); re(); });
+}
+function renderFam(){
+  const box = $('#famBox'), G = D.me.family.groups;
+  box.innerHTML = G.map((g,gi) => `<div class="item"><div class="item-head">GROUP ${gi+1}<span class="sp"></span>${hb('family.groups',gi)}</div>
+    <input type="text" data-p="family.groups.${gi}.title" value="${esc(g.title)}" placeholder="그룹 이름 (예: Family Site)">
+    ${g.sites.map((s,si) => { const b = `family.groups.${gi}.sites.${si}`; return `<div class="item" style="margin:10px 0 0;background:#fff"><div class="item-head">SITE ${si+1}<span class="sp"></span>${hb(`family.groups.${gi}.sites`,si)}</div>
+      <div class="row" style="gap:10px;margin-bottom:8px">${imgCtl(b+'.image',110,46)}</div>
+      <input type="text" data-p="${b}.title" value="${esc(s.title)}" placeholder="사이트 이름">
+      <input type="text" style="margin-top:6px" data-p="${b}.desc" value="${esc(s.desc||'')}" placeholder="한 줄 설명">
+      <input type="text" style="margin-top:6px" data-p="${b}.url" value="${esc(s.url||'')}" placeholder="주소 (https://…)"></div>`; }).join('')}
+    <button class="btn sm ghost" style="margin-top:10px" data-as="${gi}">+ 사이트 추가</button></div>`).join('') || '<div class="empty">그룹이 없어요</div>';
+  bindMe(box, renderFam);
+  box.querySelectorAll('[data-as]').forEach(b => b.onclick = () => { G[+b.dataset.as].sites.push({title:'',desc:'',url:'',image:''}); save(); renderFam(); });
+}
+function renderPr(){
+  const box = $('#prBox'), C = D.me.prompt.cards;
+  box.innerHTML = C.map((c,i) => `<div class="item"><div class="item-head">CARD ${String(i+1).padStart(2,'0')}<span class="sp"></span>${hb('prompt.cards',i)}</div>
+    <div class="row" style="gap:8px;margin-bottom:10px"><input type="text" data-p="prompt.cards.${i}.tag" value="${esc(c.tag)}" placeholder="제목 (# 없이)"><input type="text" data-p="prompt.cards.${i}.label" value="${esc(c.label)}" placeholder="오른쪽 라벨 (ARCH)"></div>
+    <div class="row" style="gap:12px;align-items:flex-start">${['a','b'].map(k => { const b = `prompt.cards.${i}.${k}`; return `<div style="flex:1;min-width:0">
+      <div class="row" style="gap:6px"><input type="text" style="flex:.6" data-p="${b}.role" value="${esc(c[k].role)}" placeholder="OC"><input type="text" data-p="${b}.name" value="${esc(c[k].name)}" placeholder="이름"></div>
+      <div class="row" style="gap:8px;margin:8px 0">${imgCtl(b+'.image',60,80)}</div>
+      <textarea data-p="${b}.look" placeholder="외형 프롬프트">${esc(c[k].look)}</textarea>
+      <textarea style="margin-top:6px" data-p="${b}.outfit" placeholder="의상 프롬프트">${esc(c[k].outfit)}</textarea></div>`; }).join('')}</div></div>`).join('') || '<div class="empty">카드가 없어요</div>';
+  bindMe(box, renderPr);
+}
+function renderMe(){
+  const m = D.me;
+  $('#meT').value = m.title; $('#meS').value = m.subtitle; $('#meN').value = m.name; $('#meH').value = m.handle;
+  $('#meAv').innerHTML = m.avatar ? `<img src="${esc(m.avatar)}" alt="">` : '';
+  $('#aFields').value = m.about.profile.fields.map(f => f.k + '=' + f.v).join('\n');
+  $('#aRows').value = m.about.notice.rows.map(rowTxt).join('\n');
+  $('#aBul').value = m.about.notice.bullets.join('\n');
+  $('#aNg').value = m.about.ng.items.join('\n');
+  renderFam(); renderPr();
+}
+[['meT','title'],['meS','subtitle'],['meN','name'],['meH','handle']].forEach(([id,k]) => $('#'+id).oninput = e => { D.me[k] = e.target.value; saveSoon(); });
+$('#aFields').oninput = e => { D.me.about.profile.fields = lines(e.target.value).map(kv); saveSoon(); };
+$('#aRows').oninput = e => { D.me.about.notice.rows = lines(e.target.value).map(parseRow); saveSoon(); };
+$('#aBul').oninput = e => { D.me.about.notice.bullets = lines(e.target.value); saveSoon(); };
+$('#aNg').oninput = e => { D.me.about.ng.items = lines(e.target.value); saveSoon(); };
+$('#meAvUp').onclick = () => pickImg(400, v => { D.me.avatar = v; renderMe(); });
+$('#meAvDel').onclick = () => { D.me.avatar = ''; save(); renderMe(); };
+$('#famAddG').onclick = () => { D.me.family.groups.push({title:'',sites:[]}); save(); renderFam(); };
+$('#prAdd').onclick = () => { D.me.prompt.cards.push(pcd('','','','')); save(); renderPr(); };
 
 /* ---------- 음악 ---------- */
 function renderTracks(){
@@ -603,8 +735,9 @@ function initAll(){
     $('#backLink').href = 'index.html#' + SEC; $('#backLink').textContent = '← ' + lb + ' 페이지 보기';
     document.title = 'Admin · ' + lb;
   }
+  if (MODE === 'sec') document.body.dataset.p = SEC;
   bindBasic(); renderMenu(); renderMain(); renderFav(); renderOc(); renderTracks(); bindVol();
-  $('#showCal').checked = D.showCalendar !== false; renderDD(); renderSc(); renderPin();
+  $('#showCal').checked = D.showCalendar !== false; renderDD(); renderSc(); renderPin(); if (MODE === 'sec' && SEC === 'me') renderMe();
 }
 /* ---------- GitHub 바로 게시 ---------- */
 const GH_KEY = 'sc_gh';
@@ -688,6 +821,7 @@ $('#pub').onclick = async () => {
     };
     if (MODE === 'sec'){
       await upSection(SEC);
+      if (SEC === 'me'){ let n = 0; for (const [o,k] of meImgs(D.me)) o[k] = await up(o[k], `me-${ts}-${n++}.jpg`); }
       const remote = (await fetchRemote()) || {};
       remote[SEC] = D[SEC];
       remote.pins = Object.assign({}, remote.pins, {[SEC]: D.pins[SEC]});
