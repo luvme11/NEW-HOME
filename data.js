@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792266990420,
+  "updatedAt": 1792267203496,
   "title": [
     "LOVE",
     "ME"
@@ -91,7 +91,7 @@ window.SITE_DATA = {
     "v": 2,
     "title": "Profile",
     "subtitle": "ABOUT THE ACCOUNT",
-    "avatar": "images/me-1792266988359-0.jpg",
+    "avatar": "images/me-1792267201192-0.jpg",
     "name": "U2",
     "handle": "@noxuelux",
     "about": {
