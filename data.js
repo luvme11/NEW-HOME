@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792271254560,
+  "updatedAt": 1792271282604,
   "title": [
     "LOVE",
     "ME"
@@ -206,9 +206,9 @@ window.SITE_DATA = {
     "oc": {
       "cards": [
         {
-          "tag": "츠키시로 시오리",
+          "tag": "月城 しおり",
           "label": "PERSONA",
-          "name": "月城 しおり",
+          "name": "츠키시로 시오리",
           "image": "images/me-1792271252084-0.jpg",
           "look": "1woman, adult woman, early 20s, petite, slender body, delicate build,\n\n(very long hair:1.4), (waist-length hair:1.4), (hair reaching down to the waist:1.3), (long hair flowing down the back:1.3), long flowing locks behind shoulders, pure white hair, snow-white hair, soft natural waves, medium hair volume, wispy see-through bangs, short wispy bangs with very long back hair,\n\nlarge round eyes, vivid ruby red eyes, brilliant ruby irises, snow-white eyelashes, softly arched eyebrows,\n\npale porcelain skin, delicate oval face, small refined nose, pale lips, faint gentle smile, natural human ears,\n\ndelicate facial features, doll-like beauty, fragile appearance, languid expression, melancholic aura, subtly decadent atmosphere,",
           "outfit": "worst quality, low quality, lowres, jpeg artifacts, cropped, text, watermark, username, artist name, bad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra arms, extra legs, extra head, multiple people, duplicate character, frame, border, 3d, 3d render, nsfw, layered hair, layered cut, hush cut, wolf cut, shag cut, feathered hair, messy hair, flipped hair, outward flip, spiked hair, choppy layers, sweat, sweatdrop, sweat drop, sweating, sweaty, perspiration, wet skin, \n\n2::blush::, 2::blushing::, 2::rosy cheeks::, 2::flushed cheeks::, 2::pink cheeks::, 1.8::red cheeks::, 1.8::cheek blush::, 1.8::blush marks::, 1.8::blush lines::, 1.5::facial redness::, 1.5::reddened face::, heavy blush, subtle blush, soft blush, cheek tint, pink shading on cheeks, red shading on cheeks, embarrassed blush, under-eye blush,\n\n(worst hand anatomy:1.5), (bad hands:1.5), (deformed hands:1.5), (malformed fingers:1.5), (extra fingers:1.5), (missing fingers:1.5), (fused fingers:1.5), (mutated hands:1.4), (extra digits:1.4), (missing digits:1.4), (six fingers:1.5), (four fingers:1.4), (disconnected fingers:1.4), (twisted fingers:1.4), (broken fingers:1.4), (unnaturally bent fingers:1.4), (long fingers:1.3), (short fingers:1.3), (webbed fingers:1.4), (poorly drawn hands:1.5), (distorted palms:1.4), (incorrect finger joints:1.4), (extra hands:1.5), (missing hands:1.4), (merged hands:1.4),\n\n(short hair:1.4), (bob cut:1.4), (shoulder-length hair:1.3), medium-length hair, lob haircut, short back hair, layered bob, black hair, blonde hair, gray hair, black eyelashes, dark eyelashes, blue eyes, green eyes, elf ears, pointed ears, heavy makeup"
