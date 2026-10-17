@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792270236207,
+  "updatedAt": 1792270255447,
   "title": [
     "LOVE",
     "ME"
@@ -206,8 +206,8 @@ window.SITE_DATA = {
     "prompt": {
       "cards": [
         {
-          "tag": "탱글",
-          "label": "ARCH",
+          "tag": "찬희유이",
+          "label": "Caveduck",
           "a": {
             "role": "OC",
             "name": "선유이",
