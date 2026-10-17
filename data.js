@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792264086462,
+  "updatedAt": 1792264089330,
   "title": [
     "LOVE",
     "ME"
@@ -35,7 +35,7 @@ window.SITE_DATA = {
       "title": "홈 수정",
       "memo": "",
       "repeat": false,
-      "done": true
+      "done": false
     }
   ],
   "pin": ""
