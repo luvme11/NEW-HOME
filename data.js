@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792277083501,
+  "updatedAt": 1792279598696,
   "title": [
     "LOVE",
     "ME"
@@ -42,15 +42,15 @@ window.SITE_DATA = {
       "date": "2026-10-18",
       "time": "",
       "title": "홈 수정",
-      "memo": "",
+      "memo": "- 관리자가 아니면 하트 안 눌리게 변경할 수 있는지 여부 확인",
       "repeat": false,
-      "done": true
+      "done": false
     },
     {
       "date": "2026-10-18",
       "time": "",
-      "title": "룩/구도 업로드 사이트 제작",
-      "memo": "",
+      "title": "갠홈 두 개 제작",
+      "memo": "- 구도/룩/기본 프롬프트 올리는 갠홈\n- 로라 정보/게시판(글 쓰기) 가능한 갠홈",
       "repeat": false
     }
   ],
