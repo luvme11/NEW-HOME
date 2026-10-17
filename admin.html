@@ -89,14 +89,15 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
   <a class="back" href="index.html">← 메인 보기</a>
   <span class="status" id="status"></span>
   <button class="btn" id="imp">불러오기</button>
-  <button class="btn pri" id="exp">data.js 내보내기</button>
+  <button class="btn" id="exp">data.js 내보내기</button>
+  <button class="btn pri" id="pub">게시하기</button>
   <input type="file" id="impFile" accept=".js,.json">
 </div></div>
 
 <main>
   <h1>관리자</h1>
   <p class="lead">여기서 고친 내용은 이 브라우저에 바로 저장되어 메인에서 미리 볼 수 있어요.<br>
-  다른 사람에게도 보이게 하려면 <b>data.js 내보내기</b>로 받은 파일을 GitHub 저장소의 <code>data.js</code>와 교체해 주세요.</p>
+  다른 사람에게도 보이게 하려면 상단 <b>게시하기</b>를 누르세요. (처음 한 번만 아래 <b>GitHub 연결</b> 설정이 필요해요)</p>
 
   <section class="card">
     <h2>기본</h2>
@@ -146,6 +147,25 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <p class="hint">D+ : 시작일부터 며칠째인지 표시 (시작일 = 1일)<br>D- : 남은 일수 표시, 가까운 순서로 최대 3개. “매년 반복”을 켜면 기념일·생일 등에 편해요.</p>
   </section>
 
+  <section class="card" id="ghCard">
+    <h2>GITHUB 연결 (바로 게시)</h2>
+    <div class="row" style="gap:10px">
+      <div style="flex:1"><label class="f" style="margin-top:0">GitHub 아이디</label><input type="text" id="ghOwner" placeholder="luvme11"></div>
+      <div style="flex:1"><label class="f" style="margin-top:0">저장소 이름</label><input type="text" id="ghRepo" placeholder="NEW-HOME"></div>
+      <div style="flex:.6"><label class="f" style="margin-top:0">브랜치</label><input type="text" id="ghBranch" placeholder="main"></div>
+    </div>
+    <label class="f">액세스 토큰</label>
+    <input type="password" id="ghToken" placeholder="github_pat_…" autocomplete="off">
+    <p class="hint" id="ghState"></p>
+    <p class="hint"><b>토큰 만드는 법</b><br>
+      1. GitHub 오른쪽 위 프로필 → <b>Settings</b> → 맨 아래 <b>Developer settings</b><br>
+      2. <b>Personal access tokens → Fine-grained tokens → Generate new token</b><br>
+      3. Repository access: <b>Only select repositories</b> → 이 저장소만 선택<br>
+      4. Permissions → Repository permissions → <b>Contents: Read and write</b><br>
+      5. 만료 기간은 길게 정하고 생성한 뒤, 나온 토큰을 위 칸에 붙여넣기</p>
+    <p class="hint">토큰은 지금 쓰는 이 브라우저에만 저장되고 사이트 코드나 data.js에는 들어가지 않아요. 다른 사람에게 보여주지 마세요. 기기를 바꾸면 다시 입력해야 해요.</p>
+  </section>
+
   <section class="card">
     <h2>관리자 잠금 (선택)</h2>
     <div class="row">
@@ -158,7 +178,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
   </section>
 
   <section class="card">
-    <h2>GitHub에 반영하는 법</h2>
+    <h2>수동으로 반영하는 법 (GitHub 연결을 안 했을 때)</h2>
     <ol class="steps">
       <li>이 페이지에서 내용을 고친다 (자동 저장)</li>
       <li>상단 <b>data.js 내보내기</b>를 눌러 파일을 받는다</li>
@@ -390,7 +410,86 @@ function initAll(){
   bindBasic(); renderMenu(); renderMain(); renderTracks(); bindVol();
   $('#showCal').checked = D.showCalendar !== false; renderDD(); renderPin();
 }
+/* ---------- GitHub 바로 게시 ---------- */
+const GH_KEY = 'sc_gh';
+function ghGet(){ try{ return JSON.parse(localStorage.getItem(GH_KEY) || '{}'); }catch(e){ return {}; } }
+function ghGuess(){
+  const h = location.hostname;
+  return h.endsWith('.github.io') ? {owner:h.split('.')[0], repo:location.pathname.split('/')[1] || h} : {};
+}
+function ghState(){
+  const g = ghGet();
+  $('#ghState').textContent = (g.token && g.owner && g.repo)
+    ? '현재: 연결됨 — 상단 “게시하기”로 바로 반영돼요'
+    : '현재: 연결 전 — 연결하면 “게시하기”를 쓸 수 있어요';
+}
+function ghSaveForm(){
+  localStorage.setItem(GH_KEY, JSON.stringify({
+    owner: $('#ghOwner').value.trim(), repo: $('#ghRepo').value.trim(),
+    branch: $('#ghBranch').value.trim() || 'main', token: $('#ghToken').value.trim()
+  }));
+  ghState();
+}
+function ghInit(){
+  const g = Object.assign({branch:'main'}, ghGuess(), ghGet());
+  $('#ghOwner').value = g.owner || ''; $('#ghRepo').value = g.repo || '';
+  $('#ghBranch').value = g.branch || 'main'; $('#ghToken').value = g.token || '';
+  ['Owner','Repo','Branch','Token'].forEach(k => $('#gh'+k).oninput = ghSaveForm);
+  ghState();
+}
+async function ghFail(r){
+  if (r.status === 401) return '토큰이 올바르지 않거나 만료됐어요';
+  if (r.status === 403) return '토큰 권한이 부족해요 (Contents: Read and write 확인)';
+  if (r.status === 404) return '저장소를 찾을 수 없어요 (아이디/저장소 이름/토큰 대상 저장소 확인)';
+  let m = ''; try{ m = (await r.json()).message || ''; }catch(e){}
+  return `오류 ${r.status} ${m}`;
+}
+async function ghApi(path, method, body, q){
+  const g = ghGet();
+  return fetch(`https://api.github.com/repos/${g.owner}/${g.repo}/contents/${path}${q||''}`, {
+    method: method || 'GET',
+    headers: {Authorization:'Bearer '+g.token, Accept:'application/vnd.github+json', 'Content-Type':'application/json'},
+    body: body ? JSON.stringify(body) : undefined
+  });
+}
+async function ghPut(path, b64, msg){
+  const g = ghGet(); let sha;
+  const r0 = await ghApi(path, 'GET', null, '?ref=' + encodeURIComponent(g.branch));
+  if (r0.ok) sha = (await r0.json()).sha;
+  else if (r0.status !== 404) throw new Error(await ghFail(r0));
+  const r = await ghApi(path, 'PUT', {message:msg, content:b64, branch:g.branch, sha});
+  if (!r.ok) throw new Error(await ghFail(r));
+}
+$('#pub').onclick = async () => {
+  const g = ghGet();
+  if (!(g.token && g.owner && g.repo)){
+    toast('아래 “GitHub 연결”을 먼저 설정해 주세요');
+    $('#ghCard').scrollIntoView({behavior:'smooth'}); return;
+  }
+  const btn = $('#pub'); btn.disabled = true; btn.textContent = '게시 중…';
+  try{
+    const ts = Date.now();
+    const up = async (dataUrl, name) => { await ghPut('images/'+name, dataUrl.split(',')[1], 'Upload '+name); return 'images/'+name; };
+    if (D.mainImage.startsWith('data:')) D.mainImage = await up(D.mainImage, `main-${ts}.jpg`);
+    for (let i=0; i<D.playlist.length; i++){
+      const t = D.playlist[i];
+      if ((t.thumb||'').startsWith('data:')) t.thumb = await up(t.thumb, `thumb-${ts}-${i}.jpg`);
+    }
+    save();
+    const txt = 'window.SITE_DATA = ' + JSON.stringify(D, null, 2) + ';\n';
+    await ghPut('data.js', btoa(unescape(encodeURIComponent(txt))), 'Update site data');
+    renderMain(); renderTracks();
+    $('#status').textContent = '✓ 게시 완료';
+    toast('게시했어요! 1~2분 뒤 사이트에 반영돼요');
+  }catch(e){
+    toast('게시 실패: ' + e.message);
+  }finally{
+    btn.disabled = false; btn.textContent = '게시하기';
+  }
+};
+
 initAll();
+ghInit();
 </script>
 </body>
 </html>
