@@ -294,7 +294,7 @@ a.fc:hover{transform:translateY(-2px);border-color:#bbb}
 .pg2{display:grid;grid-template-columns:1fr 1fr;gap:24px 14px}
 .pi{display:flex;gap:2px;aspect-ratio:3/2;margin-top:9px;border-radius:12px;overflow:hidden;background:#fff}
 .pi img,.pi u{flex:1;min-width:0;height:100%;object-fit:cover;background:#ececec}
-.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.pnm{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
 .pw{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;min-width:0}
 .rl{font-style:normal;font-size:7px;font-weight:800;letter-spacing:.08em;padding:2px 5px;border-radius:4px;border:1px solid #ccc;color:#888}
 .rl.dk{background:#2a2a2a;border-color:#2a2a2a;color:#fff}
@@ -758,7 +758,7 @@ function meTab(m){
   if(MT===1) return f.groups.map((g,gi)=>`<div class="sec">${sh(gi+1,g.title,g.sites.length+' SITES')}<div class="fg">${g.sites.map(s=>{
     const u=fixUrl(s.url);
     return `<${u?`a href="${esc(u)}" target="_blank" rel="noopener"`:'div'} class="fc"><div class="fi">${s.image?`<img src="${esc(s.image)}" alt="" loading="lazy">`:''}</div><div class="ft"><div><b>${esc(s.title)}</b>${s.desc?`<small>${esc(s.desc)}</small>`:''}</div>${u?`<i class="ar">${ARROW_SVG}</i>`:''}</div></${u?'a':'div'}>`;}).join('')}</div></div>`).join('') || '<div class="oc-empty">아직 등록된 사이트가 없어요</div>';
-  return `<div class="pg2">${pr.cards.map((c,ci)=>`<div>${sh(ci+1,'#'+c.tag,c.label,'sm')}<div class="pi">${[c.a,c.b].map(x=>x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy">`:'<u></u>').join('')}</div><div class="pn">${['a','b'].map((k,j)=>`<div><div class="pw"><em class="rl${j?'':' dk'}">${esc(c[k].role)}</em>${esc(c[k].name)}</div><div class="pb">${[['look','외형'],['outfit','네거티브']].map(([t,n])=>`<button data-c="${ci}.${k}.${t}" class="${c[k][t]?'':'na'}">${CP_SVG}${n}</button>`).join('')}</div></div>`).join('')}</div><div class="pb pc"><button data-c="${ci}.c.couple" class="${c.couple?'':'na'}">${CP_SVG}커플 네거티브</button></div></div>`).join('')}</div>` + (pr.cards.length?'':'<div class="oc-empty">아직 등록된 프롬프트가 없어요</div>');
+  return `<div class="pg2">${pr.cards.map((c,ci)=>`<div>${sh(ci+1,'#'+c.tag,c.label,'sm')}<div class="pi">${[c.a,c.b].map(x=>x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy">`:'<u></u>').join('')}</div><div class="pnm">${['a','b'].map((k,j)=>`<div><div class="pw"><em class="rl${j?'':' dk'}">${esc(c[k].role)}</em>${esc(c[k].name)}</div><div class="pb">${[['look','외형'],['outfit','네거티브']].map(([t,n])=>`<button data-c="${ci}.${k}.${t}" class="${c[k][t]?'':'na'}">${CP_SVG}${n}</button>`).join('')}</div></div>`).join('')}</div><div class="pb pc"><button data-c="${ci}.c.couple" class="${c.couple?'':'na'}">${CP_SVG}커플 네거티브</button></div></div>`).join('')}</div>` + (pr.cards.length?'':'<div class="oc-empty">아직 등록된 프롬프트가 없어요</div>');
 }
 function renderMe(){
   ME = DATA.me && DATA.me.v===2 ? Object.assign({}, ME_DEF, DATA.me) : ME_DEF;
