@@ -33,7 +33,7 @@ h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:6px 0 4px}
 label.f{display:block;font-size:12px;font-weight:600;margin:12px 0 5px;color:#444}
 label.f:first-of-type{margin-top:0}
 label.f small{font-weight:400;color:var(--sub);margin-left:4px}
-input[type=text],input[type=date],input[type=password],input[type=url],textarea,select{
+input[type=text],input[type=date],input[type=time],input[type=password],input[type=url],textarea,select{
   width:100%;border:1px solid #dcdcdc;border-radius:10px;padding:9px 11px;font-size:13.5px;background:#fff;outline:0}
 input:focus,textarea:focus,select:focus{border-color:#2a2a2a}
 textarea{resize:vertical;min-height:62px;line-height:1.5}
@@ -147,6 +147,16 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
     <p class="hint">D+ : 시작일부터 며칠째인지 표시 (시작일 = 1일)<br>D- : 남은 일수 표시, 가까운 순서로 최대 3개. “매년 반복”을 켜면 기념일·생일 등에 편해요.</p>
   </section>
 
+  <section class="card">
+    <h2>일정</h2>
+    <p class="hint" style="margin:0 0 12px">일정이 있는 날은 캘린더에 작은 점이 생기고, 날짜를 누르면 그날의 일정이 보여요.</p>
+    <div id="scList"></div>
+    <div class="row">
+      <button class="btn sm ghost" id="scAdd">+ 일정 추가</button>
+      <button class="btn sm" id="scSort">날짜순 정렬</button>
+    </div>
+  </section>
+
   <section class="card" id="ghCard">
     <h2>GITHUB 연결 (바로 게시)</h2>
     <div class="row" style="gap:10px">
@@ -193,7 +203,7 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:5px;font-size:12px}
 <script>
 const $ = s => document.querySelector(s);
 const KEY = 'sc_data';
-const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],pin:''};
+const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],pin:''};
 
 function load(){
   const base = window.SITE_DATA || {};
@@ -366,6 +376,34 @@ $('#ddSince').onclick = () => { D.ddays.push({type:'since',label:'',date:''}); s
 $('#ddUntil').onclick = () => { D.ddays.push({type:'until',label:'',date:'',repeat:true}); save(); renderDD(); };
 $('#showCal').onchange = e => { D.showCalendar = e.target.checked; save(); };
 
+/* ---------- 일정 ---------- */
+function renderSc(){
+  const box = $('#scList');
+  if(!D.schedule.length){ box.innerHTML = '<div class="empty">추가한 일정이 없어요</div>'; return; }
+  box.innerHTML = D.schedule.map((e,i)=>`
+    <div class="item">
+      <div class="item-head">일정 ${String(i+1).padStart(2,'0')}<span class="sp"></span><button class="ib" data-rm="${i}">✕</button></div>
+      <div class="row" style="gap:10px">
+        <div style="flex:1"><input type="date" data-k="date" data-i="${i}" value="${esc(e.date)}"></div>
+        <div style="flex:.7"><input type="time" data-k="time" data-i="${i}" value="${esc(e.time)}"></div>
+      </div>
+      <input type="text" style="margin-top:8px" data-k="title" data-i="${i}" value="${esc(e.title)}" placeholder="일정 제목">
+      <textarea style="margin-top:8px;min-height:44px" data-k="memo" data-i="${i}" placeholder="메모 (선택)">${esc(e.memo)}</textarea>
+      <label class="chk" style="margin-top:8px"><input type="checkbox" data-rep="${i}" ${e.repeat?'checked':''}> 매년 반복 (생일·기념일)</label>
+    </div>`).join('');
+  box.querySelectorAll('[data-k]').forEach(el=> el.oninput = e => { D.schedule[+el.dataset.i][el.dataset.k] = e.target.value; saveSoon(); });
+  box.querySelectorAll('[data-rep]').forEach(el=> el.onchange = e => { D.schedule[+el.dataset.rep].repeat = e.target.checked; save(); });
+  box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ D.schedule.splice(+b.dataset.rm,1); save(); renderSc(); });
+}
+$('#scAdd').onclick = () => {
+  D.schedule.push({date:new Date().toLocaleDateString('sv-SE'), time:'', title:'', memo:'', repeat:false});
+  save(); renderSc();
+};
+$('#scSort').onclick = () => {
+  D.schedule.sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
+  save(); renderSc();
+};
+
 /* ---------- 잠금 ---------- */
 function renderPin(){ $('#pinState').textContent = D.pin ? '현재: 잠금 사용 중' : '현재: 잠금 없음'; }
 $('#pinSet').onclick = () => {
@@ -408,7 +446,7 @@ $('#reset').onclick = () => {
 
 function initAll(){
   bindBasic(); renderMenu(); renderMain(); renderTracks(); bindVol();
-  $('#showCal').checked = D.showCalendar !== false; renderDD(); renderPin();
+  $('#showCal').checked = D.showCalendar !== false; renderDD(); renderSc(); renderPin();
 }
 /* ---------- GitHub 바로 게시 ---------- */
 const GH_KEY = 'sc_gh';
