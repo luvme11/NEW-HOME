@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792269031967,
+  "updatedAt": 1792269488894,
   "title": [
     "LOVE",
     "ME"
@@ -84,6 +84,15 @@ window.SITE_DATA = {
         "since": "2026-10-01",
         "siteName": "luvinfo",
         "url": "https://luvinfo.me/0413"
+      },
+      {
+        "name": "성제다정",
+        "note": "금성제 x 이다정",
+        "image": "images/pair-1792269486404-1.jpg",
+        "soon": true,
+        "since": "2019-06-22",
+        "siteName": "luvinfo",
+        "url": "https://luvinfo.me/love0413"
       }
     ]
   },
