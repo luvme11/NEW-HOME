@@ -242,7 +242,7 @@ const SECS = ['oc','pair','me'];
 const SEC = new URLSearchParams(location.search).get('p');
 const MODE = SECS.includes(SEC) ? 'sec' : 'main';
 document.body.dataset.mode = MODE;
-const SEC_DEF = {oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS'}, pair:{title:'Pair',subtitle:'PAIR'}, me:{title:'Me',subtitle:'ABOUT ME'}};
+const SEC_DEF = {oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS'}, pair:{title:'Pair',subtitle:'DREAM & PAIRS'}, me:{title:'Me',subtitle:'ABOUT ME'}};
 const KEY = 'sc_data';
 const DEF = {updatedAt:0,title:[],mainImage:'',verticalText:'',menu:[],playlist:[],volume:60,showCalendar:true,ddays:[],schedule:[],favicon:'',pin:''};
 
@@ -253,7 +253,7 @@ function norm(d){
   SECS.forEach(k => {
     d[k] = Object.assign({title:SEC_DEF[k].title, subtitle:SEC_DEF[k].subtitle, characters:[]}, d[k] || {});
     if (!Array.isArray(d[k].characters)) d[k].characters = [];
-    d[k].characters = d[k].characters.map(c => ({name:c.name||'', note: c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : ''), image:c.image||'', soon:!!c.soon}));
+    d[k].characters = d[k].characters.map(c => ({name:c.name||'', note: c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : ''), image:c.image||'', soon:!!c.soon, since:c.since||'', siteName:c.siteName||'', url:c.url||''}));
   });
   d.pins = Object.assign({oc:'',pair:'',me:''}, d.pins || {});
   return d;
@@ -416,14 +416,17 @@ function renderSecInner(){
         <div class="col">
           <div class="row" style="gap:8px">
             <div style="flex:1"><input type="text" data-k="name" data-i="${i}" value="${esc(c.name)}" placeholder="이름"></div>
-            <div style="flex:1"><input type="text" data-k="note" data-i="${i}" value="${esc(c.note)}" placeholder="작은 문구 (예: Pair SANTA)"></div>
+            <div style="flex:1"><input type="text" data-k="note" data-i="${i}" value="${esc(c.note)}" placeholder="${SEC === 'pair' ? '설명 (예: Santa × Cider)' : '작은 문구 (예: Pair SANTA)'}"></div>
           </div>
           <div class="row" style="gap:8px;margin-top:8px">
             <button class="btn sm" data-img="${i}">사진 올리기</button>
             <button class="btn sm danger" data-imgdel="${i}">삭제</button>
           </div>
           <input type="text" style="margin-top:8px" data-k="image" data-i="${i}" value="${c.image && !c.image.startsWith('data:') ? esc(c.image) : ''}" placeholder="또는 이미지 주소 / 경로">
-          <label class="chk" style="margin-top:8px"><input type="checkbox" data-soon="${i}" ${c.soon?'checked':''}> COMING SOON 표시</label>
+          ${SEC === 'pair' ? `<label class="f" style="margin-top:12px">만난 날 · 사이트 <small>COMING SOON을 끄면 사이트 버튼이 나타나요</small></label>
+          <div class="row" style="gap:8px"><div style="flex:1"><input type="date" data-k="since" data-i="${i}" value="${esc(c.since)}"></div><div style="flex:1"><input type="text" data-k="siteName" data-i="${i}" value="${esc(c.siteName)}" placeholder="사이트 이름"></div></div>
+          <input type="text" style="margin-top:8px" data-k="url" data-i="${i}" value="${esc(c.url)}" placeholder="사이트 주소 (https://…)">` : ''}
+          <label class="chk" style="margin-top:8px"><input type="checkbox" data-soon="${i}" ${c.soon?'checked':''}>${SEC === 'pair' ? ' COMING SOON (끄면 사이트 이름 버튼이 나타나요)' : ' COMING SOON 표시'}</label>
         </div>
       </div>
     </div>`).join('');
@@ -443,7 +446,7 @@ function renderSecInner(){
     inp.click();
   });
 }
-$('#ocAdd').onclick = () => { D[SEC].characters.push({name:'', note:'', image:'', soon:true}); save(); renderSecInner(); };
+$('#ocAdd').onclick = () => { D[SEC].characters.push({name:'', note:'', image:'', soon:true, since:'', siteName:'', url:''}); save(); renderSecInner(); };
 
 /* ---------- 음악 ---------- */
 function renderTracks(){
