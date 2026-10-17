@@ -1,15 +1,24 @@
 window.SITE_DATA = {
-  "updatedAt": 1792264712273,
+  "updatedAt": 1792265022776,
   "title": [
     "LOVE",
     "ME"
   ],
-  "mainImage": "images/main-1792262733971.jpg",
+  "mainImage": "images/main-1792265020085.jpg",
   "verticalText": "chanhee",
   "menu": [
-    "OC",
-    "Pair",
-    "Me"
+    {
+      "label": "OC",
+      "href": "#oc"
+    },
+    {
+      "label": "Pair",
+      "href": "#pair"
+    },
+    {
+      "label": "Me",
+      "href": "#me"
+    }
   ],
   "playlist": [
     {
@@ -38,6 +47,7 @@ window.SITE_DATA = {
       "done": false
     }
   ],
+  "favicon": "",
   "pin": "",
   "oc": {
     "title": "OC",
@@ -52,6 +62,18 @@ window.SITE_DATA = {
     ]
   },
   "pins": {
-    "oc": ""
+    "oc": "",
+    "pair": "",
+    "me": ""
+  },
+  "pair": {
+    "title": "Pair",
+    "subtitle": "PAIR",
+    "characters": []
+  },
+  "me": {
+    "title": "Me",
+    "subtitle": "ABOUT ME",
+    "characters": []
   }
 };
