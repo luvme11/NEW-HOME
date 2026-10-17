@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792265461080,
+  "updatedAt": 1792265894341,
   "title": [
     "LOVE",
     "ME"
@@ -75,7 +75,14 @@ window.SITE_DATA = {
   "pair": {
     "title": "Pair",
     "subtitle": "PAIR",
-    "characters": []
+    "characters": [
+      {
+        "name": "ㅌㅅㅌ",
+        "note": "ㅌㅅㅌ",
+        "image": "",
+        "soon": true
+      }
+    ]
   },
   "me": {
     "title": "Me",
