@@ -169,6 +169,47 @@ body:not([data-view="sec"]) .page{display:none}
 .oc-info .pr{font-size:8px;color:#888;letter-spacing:.12em;margin-top:1px}
 .oc-empty{grid-column:1/-1;font-size:12px;color:#aaa;padding:30px 0}
 
+
+/* Pair 슬라이드 */
+.pair-only,.pair-nav{display:none}
+body[data-sec="pair"] .pair-only{display:block}
+body[data-sec="pair"] .grid-only{display:none}
+body[data-sec="pair"] .pair-nav{display:flex}
+.pair-nav{position:absolute;right:0;top:44px;align-items:center;gap:12px}
+.pair-nav .pc{display:flex;align-items:baseline;gap:5px}
+.pair-nav .pc b{font-size:30px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pair-nav .pc small{font-size:9px;font-weight:700;letter-spacing:.15em;color:#777}
+.pdots{display:flex;align-items:center;gap:5px;margin:0 4px}
+.pdots i{display:block;width:5px;height:5px;border-radius:3px;background:#d0d0d0;cursor:pointer;transition:width .25s,background .25s}
+.pdots i.on{width:18px;background:#2a2a2a}
+.pair-nav button.pn{width:36px;height:36px;border-radius:50%;border:1px solid #ddd;background:#fff;display:grid;place-items:center;transition:border-color .2s}
+.pair-nav button.pn:hover{border-color:#2a2a2a}
+.pair-nav button.pn svg{width:12px;height:12px;stroke:#333;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pair-main{display:flex;align-items:center;gap:43px;margin-top:46px;transition:opacity .16s}
+.pair-main.fade{opacity:0}
+.pair-img{position:relative;flex:none;width:min(535px,52vw);aspect-ratio:535/366;border-radius:26px;overflow:hidden;border:1px solid #e3e3e3;background:#ececec;box-shadow:0 14px 34px -14px rgba(0,0,0,.18)}
+.pair-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pair-info{border-left:2px solid #cfcfcf;padding:6px 0 6px 16px;min-width:0}
+.pair-info .no{font-size:8px;color:#888;letter-spacing:.15em}
+.pair-info .nm{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:4px;word-break:keep-all}
+.pair-meta{display:flex;align-items:center;gap:8px;margin-top:12px}
+.pair-meta b{background:#efefef;border-radius:10px;padding:3px 9px;font-size:9.5px;font-weight:800}
+.pair-meta span{font-size:8px;letter-spacing:.15em;color:#999;font-weight:700}
+.pair-desc{font-size:10.5px;color:#555;margin-top:14px;line-height:1.6;white-space:pre-line}
+.pbtn{display:inline-flex;align-items:center;gap:9px;margin-top:20px;height:34px;padding:0 8px 0 16px;border-radius:17px;border:1px solid #ddd;background:rgba(255,255,255,.7);font-size:8px;font-weight:800;letter-spacing:.2em;color:#444;max-width:100%}
+.pbtn .lk{width:18px;height:18px;border-radius:50%;background:#f1f1f1;display:grid;place-items:center;flex:none}
+.pbtn .lk svg{width:9px;height:9px}
+.pbtn.open{background:#2a2a2a;border-color:#2a2a2a;color:#fff;cursor:pointer;transition:transform .2s}
+.pbtn.open:hover{transform:translateY(-1px)}
+.pbtn.open .lk{background:rgba(255,255,255,.18)}
+.pbtn.open .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbtn.plain{padding-right:16px}
+@media (max-width:1000px){
+  .pair-nav{position:static;margin-top:18px}
+  .pair-main{flex-direction:column;align-items:stretch;gap:22px;margin-top:26px}
+  .pair-img{width:100%}
+}
+
 @media (max-width:1000px){
   body{padding:48px 16px 330px}
   .title,.stage,.menu{position:static;transform:none}
@@ -208,7 +249,26 @@ body:not([data-view="sec"]) .page{display:none}
   <a class="back" href="#home"><svg viewBox="0 0 8 8"><path d="M5.5 1 2.5 4l3 3"/></svg>HOME</a>
   <h2 class="pg-title" id="ocTitle">OC</h2>
   <p class="pg-sub" id="ocSub"></p>
-  <div class="oc-scroll"><div class="oc-grid" id="ocGrid"></div></div>
+  <div class="oc-scroll grid-only"><div class="oc-grid" id="ocGrid"></div></div>
+  <div class="pair-nav" id="pairNav">
+    <span class="pc"><b id="pCur">01</b><small id="pTot">/ 00</small></span>
+    <span class="pdots" id="pDots"></span>
+    <button class="pn" id="pPrev" aria-label="이전"><svg viewBox="0 0 12 12"><path d="M7.5 2 3.5 6l4 4"/></svg></button>
+    <button class="pn" id="pNext" aria-label="다음"><svg viewBox="0 0 12 12"><path d="M4.5 2l4 4-4 4"/></svg></button>
+  </div>
+  <div class="pair-only" id="pairView">
+    <div class="pair-main" id="pairMain">
+      <div class="pair-img"><img id="pImg" alt="" hidden><span class="oc-noimg" id="pNoImg">NO IMAGE</span></div>
+      <div class="pair-info">
+        <div class="no" id="pNo"></div>
+        <div class="nm" id="pName"></div>
+        <div class="pair-meta" id="pMeta"><b id="pD"></b><span id="pSince"></span></div>
+        <div class="pair-desc" id="pDesc"></div>
+        <div id="pBtn"></div>
+      </div>
+    </div>
+    <div class="oc-empty" id="pairEmpty" style="display:none">아직 등록된 카드가 없어요</div>
+  </div>
 </main>
 
 <section class="widget cal home-only" id="cal">
@@ -272,7 +332,7 @@ function loadData(){
     const ls = JSON.parse(localStorage.getItem('sc_data') || 'null');
     if (ls && (ls.updatedAt||0) > (base.updatedAt||0)) d = ls;
   }catch(e){}
-  return Object.assign({title:[],menu:[],playlist:[],ddays:[],schedule:[],oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS',characters:[]},pair:{title:'Pair',subtitle:'PAIR',characters:[]},me:{title:'Me',subtitle:'ABOUT ME',characters:[]},volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
+  return Object.assign({title:[],menu:[],playlist:[],ddays:[],schedule:[],oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS',characters:[]},pair:{title:'Pair',subtitle:'DREAM & PAIRS',characters:[]},me:{title:'Me',subtitle:'ABOUT ME',characters:[]},volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
 }
 const DATA = loadData();
 
@@ -499,10 +559,69 @@ vol.oninput = e => { vol.style.setProperty('--p', e.target.value+'%'); if(ready)
 loadMeta();
 
 /* ===== 섹션 페이지 (OC / Pair / Me) ===== */
+/* ===== Pair 슬라이드 ===== */
+let PI = 0, PAIRS = [];
+const LOCK_SVG = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="5.2" width="8" height="5.5" rx="1.2"/><path d="M4 5V3.8a2 2 0 0 1 4 0V5"/></svg>';
+const ARROW_SVG = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 9 3M4 3h5v5"/></svg>';
+const fixUrl = u => { u = (u||'').trim(); return u && !/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(u) ? 'https://' + u : u; };
+function fillPair(){
+  const c = PAIRS[PI];
+  const img = $('#pImg');
+  if (c.image){ img.src = c.image; img.alt = c.name || ''; img.hidden = false; $('#pNoImg').style.display = 'none'; }
+  else { img.hidden = true; img.removeAttribute('src'); $('#pNoImg').style.display = ''; }
+  $('#pNo').textContent = 'No.' + pad(PI+1);
+  $('#pName').textContent = c.name || '';
+  const desc = c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : '');
+  $('#pDesc').textContent = desc; $('#pDesc').style.display = desc ? '' : 'none';
+  const m = (c.since||'').split('-').map(Number);
+  if (m.length === 3 && !m.some(isNaN)){
+    const d = new Date(m[0], m[1]-1, m[2]), diff = Math.round((d - today)/864e5);
+    $('#pD').textContent = diff > 0 ? 'D-' + diff : 'D+' + (1 - diff);
+    $('#pSince').textContent = (diff > 0 ? 'ON ' : 'SINCE ') + m[0] + '.' + pad(m[1]) + '.' + pad(m[2]);
+    $('#pMeta').style.display = '';
+  } else $('#pMeta').style.display = 'none';
+  const url = fixUrl(c.url), nm = esc(c.siteName || '사이트 방문');
+  $('#pBtn').innerHTML = c.soon
+    ? `<span class="pbtn">COMING SOON<i class="lk">${LOCK_SVG}</i></span>`
+    : url ? `<a class="pbtn open" href="${esc(url)}" target="_blank" rel="noopener"><span class="t">${nm}</span><i class="lk">${ARROW_SVG}</i></a>`
+          : (c.siteName ? `<span class="pbtn plain">${nm}</span>` : '');
+  $('#pCur').textContent = pad(PI+1);
+  $('#pDots').innerHTML = PAIRS.map((_,i)=>`<i class="${i===PI?'on':''}" data-i="${i}"></i>`).join('');
+  $('#pDots').querySelectorAll('i').forEach(el => el.onclick = () => pairGo(+el.dataset.i - PI));
+}
+function pairGo(step, instant){
+  if (!PAIRS.length) return;
+  PI = (PI + step + PAIRS.length) % PAIRS.length;
+  if (instant){ fillPair(); return; }
+  const m = $('#pairMain'); m.classList.add('fade');
+  setTimeout(()=>{ fillPair(); m.classList.remove('fade'); }, 160);
+}
+function renderPair(o){
+  PAIRS = o.characters || []; PI = 0;
+  const has = PAIRS.length > 0;
+  $('#pairMain').style.display = has ? '' : 'none';
+  $('#pairEmpty').style.display = has ? 'none' : '';
+  $('#pairNav').style.visibility = has ? '' : 'hidden';
+  $('#pTot').textContent = '/ ' + pad(PAIRS.length);
+  if (has) fillPair();
+}
+$('#pPrev').onclick = () => pairGo(-1);
+$('#pNext').onclick = () => pairGo(1);
+document.addEventListener('keydown', e => {
+  if (document.body.dataset.sec !== 'pair') return;
+  if (e.key === 'ArrowLeft') pairGo(-1); else if (e.key === 'ArrowRight') pairGo(1);
+});
+(function(){
+  let x0 = null; const m = $('#pairMain');
+  m.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, {passive:true});
+  m.addEventListener('touchend', e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 50) pairGo(dx < 0 ? 1 : -1); });
+})();
+
 function renderSection(k){
   const o = DATA[k] || {};
   $('#ocTitle').textContent = o.title || k.toUpperCase();
   $('#ocSub').textContent = o.subtitle || '';
+  if (k === 'pair'){ renderPair(o); return; }
   const LOCK = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="5.2" width="8" height="5.5" rx="1.2"/><path d="M4 5V3.8a2 2 0 0 1 4 0V5"/></svg>';
   const ch = o.characters || [];
   $('#ocGrid').innerHTML = ch.length ? ch.map((c,i)=>{
@@ -521,6 +640,7 @@ $('#mOpen').onclick = () => setMusic(false);
 function route(){
   const r = (location.hash || '').replace(/^#/, '');
   VIEW = SEC_KEYS.includes(r) ? 'sec' : 'home';
+  document.body.dataset.sec = VIEW === 'sec' ? r : '';
   if (VIEW === 'sec') renderSection(r);
   $('#heart').href = VIEW === 'sec' ? 'admin.html?p=' + r : 'admin.html';
   document.body.dataset.view = VIEW;
