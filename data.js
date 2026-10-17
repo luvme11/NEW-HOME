@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792269488894,
+  "updatedAt": 1792269759996,
   "title": [
     "LOVE",
     "ME"
@@ -125,7 +125,7 @@ window.SITE_DATA = {
           {
             "groups": [
               {
-                "label": "MAIN!",
+                "label": "AI!",
                 "pills": [
                   {
                     "k": "Caveduck",
@@ -149,21 +149,11 @@ window.SITE_DATA = {
           {
             "groups": [
               {
-                "label": "AND?",
+                "label": "DREAM?",
                 "pills": [
                   {
-                    "k": "ARCH",
-                    "v": "Blue",
-                    "dark": false
-                  },
-                  {
-                    "k": "Fearless",
-                    "v": "Mustang",
-                    "dark": false
-                  },
-                  {
-                    "k": "Sizz",
-                    "v": "서해영",
+                    "k": "Main",
+                    "v": "약한영웅 금성제",
                     "dark": false
                   }
                 ]
