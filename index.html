@@ -158,6 +158,7 @@ body:not([data-view="sec"]) .page{display:none}
 .oc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,211px));gap:30px 29px;padding-bottom:40px}
 .oc-img{position:relative;aspect-ratio:211/281;border-radius:12px;overflow:hidden;border:1px solid #e6e6e6;background:#ececec}
 .oc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.oc-img.is-soon img{filter:grayscale(1) brightness(.97);transition:filter .3s}
 .oc-noimg{position:absolute;inset:0;display:grid;place-items:center;font-size:9px;letter-spacing:.25em;color:#b5b5b5}
 .soon{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;align-items:center;gap:5px;white-space:nowrap;
   background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border-radius:14px;padding:5px 11px;font-size:8px;font-weight:800;letter-spacing:.18em;color:#222}
@@ -506,7 +507,7 @@ function renderSection(k){
   const ch = o.characters || [];
   $('#ocGrid').innerHTML = ch.length ? ch.map((c,i)=>{
     const note = c.note != null ? c.note : (c.pair ? 'Pair ' + c.pair : '');
-    return `<div class="oc-card"><div class="oc-img">${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">` : '<span class="oc-noimg">NO IMAGE</span>'}${c.soon ? `<span class="soon">${LOCK}COMING SOON</span>` : ''}</div>` +
+    return `<div class="oc-card"><div class="oc-img${c.soon ? ' is-soon' : ''}">${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">` : '<span class="oc-noimg">NO IMAGE</span>'}${c.soon ? `<span class="soon">${LOCK}COMING SOON</span>` : ''}</div>` +
     `<div class="oc-info"><div class="no">No.${pad(i+1)}</div><div class="nm">${esc(c.name||'')}</div>${note ? `<div class="pr">${esc(note)}</div>` : ''}</div></div>`;
   }).join('') : '<div class="oc-empty">아직 등록된 카드가 없어요</div>';
 }
