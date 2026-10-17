@@ -121,6 +121,53 @@ input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:
 .vol input{width:70px}
 #yt{position:fixed;left:-9999px;top:0;width:200px;height:200px;opacity:0;pointer-events:none}
 
+/* 접힌 음악 = 알약 */
+.music .mini{display:none;align-items:center;gap:10px;padding:8px 12px 8px 8px}
+.music.collapsed{width:254px;border-radius:30px;left:16px;bottom:16px}
+.music.collapsed .w-head,.music.collapsed .w-body{display:none}
+.music.collapsed .mini{display:flex}
+.mini .meta{flex:1;min-width:0}
+.mini .name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini .by{font-size:10px;color:#888;margin-top:1px}
+.thumb.sm{width:36px;height:36px;font-size:14px}
+.thumb.sm::after{width:8px;height:8px}
+.play.sm{width:34px;height:34px;flex:none}
+.play.sm svg{width:11px;height:11px}
+.expand{width:22px;height:22px;display:grid;place-items:center;flex:none}
+.expand svg{width:13px;height:13px;stroke:#888;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.expand:hover svg{stroke:#222}
+
+/* 메뉴 링크 */
+.menu li a{display:block}
+.menu li a b{transition:color .2s}
+.menu li a:hover b{color:#2a2a2a}
+
+/* 페이지 전환 */
+body[data-view="oc"] .home-only{display:none !important}
+body:not([data-view="oc"]) .page{display:none}
+.page{position:absolute;left:74px;top:172px;width:min(1000px,calc(100vw - 148px))}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:.3em;color:#555}
+.back svg{width:8px;height:8px;stroke:#555;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.back:hover{color:#111}
+.pg-title{font-size:50px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:20px}
+.pg-sub{font-size:9px;letter-spacing:.3em;color:#777;margin-top:14px}
+.oc-scroll{margin-top:38px;height:calc(100vh - 318px - 130px);min-height:300px;overflow-y:auto;padding-right:16px;scrollbar-width:thin;scrollbar-color:#cfcfcf transparent}
+.oc-scroll::-webkit-scrollbar{width:3px}
+.oc-scroll::-webkit-scrollbar-thumb{background:#cfcfcf;border-radius:3px}
+.oc-scroll::-webkit-scrollbar-track{background:transparent}
+.oc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,211px));gap:30px 29px;padding-bottom:40px}
+.oc-img{position:relative;aspect-ratio:211/281;border-radius:12px;overflow:hidden;border:1px solid #e6e6e6;background:#ececec}
+.oc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.oc-noimg{position:absolute;inset:0;display:grid;place-items:center;font-size:9px;letter-spacing:.25em;color:#b5b5b5}
+.soon{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;align-items:center;gap:5px;white-space:nowrap;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border-radius:14px;padding:5px 11px;font-size:8px;font-weight:800;letter-spacing:.18em;color:#222}
+.soon svg{width:9px;height:9px}
+.oc-info{margin-top:8px;border-left:1px solid #cfcfcf;padding-left:9px}
+.oc-info .no{font-size:8px;color:#888;letter-spacing:.15em}
+.oc-info .nm{font-size:15px;font-weight:800;line-height:1.3;margin-top:1px}
+.oc-info .pr{font-size:8px;color:#888;letter-spacing:.12em;margin-top:1px}
+.oc-empty{grid-column:1/-1;font-size:12px;color:#aaa;padding:30px 0}
+
 @media (max-width:1000px){
   body{padding:48px 16px 330px}
   .title,.stage,.menu{position:static;transform:none}
@@ -131,17 +178,21 @@ input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:
   .cal{position:relative;right:auto;top:auto;margin:30px auto 0}
   .music{left:8px;right:8px;width:auto;max-width:360px;bottom:8px}
   .heart{right:20px}
+  .page{position:static;width:100%}
+  .oc-scroll{height:auto;overflow:visible;padding-right:0}
+  .oc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px}
+  .music.collapsed{right:auto;width:254px;left:8px;bottom:8px}
 }
 </style>
 <script src="data.js"></script>
 </head>
 <body>
 
-<a class="heart" href="admin.html" aria-label="admin" title="">♡</a>
+<a class="heart home-only" href="admin.html" aria-label="admin" title="">♡</a>
 
-<h1 class="title" id="title"></h1>
+<h1 class="title home-only" id="title"></h1>
 
-<div class="stage">
+<div class="stage home-only">
   <div class="arch" id="arch">
     <div class="ph">MAIN IMAGE</div>
     <img id="mainImg" alt="" hidden>
@@ -149,9 +200,17 @@ input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:
   </div>
 </div>
 
-<ul class="menu" id="menu"></ul>
+<ul class="menu home-only" id="menu"></ul>
 
-<section class="widget cal" id="cal">
+<!-- OC 페이지 -->
+<main class="page" id="view-oc">
+  <a class="back" href="#home"><svg viewBox="0 0 8 8"><path d="M5.5 1 2.5 4l3 3"/></svg>HOME</a>
+  <h2 class="pg-title" id="ocTitle">OC</h2>
+  <p class="pg-sub" id="ocSub"></p>
+  <div class="oc-scroll"><div class="oc-grid" id="ocGrid"></div></div>
+</main>
+
+<section class="widget cal home-only" id="cal">
   <div class="w-head"><span>CALENDAR</span>
     <div class="tools"><button data-toggle aria-label="접기"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button></div>
   </div>
@@ -191,6 +250,12 @@ input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:
       <div class="vol"><svg viewBox="0 0 12 12"><path d="M1 4.5h2L6 2v8L3 7.5H1z"/></svg><input type="range" id="vol" min="0" max="100"></div>
     </div>
   </div>
+  <div class="mini">
+    <div class="thumb sm" id="mThumb"></div>
+    <div class="meta"><div class="name" id="mName"></div><div class="by" id="mBy"></div></div>
+    <button class="play sm" id="mPlay" aria-label="재생"><svg id="mIco" viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg></button>
+    <button class="expand" id="mOpen" aria-label="펼치기"><svg viewBox="0 0 16 16"><path d="M9.5 2H14v4.5M14 2 9 7M6.5 14H2V9.5M2 14l5-5"/></svg></button>
+  </div>
   <div id="yt"><div id="ytp"></div></div>
 </section>
 
@@ -206,7 +271,7 @@ function loadData(){
     const ls = JSON.parse(localStorage.getItem('sc_data') || 'null');
     if (ls && (ls.updatedAt||0) > (base.updatedAt||0)) d = ls;
   }catch(e){}
-  return Object.assign({title:[],menu:[],playlist:[],ddays:[],schedule:[],volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
+  return Object.assign({title:[],menu:[],playlist:[],ddays:[],schedule:[],oc:{title:'OC',subtitle:'ORIGINAL CHARACTERS',characters:[]},volume:60,showCalendar:true,mainImage:'',verticalText:''}, d);
 }
 const DATA = loadData();
 
@@ -224,7 +289,12 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 $('#title').innerHTML = DATA.title.map(esc).join('<br>');
 document.title = DATA.title.join(' ') || 'Home';
 $('#vtext').textContent = DATA.verticalText;
-$('#menu').innerHTML = DATA.menu.map((m,i)=>`<li>${pad(i+1)}<i></i><b>${esc(m)}</b></li>`).join('');
+const MENU = DATA.menu.map(m => typeof m === 'string' ? {label:m, href:/^oc$/i.test(m.trim()) ? '#oc' : ''} : m);
+$('#menu').innerHTML = MENU.map((m,i)=>{
+  const b = `<b>${esc(m.label)}</b>`;
+  const ext = /^https?:/.test(m.href||'') ? ' target="_blank" rel="noopener"' : '';
+  return `<li>${pad(i+1)}<i></i>${m.href ? `<a href="${esc(m.href)}"${ext}>${b}</a>` : b}</li>`;
+}).join('');
 if (DATA.mainImage){ const img=$('#mainImg'); img.src=DATA.mainImage; img.hidden=false; $('#arch').classList.add('has-img'); }
 
 /* ===== 위젯 접기 ===== */
@@ -356,14 +426,17 @@ const ytId = u => ((u||'').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})
 const fmt = s => { s=Math.floor(s||0); return Math.floor(s/60)+':'+pad(s%60); };
 
 function setThumb(src){
-  const t = $('#thumb'); t.innerHTML = '';
-  if (src){ const i = document.createElement('img'); i.src = src; t.appendChild(i); t.style.background=''; }
-  else { t.textContent = ((tracks[idx].title||'S')[0]).toUpperCase(); t.style.background='#bdbdbd'; }
+  ['#thumb','#mThumb'].forEach(q=>{
+    const t = $(q); t.innerHTML = '';
+    if (src){ const i = document.createElement('img'); i.src = src; t.appendChild(i); t.style.background=''; }
+    else { t.textContent = ((tracks[idx].title||'S')[0]).toUpperCase(); t.style.background='#bdbdbd'; }
+  });
 }
 function setSeek(v){ const e=$('#seek'); e.value=v; e.style.setProperty('--p',(v/10)+'%'); }
 function loadMeta(){
   const t = tracks[idx];
   $('#tName').textContent = t.title; $('#tBy').textContent = t.artist;
+  $('#mName').textContent = t.title; $('#mBy').textContent = t.artist;
   setThumb(t.thumb || '');
   $('#open').style.display = t.url ? '' : 'none';
   $('#open').onclick = () => window.open(t.url,'_blank');
@@ -371,8 +444,9 @@ function loadMeta(){
 }
 function setIcon(p){
   playing = p;
-  $('#ico').innerHTML = p ? '<path d="M2.5 1.5h2.6v9H2.5zM6.9 1.5h2.6v9H6.9z"/>' : '<path d="M3 1.5v9l7.5-4.5z"/>';
-  $('#thumb').classList.toggle('spin', p);
+  const path = p ? '<path d="M2.5 1.5h2.6v9H2.5zM6.9 1.5h2.6v9H6.9z"/>' : '<path d="M3 1.5v9l7.5-4.5z"/>';
+  $('#ico').innerHTML = path; $('#mIco').innerHTML = path;
+  $('#thumb').classList.toggle('spin', p); $('#mThumb').classList.toggle('spin', p);
 }
 
 window.onYouTubeIframeAPIReady = () => {
@@ -399,7 +473,7 @@ setInterval(()=>{
   if(d){ $('#cur').textContent = fmt(c); setSeek(c/d*1000); }
 }, 400);
 
-$('#play').onclick = () => {
+$('#play').onclick = $('#mPlay').onclick = () => {
   if(!ready || !ytId(tracks[idx].url)) return;
   playing ? player.pauseVideo() : player.playVideo();
 };
@@ -420,6 +494,35 @@ const vol = $('#vol'); vol.value = DATA.volume; vol.style.setProperty('--p', DAT
 vol.oninput = e => { vol.style.setProperty('--p', e.target.value+'%'); if(ready) player.setVolume(+e.target.value); };
 
 loadMeta();
+
+/* ===== OC 페이지 ===== */
+(function(){
+  const o = DATA.oc || {};
+  $('#ocTitle').textContent = o.title || 'OC';
+  $('#ocSub').textContent = o.subtitle || '';
+  const LOCK = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="5.2" width="8" height="5.5" rx="1.2"/><path d="M4 5V3.8a2 2 0 0 1 4 0V5"/></svg>';
+  const ch = o.characters || [];
+  $('#ocGrid').innerHTML = ch.length ? ch.map((c,i)=>
+    `<div class="oc-card"><div class="oc-img">${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">` : '<span class="oc-noimg">NO IMAGE</span>'}${c.soon ? `<span class="soon">${LOCK}COMING SOON</span>` : ''}</div>` +
+    `<div class="oc-info"><div class="no">No.${pad(i+1)}</div><div class="nm">${esc(c.name||'')}</div>${c.pair ? `<div class="pr">Pair ${esc(c.pair)}</div>` : ''}</div></div>`
+  ).join('') : '<div class="oc-empty">아직 등록된 캐릭터가 없어요</div>';
+})();
+
+/* ===== 페이지 전환(해시) + 음악 접기 ===== */
+let VIEW = 'home', homeCollapsed = false;
+const musicEl = $('#music');
+function setMusic(c){ musicEl.classList.toggle('collapsed', c); if (VIEW === 'home') homeCollapsed = c; }
+musicEl.querySelector('[data-toggle]').onclick = () => setMusic(!musicEl.classList.contains('collapsed'));
+$('#mOpen').onclick = () => setMusic(false);
+function route(){
+  const r = (location.hash || '').replace(/^#/, '');
+  VIEW = r === 'oc' ? 'oc' : 'home';
+  document.body.dataset.view = VIEW;
+  musicEl.classList.toggle('collapsed', VIEW === 'oc' ? true : homeCollapsed);
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+route();
 </script>
 </body>
 </html>
