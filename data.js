@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792335422361,
+  "updatedAt": 1792340636607,
   "title": [
     "LOVE",
     "ME"
@@ -233,6 +233,18 @@ window.SITE_DATA = {
               "desc": "구도/룩 사이트",
               "url": "https://luvme11.github.io/prompt/prompts.html",
               "image": "images/me-1792326914648-0.jpg"
+            },
+            {
+              "title": "",
+              "desc": "",
+              "url": "",
+              "image": ""
+            },
+            {
+              "title": "LOVE",
+              "desc": "임찬희 홈",
+              "url": "https://luvme11.github.io/home/#home",
+              "image": "images/me-1792340634077-0.jpg"
             }
           ]
         }
