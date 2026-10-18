@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792340643229,
+  "updatedAt": 1792340672536,
   "title": [
     "LOVE",
     "ME"
@@ -235,8 +235,8 @@ window.SITE_DATA = {
               "image": "images/me-1792326914648-0.jpg"
             },
             {
-              "title": "",
-              "desc": "",
+              "title": "My Home",
+              "desc": "로라/게시판/에셋 사이트",
               "url": "",
               "image": ""
             },
