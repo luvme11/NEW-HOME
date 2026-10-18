@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792279900960,
+  "updatedAt": 1792322385080,
   "title": [
     "LOVE",
     "ME"
@@ -56,9 +56,17 @@ window.SITE_DATA = {
     {
       "date": "2026-10-18",
       "time": "",
-      "title": "기타 할 일",
-      "memo": "- 작전명 순정 관련 드림 페소 짜기\n- 제미나이 확장 프로그램 *지문* 이 아니라 그냥 아무것도 없을 땐 기울기+회색 유지, 대사의 경우 \"\" 색상 유지하게 하기",
+      "title": "드림 페소 짜기",
+      "memo": "- 작전명 순정 관련 드림 페소 짜기\n",
       "repeat": false
+    },
+    {
+      "date": "2026-10-18",
+      "time": "",
+      "title": "제미나이 확장 프로그램 수정",
+      "memo": "- *지문* 이 아니라 그냥 아무것도 없을 땐 기울기+회색 유지\n- 대사의 경우 \"\" 색상 유지하게 하기",
+      "repeat": false,
+      "done": true
     }
   ],
   "favicon": "images/favicon-1792265260687.png",
