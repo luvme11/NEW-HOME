@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792342080591,
+  "updatedAt": 1792342618424,
   "title": [
     "LOVE",
     "ME"
@@ -132,7 +132,7 @@ window.SITE_DATA = {
     "v": 2,
     "title": "Profile",
     "subtitle": "ABOUT THE ACCOUNT",
-    "avatar": "images/me-1792267201192-0.jpg",
+    "avatar": "images/me-1792342614038-0.jpg",
     "name": "U2",
     "handle": "@noxuelux",
     "about": {
@@ -238,7 +238,7 @@ window.SITE_DATA = {
               "title": "My Home",
               "desc": "로라/게시판/에셋 사이트",
               "url": "https://luvme11.github.io/homex/home.html",
-              "image": ""
+              "image": "images/me-1792342614038-1.jpg"
             }
           ]
         },
