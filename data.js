@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792322429613,
+  "updatedAt": 1792326916755,
   "title": [
     "LOVE",
     "ME"
@@ -220,8 +220,10 @@ window.SITE_DATA = {
           "title": "Site",
           "sites": [
             {
-              "title": "Text Editor",
-              "desc": "발췌 기능 포함 글자 편집기"
+              "title": "Prompt Archive",
+              "desc": "구도/룩 사이트",
+              "url": "https://luvme11.github.io/prompt/prompts.html",
+              "image": "images/me-1792326914648-0.jpg"
             }
           ]
         }
