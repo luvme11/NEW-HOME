@@ -710,11 +710,12 @@ $('#pinSet').onclick = () => {
   setPin(hash(v)); $('#pin').value=''; save(); renderPin(); toast(MODE === 'sec' ? '잠금을 설정했어요 (게시 후 반영)' : '잠금을 설정했어요 (게시/내보내기 후 반영)');
 };
 $('#pinDel').onclick = () => { setPin(''); save(); renderPin(); toast('잠금을 해제했어요'); };
+const OWNK = MODE === 'main' ? 'sc_owner' : 'sc_owner_' + SEC;
 if (getPin() && sessionStorage.getItem(OKK) !== getPin()) $('#lock').classList.add('on');
-else if (MODE === 'main') localStorage.setItem('sc_owner', '1');
+else localStorage.setItem(OWNK, '1');
 $('#lockForm').onsubmit = e => {
   e.preventDefault();
-  if (hash($('#lockPw').value) === getPin()){ sessionStorage.setItem(OKK, getPin()); if (MODE === 'main') localStorage.setItem('sc_owner', '1'); $('#lock').classList.remove('on'); }
+  if (hash($('#lockPw').value) === getPin()){ sessionStorage.setItem(OKK, getPin()); localStorage.setItem(OWNK, '1'); $('#lock').classList.remove('on'); }
   else { $('#lockErr').textContent = '비밀번호가 달라요'; $('#lockPw').value=''; }
 };
 
