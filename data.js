@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792341098814,
+  "updatedAt": 1792342080591,
   "title": [
     "LOVE",
     "ME"
@@ -237,7 +237,7 @@ window.SITE_DATA = {
             {
               "title": "My Home",
               "desc": "로라/게시판/에셋 사이트",
-              "url": "",
+              "url": "https://luvme11.github.io/homex/home.html",
               "image": ""
             }
           ]
