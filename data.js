@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792326916755,
+  "updatedAt": 1792333129887,
   "title": [
     "LOVE",
     "ME"
@@ -49,16 +49,10 @@ window.SITE_DATA = {
     {
       "date": "2026-10-18",
       "time": "",
-      "title": "갠홈 두 개 제작",
-      "memo": "- 구도/룩/기본 프롬프트 올리는 갠홈\n- 로라 정보/게시판(글 쓰기) 가능한 갠홈",
-      "repeat": false
-    },
-    {
-      "date": "2026-10-18",
-      "time": "",
-      "title": "드림 페소 짜기",
-      "memo": "- 작전명 순정 관련 드림 페소 짜기\n",
-      "repeat": false
+      "title": "갠홈 제작",
+      "memo": "- 구도/룩/기본 프롬프트 올리는 갠홈",
+      "repeat": false,
+      "done": true
     },
     {
       "date": "2026-10-18",
@@ -67,6 +61,13 @@ window.SITE_DATA = {
       "memo": "- *지문* 이 아니라 그냥 아무것도 없을 땐 기울기+회색 유지\n- 대사의 경우 \"\" 색상 유지하게 하기",
       "repeat": false,
       "done": true
+    },
+    {
+      "date": "2026-10-19",
+      "time": "",
+      "title": "갠홈 두 개 제작",
+      "memo": "- 로라 정보/게시판(글 쓰기) 가능한 갠홈\n- 스핀 같은 질문 받는 갠홈",
+      "repeat": false
     }
   ],
   "favicon": "images/favicon-1792265260687.png",
