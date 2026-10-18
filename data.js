@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792341025886,
+  "updatedAt": 1792341098814,
   "title": [
     "LOVE",
     "ME"
@@ -239,24 +239,29 @@ window.SITE_DATA = {
               "desc": "로라/게시판/에셋 사이트",
               "url": "",
               "image": ""
-            },
+            }
+          ]
+        },
+        {
+          "title": "home",
+          "sites": [
             {
               "title": "LOVE",
               "desc": "임찬희 개인 홈",
               "url": "https://luvme11.github.io/home/#home",
-              "image": "images/me-1792340634077-0.jpg"
+              "image": "images/me-1792341092727-0.jpg"
             },
             {
               "title": "luvinfo",
               "desc": "메인 성향글",
               "url": "https://luvinfo.me/0413",
-              "image": "images/me-1792341021422-0.jpg"
+              "image": "images/me-1792341092727-1.jpg"
             },
             {
               "title": "luvinfo",
               "desc": "서브 성향글",
               "url": "https://luvinfo.me/love0413",
-              "image": "images/me-1792341021422-1.jpg"
+              "image": "images/me-1792341092727-2.jpg"
             }
           ]
         }
