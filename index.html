@@ -17,6 +17,7 @@ a{color:inherit;text-decoration:none}
 /* 관리자 하트 */
 .heart{position:fixed;top:22px;right:38px;font-size:15px;line-height:1;color:#b9b9b9;z-index:20;transition:color .2s}
 .heart:hover{color:#666}
+.heart.off{pointer-events:none;cursor:default;opacity:.5}
 
 .title{position:absolute;left:70px;top:218px;font-size:38px;font-weight:800;line-height:1.12;letter-spacing:-.02em}
 
@@ -72,6 +73,10 @@ a{color:inherit;text-decoration:none}
 .sc b{font-weight:600;display:block}
 .sc small{display:block;color:#999;font-size:8px;margin-top:2px;line-height:1.4;white-space:pre-line}
 .sc-empty{font-size:8.5px;color:#bbb;padding:4px 0 8px}
+/* 메모: 메인에서는 숨김, 제목 꾹 누르면 팝업 */
+.sc b.hm{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;cursor:pointer}
+.sc b.hm::after{content:"";display:inline-block;width:3px;height:3px;margin-left:4px;border-radius:50%;background:#d9775c;vertical-align:middle;opacity:.7}
+.memo-pop{position:fixed;z-index:50;max-width:200px;padding:9px 11px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:12px;box-shadow:var(--shadow);font-size:10px;line-height:1.5;color:#555;white-space:pre-line;word-break:break-word}
 .ck{width:11px;height:11px;border:1px solid #bdbdbd;border-radius:3px;flex:none;margin-top:1px;display:grid;place-items:center;background:#fff}
 .ck.on{background:#2a2a2a;border-color:#2a2a2a}
 .ck.on::after{content:"";width:3px;height:6px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg) translate(-.5px,-.5px)}
@@ -479,14 +484,38 @@ const evOn = (y,m,d) => SCHED.filter(e=>{
   const [Y,M,D2] = e.date.split('-').map(Number);
   return e.repeat ? (M===m+1 && D2===d) : (Y===y && M===m+1 && D2===d);
 }).sort((a,b)=>(a.time||'99').localeCompare(b.time||'99'));
+let memoPop = null;
+const closeMemo = () => { if(memoPop){ memoPop.remove(); memoPop = null; } };
+function showMemo(el, text){
+  closeMemo();
+  const p = document.createElement('div'); p.className = 'memo-pop'; p.textContent = text;
+  document.body.appendChild(p);
+  const r = el.getBoundingClientRect(), w = p.offsetWidth, h = p.offsetHeight;
+  const x = Math.min(Math.max(8, r.left), innerWidth - w - 8);
+  let y = r.bottom + 6; if (y + h > innerHeight - 8) y = Math.max(8, r.top - h - 6);
+  p.style.left = x + 'px'; p.style.top = y + 'px';
+  memoPop = p;
+}
+document.addEventListener('pointerdown', e => { if (memoPop && !e.target.closest('.memo-pop')) closeMemo(); });
+window.addEventListener('scroll', closeMemo, {passive:true});
 function renderSched(){
+  closeMemo();
   const box = $('#sched');
   if(!SCHED.length){ box.innerHTML = ''; return; }
   const y = sel.getFullYear(), m = sel.getMonth(), d = sel.getDate();
   const list = evOn(y,m,d);
-  const rows = list.map((e,i)=>`<div class="sc ${e.done?'done':''}"><span class="ck ${e.done?'on':''} ${OWNER?'own':''}" data-i="${i}"></span>${e.time?`<time>${esc(e.time)}</time>`:''}<span><b>${esc(e.title)}</b>${e.memo?`<small>${esc(e.memo)}</small>`:''}</span></div>`).join('');
+  const rows = list.map((e,i)=>`<div class="sc ${e.done?'done':''}"><span class="ck ${e.done?'on':''} ${OWNER?'own':''}" data-i="${i}"></span>${e.time?`<time>${esc(e.time)}</time>`:''}<span><b class="${e.memo?'hm':''}" data-m="${i}">${esc(e.title)}</b></span></div>`).join('');
   box.innerHTML = `<div class="sc-h"><span>${pad(m+1)}.${pad(d)} SCHEDULE</span><span id="scst">${list.length||''}</span></div>` +
     (list.length ? rows : '<div class="sc-empty">등록된 일정이 없어요</div>');
+  box.querySelectorAll('b.hm').forEach(el => {
+    const memo = list[+el.dataset.m].memo;
+    let t = null, sx = 0, sy = 0;
+    const cancel = () => { clearTimeout(t); t = null; };
+    el.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; cancel(); t = setTimeout(() => { t = null; showMemo(el, memo); }, 450); });
+    el.addEventListener('pointermove', e => { if (t && Math.hypot(e.clientX - sx, e.clientY - sy) > 8) cancel(); });
+    ['pointerup','pointerleave','pointercancel'].forEach(ev => el.addEventListener(ev, cancel));
+    el.addEventListener('contextmenu', e => e.preventDefault());
+  });
   if (OWNER) box.querySelectorAll('.ck.own').forEach(el => el.onclick = () => toggleDone(list[+el.dataset.i]));
 }
 
@@ -792,12 +821,22 @@ const musicEl = $('#music');
 function setMusic(c){ musicEl.classList.toggle('collapsed', c); if (VIEW === 'home') homeCollapsed = c; }
 musicEl.querySelector('[data-toggle]').onclick = () => setMusic(!musicEl.classList.contains('collapsed'));
 $('#mOpen').onclick = () => setMusic(false);
+/* 관리자 하트: 이 브라우저에서 관리자로 들어온 기록이 있을 때만 클릭 가능 */
+function updateHeart(r){
+  const h = $('#heart'), sec = VIEW === 'sec';
+  const ok = OWNER || (sec && !!localStorage.getItem('sc_owner_' + r));
+  h.classList.toggle('off', !ok);
+  h.setAttribute('aria-disabled', ok ? 'false' : 'true');
+  h.tabIndex = ok ? 0 : -1;
+  if (ok) h.href = sec ? 'admin.html?p=' + r : 'admin.html'; else h.removeAttribute('href');
+}
+$('#heart').addEventListener('click', e => { if ($('#heart').classList.contains('off')) e.preventDefault(); });
 function route(){
   const r = (location.hash || '').replace(/^#/, '');
   VIEW = SEC_KEYS.includes(r) ? 'sec' : 'home';
   document.body.dataset.sec = VIEW === 'sec' ? r : '';
   if (VIEW === 'sec') renderSection(r);
-  $('#heart').href = VIEW === 'sec' ? 'admin.html?p=' + r : 'admin.html';
+  updateHeart(r);
   document.body.dataset.view = VIEW;
   musicEl.classList.toggle('collapsed', VIEW === 'sec' ? true : homeCollapsed);
   window.scrollTo(0, 0);
