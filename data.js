@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792422959756,
+  "updatedAt": 1792426422673,
   "title": [
     "LOVE",
     "ME"
@@ -249,12 +249,6 @@ window.SITE_DATA = {
               "desc": "로라/게시판/에셋 사이트",
               "url": "https://luvme11.github.io/homex/home.html",
               "image": "images/me-1792342614038-1.jpg"
-            },
-            {
-              "title": "창구",
-              "desc": "자주 받는 질문 답변",
-              "url": "https://luvme11.github.io/qna/qna.html",
-              "image": "images/me-1792415067461-0.jpg"
             },
             {
               "title": "HTML 구동 확인",
