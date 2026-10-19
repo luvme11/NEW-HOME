@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792418592069,
+  "updatedAt": 1792422959756,
   "title": [
     "LOVE",
     "ME"
@@ -255,6 +255,12 @@ window.SITE_DATA = {
               "desc": "자주 받는 질문 답변",
               "url": "https://luvme11.github.io/qna/qna.html",
               "image": "images/me-1792415067461-0.jpg"
+            },
+            {
+              "title": "HTML 구동 확인",
+              "desc": "",
+              "url": "https://luvme11.github.io/up/",
+              "image": "images/me-1792422957105-0.jpg"
             }
           ]
         },
