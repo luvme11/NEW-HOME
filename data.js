@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792414591104,
+  "updatedAt": 1792414832851,
   "title": [
     "LOVE",
     "ME"
@@ -67,7 +67,8 @@ window.SITE_DATA = {
       "time": "",
       "title": "갠홈 제작 및 수정",
       "memo": "- 스핀 같은 질문 받는 갠홈\n- 로라/게시판/에셋 갠홈 수정 - 글쓰기, 에셋 부분 수정",
-      "repeat": false
+      "repeat": false,
+      "done": true
     },
     {
       "date": "2026-10-19",
