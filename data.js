@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792538723091,
+  "updatedAt": 1792538759381,
   "title": [
     "LOVE",
     "ME"
@@ -147,7 +147,7 @@ window.SITE_DATA = {
       },
       {
         "name": "시헌유리",
-        "note": "차시헌 X 한유리",
+        "note": "차시헌 x 한유리",
         "image": "images/pair-1792538712513-1.jpg",
         "soon": true,
         "since": "2026-10-21",
