@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792538465904,
+  "updatedAt": 1792538715306,
   "title": [
     "LOVE",
     "ME"
@@ -144,6 +144,15 @@ window.SITE_DATA = {
         "since": "2026-10-01",
         "siteName": "luvinfo",
         "url": "https://luvinfo.me/0413"
+      },
+      {
+        "name": "시헌유리",
+        "note": "",
+        "image": "images/pair-1792538712513-1.jpg",
+        "soon": true,
+        "since": "2026-10-21",
+        "siteName": "",
+        "url": ""
       },
       {
         "name": "성제다정",
