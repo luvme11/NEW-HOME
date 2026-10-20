@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792522660788,
+  "updatedAt": 1792522740388,
   "title": [
     "LOVE",
     "ME"
@@ -341,6 +341,14 @@ window.SITE_DATA = {
           "image": "images/me-1792273401376-0.jpg",
           "look": "1girl, solo, young woman, anime style,\n\n1.6::pale skin::, 1.5::fair skin::, 1.4::porcelain skin::, ivory skin, cool-toned pale skin, clear smooth skin, soft natural blush,\n\nblack hair, long black hair, high ponytail, neatly tied ponytail, soft flowing ponytail,\n1.6::see-through bangs::, 1.5::thin wispy bangs::, 1.4::airy transparent bangs::, soft face-framing strands, forehead slightly visible through the bangs, light delicate fringe, slight volume at the crown,\n\ndeep black-brown eyes, glossy dark eyes, almond-shaped eyes, slightly upturned eyes, soft cat-like eyes, defined upper eyelashes, long eyelashes,\n\nsmall delicate face, slim face, softly defined jawline, small nose, small mouth, thin soft lips,\ndelicate facial features, youthful feminine features, pure and gentle beauty,\n\nslender build, narrow shoulders, slim neck, visible collarbones,\ngentle expression, calm gaze, soft smile, innocent atmosphere, elegant mood,\n\nclean lineart, soft shading, detailed eyes, detailed hair, delicate illustration, high detail, best quality,\n\n[고정 상/하의]\nschool uniform, white collared shirt, crisp white pointed collar, large red ribbon bow at the neck, bright red bow tie, neatly tied ribbon, white uniform blouse underneath,\n\nlight gray zip-up hoodie, pale gray hoodie, soft heather gray hoodie, oversized hoodie, loose fit, unzipped hoodie, open front hoodie, hood down, visible zipper, white drawstrings, long sleeves, relaxed casual fit,\n\nblack pleated skirt, school uniform skirt, black uniform skirt, high-waisted skirt, dark black skirt, neat pleats, above-knee length",
           "outfit": "bad quality, low quality, worst quality, lowres, blurry, jpeg artifacts, cropped, text, watermark, username, artist name,\nbad anatomy, bad proportions, bad hands, bad fingers, extra fingers, missing fingers, extra arms, extra legs, deformed body,\n\ntan skin, dark skin, tanned skin, warm skin tone, yellow skin, orange skin, red skin, heavy blush,\nshort hair, bob cut, twintails, braid, bun, low ponytail, side ponytail,\nthick bangs, blunt bangs, full bangs, heavy bangs, straight-across bangs, curtain bangs, side-swept bangs, solid bangs, dense bangs, opaque bangs, no bangs,\nround eyes, big round eyes, droopy eyes, puppy eyes,\nthick lips, glossy lips, lipstick, heavy makeup,\nmuscular build, curvy build, wide shoulders,\nopen mouth, exaggerated smile, laughing, sweat, sweatdrop, sweat drop, sweating, sweaty, perspiration, wet skin"
+        },
+        {
+          "tag": "Lulua",
+          "label": "DREAM",
+          "name": "루루아",
+          "image": "images/me-1792522737715-0.jpg",
+          "look": "young woman, waist-length pale pink twin tails, blunt straight bangs, ruby-red eyes with concentric ring irises, porcelain-like skin,",
+          "outfit": "bad quality, low quality, worst quality, lowres, nsfw, jpeg artifacts, scan artifacts, mosaic, cropped, error, fewer digits, bad reflection, bad composition, bad anatomy, bad hands, bad fingers, missing fingers, extra hands, extra legs, excess fingers, light particles, artist name, text, watermark, username, copyright name"
         }
       ]
     },
