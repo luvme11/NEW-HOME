@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792538759381,
+  "updatedAt": 1792538782917,
   "title": [
     "LOVE",
     "ME"
@@ -105,8 +105,17 @@ window.SITE_DATA = {
       },
       {
         "name": "한유리",
-        "note": "Pair 서미르",
+        "note": "Pair 차시헌",
         "image": "images/oc-1792418588777-2.jpg",
+        "soon": true,
+        "since": "",
+        "siteName": "",
+        "url": ""
+      },
+      {
+        "name": "차시헌",
+        "note": "Pair 한유리",
+        "image": "images/oc-1792538089173-4.jpg",
         "soon": true,
         "since": "",
         "siteName": "",
@@ -116,15 +125,6 @@ window.SITE_DATA = {
         "name": "루루아",
         "note": "Lulua",
         "image": "images/oc-1792522657639-3.jpg",
-        "soon": true,
-        "since": "",
-        "siteName": "",
-        "url": ""
-      },
-      {
-        "name": "차시헌",
-        "note": "OC",
-        "image": "images/oc-1792538089173-4.jpg",
         "soon": true,
         "since": "",
         "siteName": "",
