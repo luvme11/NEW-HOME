@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792610942906,
+  "updatedAt": 1792610983074,
   "title": [
     "LOVE",
     "ME"
@@ -236,7 +236,7 @@ window.SITE_DATA = {
           "==MAIN 배려 필요, SUB 배려 불필요==",
           "블락이 아닌 경우 ==재연결 OK==",
           "블락의 경우 어떠한 경우에도 컨택 X",
-          "현재 ==caveduck kit 님 캐릭터 위주 플레이==합니다"
+          "현재 ==caveduck kit 님, teapot qwerty 님 캐릭터 위주 플레이==합니다"
         ]
       },
       "ng": {
