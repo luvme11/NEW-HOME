@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792614956120,
+  "updatedAt": 1792621160087,
   "title": [
     "LOVE",
     "ME"
@@ -408,8 +408,8 @@ window.SITE_DATA = {
           "a": {
             "role": "OC",
             "name": "미정",
-            "image": "images/me-1792610079035-0.jpg",
-            "look": "girl, black hair, black eyes, empty eyes, expressionless, somber, sanpaku, no pupil, white eyepatch, small black pupil, 1.8::shoulder-length straight black hair::, 1.8::straight blunt bangs::, 1.7::shoulder-length bob cut::, 1.6::sleek straight hair::, 1.5::even hair length::, bangs covering forehead,\n\nblack fitted women's tactical utility jacket,\nunzipped jacket,\nslim waist design,\nfeminine tailored silhouette,\nprotective pads on elbows,\nblack tactical gloves",
+            "image": "images/me-1792621157260-0.jpg",
+            "look": "girl, black hair, black eyes,\n1.8::puppy-like eyes::,\n1.8::soft downturned eyes::,\n1.7::gentle droopy eye shape::,\n1.7::round and soft eye shape::,\n1.6::slightly downturned outer eye corner::,\n1.6::large dark irises::,\n1.5::soft innocent gaze::,\n1.5::gentle puppy-like facial features::,\nsubtle melancholic expression,\nquiet and calm demeanor,\nslightly sleepy eyes,\nwhite eyepatch covering one eye,\nsmall black pupil,\n\n1.8::shoulder-length straight black hair::,\n1.8::straight blunt bangs::,\n1.7::shoulder-length bob cut::,\n1.6::sleek straight hair::,\n1.5::even hair length::,\nbangs covering forehead,\n\nblack fitted women's tactical utility jacket,\nunzipped jacket,\nslim waist design,\nfeminine tailored silhouette,\nprotective pads on elbows,\nblack tactical gloves",
             "outfit": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, mosaic, cropped, error,\nbad composition, bad anatomy, bad hands, bad fingers,\nmissing fingers, extra fingers, extra hands, extra legs,\ntext, watermark, username, artist name, copyright name,\n\nnsfw,\n\nblonde hair, beige hair, brown hair, light brown hair,\nwhite hair, silver hair, gray hair, pink hair,\npurple hair, blue hair, red hair, multicolored hair,\ngradient hair, colored streaks,\n\npink eyes, brown eyes, blue eyes, green eyes,\npurple eyes, golden eyes, amber eyes,\nheterochromia, multicolored eyes, glowing eyes,\nlight-colored irises,\n\n2::slicked back hair::,\n2::swept back hair::,\n2::combed back hair::,\n2::exposed forehead::,\n1.8::forehead showing::,\n1.8::hair pulled back::,\n1.8::pompadour::,\n1.8::undercut::,\n1.8::side part::,\n1.8::wet look hair::,\n1.8::neatly combed hair::,\n1.7::slick hair::,\n1.7::hair tied back::,\n\nbuzz cut, crew cut, bald, pixie cut,\nbob cut, blunt bob, bowl cut,\nvery short hair, waist-length hair,\nponytail, twintails, braids, hair bun,\ntopknot, man bun, pigtails,\n\nround face, chubby face, wide jaw,\nround eyes, large round eyes, droopy eyes,\nthick eyebrows, muscular body, bulky body,\n\nbad proportions, asymmetrical eyes,\ndeformed eyes, cross-eyed, extra limbs,\nblurry, duplicate character, multiple boys,\n\nwolf cut, shag cut, mullet, hime cut,\nlayered haircut, choppy layers, feathered hair,\nlong nape hair, extended nape, trailing back hair,\nspiky hair, messy spikes, outward flipping hair,\nslicked back hair, swept back hair, exposed forehead,\nside part, center part, split bangs, short bangs,\npompadour, undercut, quiff"
           },
           "b": {
