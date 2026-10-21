@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792610084305,
+  "updatedAt": 1792610857223,
   "title": [
     "LOVE",
     "ME"
@@ -414,7 +414,7 @@ window.SITE_DATA = {
         {
           "tag": "",
           "label": "AFTER MESS",
-          "couple": "",
+          "couple": "worst quality, low quality, bad quality, lowres,\njpeg artifacts, scan artifacts, blurry, pixelated,\nbad composition, bad anatomy, bad proportions,\nbad hands, bad fingers, extra fingers, missing fingers,\nextra hands, extra arms, extra legs, extra limbs,\ndeformed body, distorted body, broken limbs,\ntext, watermark, username, artist name,\n\nnsfw,\n\n3girls, 2girls, 3boys, 2boys,\nmultiple girls, multiple boys, extra person,\nthird person, duplicate characters,\nduplicate face, duplicate head,\nsame face, identical faces,\nmerged bodies, fused bodies,\noverlapping faces, fused limbs,\ngender swap, gender reversal,\nandrogynous, feminized male, masculine female,\n\nblonde hair, brown hair, light brown hair,\nwhite hair, silver hair, gray hair,\npink hair, purple hair, blue hair, red hair,\ngreen hair, multicolored hair,\ngradient hair, colored streaks,\n\nblue eyes, green eyes, pink eyes,\npurple eyes, brown eyes, golden eyes,\namber eyes, red eyes, heterochromia,\nmulticolored eyes, glowing eyes,\nlight-colored irises on girl,\n\n2::wolf cut::,\n2::mullet::,\n2::shag cut::,\n2::hush cut::,\n2::long nape hair::,\n2::extended nape::,\n2::feathered hair::,\n2::choppy layers::,\n2::outward flipped hair::,\n2::spiky hair::,\n2::hair sticking upwards::,\n\n2::slicked back hair::,\n2::swept back hair::,\n2::exposed forehead::,\n2::center part::,\n2::side part::,\n2::split bangs::,\n2::short bangs::,\n2::forehead showing::,\n\ncurly hair, wavy hair, drill hair,\nbraided hair, twin braids, twintails,\nponytail, high ponytail, hair bun,\nmessy curls, uneven hair length,\n\n2::eyepatch on male::,\n2::sunglasses on female::,\n2::burn scars on female::,\n2::female with long hair::,\n2::male with shoulder-length hair::,\n2::male with long back hair::,\n\nfaint facial scars, tiny facial scars,\nscar hidden by hair, scar hidden by sunglasses,\nscar only on neck, clean left cheek,\nmissing eyepatch, missing sunglasses,\n\nround face, chubby face, wide jaw,\nround eyes, large round eyes,\nthick eyebrows, overly muscular body,\nbulky body, exaggerated muscles,\n\nextra eyes, asymmetrical eyes,\ndeformed eyes, cross-eyed,\nmisaligned eyes, mismatched eyes,\nextra eyepatch, multiple eyepatches,\nextra sunglasses, duplicate accessories",
           "a": {
             "role": "OC",
             "name": "미정",
