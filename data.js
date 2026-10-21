@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792538782917,
+  "updatedAt": 1792609170743,
   "title": [
     "LOVE",
     "ME"
@@ -409,6 +409,25 @@ window.SITE_DATA = {
             "image": "images/me-1792538460283-1.jpg",
             "look": "boy, adult, pale skin, black hair, medium hair, slicked back hair, loose bangs, red eyes, narrow eyes, tired expression, black halo, chain earrings, cross necklace, bandages, high collar shirt, long coat, waistcoat, cravat, leather gloves, fitted trousers, dress shoes, gothic fashion, fallen angel,",
             "outfit": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, mosaic, cropped, error,\nbad composition, bad anatomy, bad hands, bad fingers,\nmissing fingers, extra fingers, extra hands, extra legs,\ntext, watermark, username, artist name, copyright name,\n\nnsfw,\n\nblonde hair, beige hair, brown hair, light brown hair,\nwhite hair, silver hair, gray hair, pink hair,\npurple hair, blue hair, red hair, multicolored hair,\ngradient hair, colored streaks,\n\npink eyes, brown eyes, blue eyes, green eyes,\npurple eyes, golden eyes, amber eyes,\nheterochromia, multicolored eyes, glowing eyes,\nlight-colored irises,\n\n2::slicked back hair::,\n2::swept back hair::,\n2::combed back hair::,\n2::exposed forehead::,\n1.8::forehead showing::,\n1.8::hair pulled back::,\n1.8::pompadour::,\n1.8::undercut::,\n1.8::side part::,\n1.8::wet look hair::,\n1.8::neatly combed hair::,\n1.7::slick hair::,\n1.7::hair tied back::,\n\nbuzz cut, crew cut, bald, pixie cut,\nbob cut, blunt bob, bowl cut,\nvery short hair, waist-length hair,\nponytail, twintails, braids, hair bun,\ntopknot, man bun, pigtails,\n\nround face, chubby face, wide jaw,\nround eyes, large round eyes, droopy eyes,\nthick eyebrows, muscular body, bulky body,\n\nbad proportions, asymmetrical eyes,\ndeformed eyes, cross-eyed, extra limbs,\nblurry, duplicate character, multiple boys"
+          }
+        },
+        {
+          "tag": "",
+          "label": "AFTER MESS",
+          "couple": "",
+          "a": {
+            "role": "OC",
+            "name": "미정",
+            "image": "",
+            "look": "",
+            "outfit": ""
+          },
+          "b": {
+            "role": "PAIR",
+            "name": "7",
+            "image": "images/me-1792609167379-0.jpg",
+            "look": "mature male, tall, toned build,\nburn scars on neck,\nprominent burn scar on the left side of the face,\nlarge visible facial burn scar, scar tissue extending from left temple to left cheek,\nirregular healed burn scar, pale scar tissue with reddish edges,\nblack hair, jet black hair,\n1.9::heavy full bangs::,\n1.9::thick straight bangs covering the forehead::,\n1.8::long bangs falling over the eyes::,\n1.8::eye-obscuring fringe::,\n1.7::compact straight hairstyle::,\n1.7::smooth rounded hair silhouette::,\n1.6::neat short sides::,\n1.6::clean short back hair::,\n1.5::no extended nape hair::,\n1.5::front-heavy hairstyle::,\nhair partially covering the sunglasses,\nslight smirk,\njitome, tsurime, half-closed eyes,\npale gray eyes,\nblack sunglasses,\n\nblack technical utility jacket,\nunzipped jacket,\nprotective pads on elbows,\nblack tactical gloves",
+            "outfit": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, mosaic, cropped, error,\nbad composition, bad anatomy, bad hands, bad fingers,\nmissing fingers, extra fingers, extra hands, extra legs,\ntext, watermark, username, artist name, copyright name,\n\nnsfw,\n\nblonde hair, beige hair, brown hair, light brown hair,\nwhite hair, silver hair, gray hair, pink hair,\npurple hair, blue hair, red hair, multicolored hair,\ngradient hair, colored streaks,\n\npink eyes, brown eyes, blue eyes, green eyes,\npurple eyes, golden eyes, amber eyes,\nheterochromia, multicolored eyes, glowing eyes,\nlight-colored irises,\n\n2::slicked back hair::,\n2::swept back hair::,\n2::combed back hair::,\n2::exposed forehead::,\n1.8::forehead showing::,\n1.8::hair pulled back::,\n1.8::pompadour::,\n1.8::undercut::,\n1.8::side part::,\n1.8::wet look hair::,\n1.8::neatly combed hair::,\n1.7::slick hair::,\n1.7::hair tied back::,\n\nbuzz cut, crew cut, bald, pixie cut,\nbob cut, blunt bob, bowl cut,\nvery short hair, waist-length hair,\nponytail, twintails, braids, hair bun,\ntopknot, man bun, pigtails,\n\nround face, chubby face, wide jaw,\nround eyes, large round eyes, droopy eyes,\nthick eyebrows, muscular body, bulky body,\n\nbad proportions, asymmetrical eyes,\ndeformed eyes, cross-eyed, extra limbs,\nblurry, duplicate character, multiple boys,\n\nwolf cut, shag cut, mullet, hime cut,\nlayered haircut, choppy layers, feathered hair,\nlong nape hair, extended nape, trailing back hair,\nspiky hair, messy spikes, outward flipping hair,\nslicked back hair, swept back hair, exposed forehead,\nside part, center part, split bangs, short bangs,\npompadour, undercut, quiff"
           }
         },
         {
