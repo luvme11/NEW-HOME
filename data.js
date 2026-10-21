@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792610983074,
+  "updatedAt": 1792614825535,
   "title": [
     "LOVE",
     "ME"
@@ -390,7 +390,7 @@ window.SITE_DATA = {
             "role": "OC",
             "name": "한유리",
             "image": "images/me-1792538460283-0.jpg",
-            "look": "Girl, cute face, mistake, shy, black hair, 1.3::tarame::, wavy long hair, 2::pure black irises::, 2::deep jet black eyes::, 1.8::solid black iris color::, dark black pupils, natural white sclera, consistent black eye color,",
+            "look": " Girl, cute face, mistake, shy, black hair, 1.3::tarame::, wavy long hair, thick white headband, wide white hairband, 2::pure black irises::, 2::deep jet black eyes::, 1.8::solid black iris color::, dark black pupils, natural white sclera, consistent black eye color,",
             "outfit": "bad quality, low quality, worst quality, lowres,\njpeg artifacts, scan artifacts, mosaic, cropped, error,\nbad composition, bad anatomy, bad hands, bad fingers,\nmissing fingers, extra fingers, extra hands, extra legs,\ntext, watermark, username, artist name, copyright name,\n\nnsfw,\n\nblonde hair, beige hair, brown hair, light brown hair, white hair, silver hair, gray hair, pink hair, purple hair, blue hair, red hair, multicolored hair, gradient hair, colored streaks, hair highlights,\n\npink eyes, brown eyes, blue eyes, green eyes, purple eyes, red eyes, golden eyes, amber eyes, heterochromia, multicolored eyes, glowing eyes, light-colored irises,\n\nshort hair, bob cut, pixie cut, shoulder-length hair, medium hair, blunt bob, boyish haircut, asymmetrical hair, ponytail, twintails, braids, hair bun, straight hair,\n\nbad anatomy, bad proportions, asymmetrical eyes, deformed eyes, cross-eyed, extra limbs, extra fingers, low quality, worst quality, blurry,\n\ngreen eyes, emerald eyes, light green irises, white irises, white eyes, blank eyes, glowing eyes, pale irises, gray eyes, blue eyes, colored irises, multicolored eyes, heterochromia, washed out eyes, missing pupils,"
           },
           "b": {
