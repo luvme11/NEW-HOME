@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792614825535,
+  "updatedAt": 1792614956120,
   "title": [
     "LOVE",
     "ME"
