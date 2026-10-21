@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792610881323,
+  "updatedAt": 1792610933518,
   "title": [
     "LOVE",
     "ME"
@@ -199,6 +199,16 @@ window.SITE_DATA = {
                   {
                     "k": "Caveduck",
                     "v": "임찬희",
+                    "dark": false
+                  }
+                ]
+              },
+              {
+                "label": "",
+                "pills": [
+                  {
+                    "k": "teapot",
+                    "v": "7",
                     "dark": false
                   }
                 ]
