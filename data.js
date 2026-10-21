@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792621333392,
+  "updatedAt": 1792621383897,
   "title": [
     "LOVE",
     "ME"
@@ -125,6 +125,15 @@ window.SITE_DATA = {
         "name": "루루아",
         "note": "Lulua",
         "image": "images/oc-1792522657639-3.jpg",
+        "soon": true,
+        "since": "",
+        "siteName": "",
+        "url": ""
+      },
+      {
+        "name": "미정",
+        "note": "22",
+        "image": "images/oc-1792621381312-5.jpg",
         "soon": true,
         "since": "",
         "siteName": "",
