@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792610933518,
+  "updatedAt": 1792610942906,
   "title": [
     "LOVE",
     "ME"
@@ -212,37 +212,17 @@ window.SITE_DATA = {
                     "dark": false
                   }
                 ]
-              },
-              {
-                "label": "SUB",
-                "pills": [
-                  {
-                    "k": "Caveduck",
-                    "v": "표유리＆서미르",
-                    "dark": false
-                  }
-                ]
               }
             ]
           },
           {
             "groups": [
               {
-                "label": "DREAM?",
-                "pills": [
-                  {
-                    "k": "Main",
-                    "v": "약한영웅 금성제",
-                    "dark": false
-                  }
-                ]
-              },
-              {
                 "label": "SUB",
                 "pills": [
                   {
-                    "k": "外",
-                    "v": "다양한 애니 및 웹툰 장르",
+                    "k": "Caveduck",
+                    "v": "표유리＆서미르",
                     "dark": false
                   }
                 ]
