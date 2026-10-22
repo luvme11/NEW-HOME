@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792677761019,
+  "updatedAt": 1792677902541,
   "title": [
     "LOVE",
     "ME"
@@ -155,20 +155,20 @@ window.SITE_DATA = {
         "url": "https://luvinfo.me/0413"
       },
       {
+        "name": "세븐미정",
+        "note": "7 x 22",
+        "image": "images/pair-1792677899731-1.jpg",
+        "soon": true,
+        "since": "2026-10-31",
+        "siteName": "",
+        "url": ""
+      },
+      {
         "name": "시헌유리",
         "note": "차시헌 x 한유리",
         "image": "images/pair-1792538712513-1.jpg",
         "soon": true,
         "since": "2026-10-21",
-        "siteName": "",
-        "url": ""
-      },
-      {
-        "name": "세븐미정",
-        "note": "7 x 22",
-        "image": "",
-        "soon": true,
-        "since": "2026-10-31",
         "siteName": "",
         "url": ""
       }
