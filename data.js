@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792684755245,
+  "updatedAt": 1792686456385,
   "title": [
     "LOVE",
     "ME"
@@ -439,6 +439,38 @@ window.SITE_DATA = {
           "image": "images/me-1792684744490-3.jpg",
           "look": "Nico Robin, One Piece, 1girl, adult woman,\ntall, slender curvy figure, long legs, narrow waist, full bust,\nfair skin, mature elegant face,\n2::long straight black hair reaching mid-back::,\n1.9::hair swept back away from forehead::,\nexposed forehead, no bangs,\n1.8::narrow almond-shaped blue eyes::,\nlong eyelashes, thin arched eyebrows,\nstraight defined nose,\ncalm intelligent expression, subtle confident smile,\n\n2::fitted blue cropped zip-up vest::,\n1.9::sleeveless blue vest with a wide folded collar::,\n1.8::partially unzipped front with a deep neckline::,\nexposed midriff,\n2::long pink wrap skirt with a large floral pattern::,\n1.8::overlapping skirt panels with a high side opening::,\npink high-heeled sandals,\norange-tinted sunglasses resting on top of head",
           "outfit": "worst quality, low quality, lowres, blurry, jpeg artifacts,\nbad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character,\nchild, male, bulky muscles, exaggerated proportions,\nshort hair, bob cut, blunt bangs, straight bangs, hair covering forehead, curly hair, twin tails, braids,\norange hair, blonde hair, brown hair, white hair, pink hair,\nbrown eyes, green eyes, red eyes,\nround face, large round eyes, childish face,\ncowboy hat, bangs,\nlong sleeves, t-shirt, coat, dress, bikini top,\njeans, trousers, shorts, miniskirt,\nboots, sneakers,\nsunglasses covering eyes,\ntext, watermark, signature"
+        },
+        {
+          "tag": "Kageyama Tobio",
+          "label": "Haikyu!!",
+          "name": "카게야마 토비오",
+          "image": "images/me-1792686446229-0.jpg",
+          "look": "Kageyama Tobio, Haikyuu!!, 1boy,\ntall, lean athletic build, broad shoulders,\nfair skin,\n2::short straight black hair::,\n1.9::neat black hair with short pointed bangs falling over forehead::,\nshort sides, tapered nape,\n1.8::sharp dark blue eyes::,\nnarrow eyes, straight eyebrows,\nyouthful angular face,\nserious expression, slightly furrowed brows, closed mouth,\n\n2::Karasuno High School volleyball uniform::,\n2::black short-sleeved volleyball jersey::,\norange side panels, white piping,\nwhite V-shaped collar with orange trim,\n2::white number 9 printed on chest and back::,\nsmall white team lettering on chest,\nmatching black volleyball shorts with orange side panels,\nblack knee pads,\nwhite athletic socks,\nwhite volleyball shoes with blue accents",
+          "outfit": "worst quality, low quality, lowres, blurry, jpeg artifacts,\nbad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character,\nadult man, mature face, old man, beard, mustache, stubble,\nbulky muscles, bodybuilder,\nlong hair, medium hair, shaggy hair, curly hair, spiky hair,\nslicked-back hair, center-parted hair, curtain bangs, exposed forehead,\nblonde hair, orange hair, brown hair, white hair,\nbrown eyes, green eyes, red eyes,\nround eyes, droopy eyes, smiling, open mouth,\norange jersey, blue jersey, white jersey, sleeveless jersey,\nlong sleeves, jacket, long pants,\ntext errors, incorrect number, watermark, signature"
+        },
+        {
+          "tag": "Tsukishima kei",
+          "label": "Haikyu!!",
+          "name": "츠키시마 케이",
+          "image": "images/me-1792686446229-1.jpg",
+          "look": "Tsukishima Kei, Haikyuu!!, 1boy,\nvery tall, slim athletic build, long limbs, narrow shoulders,\nfair skin,\n2::short light blond hair::,\n1.8::short neatly trimmed hair with slightly tousled texture::,\nshort bangs, short sides, tapered nape,\n1.8::narrow golden brown eyes::,\nhalf-lidded eyes, thin eyebrows,\n2::black rectangular glasses::,\nthin angular face,\ncalm aloof expression, subtle sarcastic smirk,\n\n2::Karasuno High School volleyball uniform::,\n2::black short-sleeved volleyball jersey::,\norange side panels, white piping,\nwhite and orange collar trim,\n2::white number 11 printed on chest and back::,\nmatching black volleyball shorts with orange side panels,\nblack knee pads,\nwhite athletic socks,\nwhite volleyball shoes with green accents",
+          "outfit": "worst quality, low quality, lowres, blurry, jpeg artifacts,\nbad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character,\nmature face, old man, beard, mustache, stubble,\nbulky muscles, bodybuilder, stocky build, short legs,\nlong hair, medium hair, long bangs, curly hair,\nslicked-back hair, center-parted hair, curtain bangs,\nblack hair, brown hair, orange hair, white hair,\nlarge round eyes, droopy eyes, blue eyes, green eyes, red eyes,\nround face, broad jaw,\nround glasses, sunglasses, opaque lenses,\nwide grin, cheerful expression,\norange jersey, blue jersey, white jersey, sleeveless jersey,\nlong sleeves, jacket, long pants,\nincorrect number, watermark, signature"
+        },
+        {
+          "tag": "Kuroo Tetsurou",
+          "label": "Haikyu!!",
+          "name": "쿠로오 테츠로",
+          "image": "images/me-1792686446229-2.jpg",
+          "look": "Kuroo Tetsurou, Haikyuu!!, 1boy,\ntall, lean muscular build, broad shoulders, long limbs,\nfair skin, angular face, defined jawline,\n2::short messy black hair::,\n2::distinctive asymmetrical bedhead hairstyle::,\n1.9::large section of spiky black hair swept toward his right side::,\n1.8::long uneven bangs partially obscuring right eye::,\nshort hair at nape,\n1.8::narrow hazel eyes::,\n1.8::sharp upturned eyes::,\nthin eyebrows, slit-like pupils,\nconfident mischievous smirk,\n\n2::Nekoma High School volleyball uniform::,\n2::red short-sleeved volleyball jersey::,\nblack side panels, white piping,\nblack collar with white trim,\n2::white number 1 printed on chest and back::,\nmatching red volleyball shorts with black side panels,\nblack knee pads,\nwhite athletic socks,\nwhite volleyball shoes with red accents",
+          "outfit": "worst quality, low quality, lowres, blurry, jpeg artifacts,\nbad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character,\nold man, beard, mustache, stubble,\nbulky muscles, bodybuilder,\nlong hair, shoulder-length hair, ponytail, braids,\nneat hair, flat hair, symmetrical hairstyle, center-parted hair, curtain bangs, slicked-back hair, bowl cut,\nblond hair, brown hair, orange hair, white hair,\nlarge round eyes, droopy eyes, blue eyes, green eyes,\nround face, innocent expression,\ncat ears, animal ears, cat tail, whiskers,\nblack jersey, orange jersey, blue jersey, sleeveless jersey,\nlong sleeves, jacket, long pants,\nincorrect number, watermark, signature"
+        },
+        {
+          "tag": "Oikawa Tooru",
+          "label": "Haikyu!!",
+          "name": "오이카와 토오루",
+          "image": "images/me-1792686446229-3.jpg",
+          "look": "Oikawa Tooru, Haikyuu!!, 1boy,\ntall, lean athletic build, broad shoulders, long limbs,\nfair skin, youthful handsome face, slim defined jawline,\n2::short chocolate brown hair::,\n1.9::fluffy brown hair with outward-flipped ends::,\n1.8::soft side-swept bangs across forehead::,\nslightly tousled hair, short nape,\n1.8::warm brown eyes::,\nslightly upturned eyes,\nconfident playful smile, relaxed expression,\n\n2::Aoba Johsai High School volleyball uniform::,\n2::white short-sleeved volleyball jersey::,\n1.9::teal collar and teal sleeve trim::,\nteal side accents,\n2::dark number 1 printed on chest and back::,\nsmall Japanese team lettering on chest,\n2::teal volleyball shorts with white side details::,\nwhite athletic socks,\nwhite volleyball shoes with blue accents",
+          "outfit": "worst quality, low quality, lowres, blurry, jpeg artifacts,\nbad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character,\nold man, beard, mustache, stubble,\nbulky muscles, bodybuilder,\nlong hair, shoulder-length hair, ponytail, braids,\nflat hair, buzz cut, tightly curled hair, slicked-back hair,\ncenter-parted hair, curtain bangs, fully exposed forehead,\nblack hair, blond hair, orange hair, white hair,\nblue eyes, green eyes, red eyes,\nglasses, facial scars, freckles,\nblack jersey, red jersey, orange jersey, sleeveless jersey,\nlong sleeves, jacket, long pants,\nincorrect number, watermark, signature"
         }
       ]
     },
