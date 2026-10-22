@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792686456385,
+  "updatedAt": 1792691401260,
   "title": [
     "LOVE",
     "ME"
@@ -471,6 +471,14 @@ window.SITE_DATA = {
           "image": "images/me-1792686446229-3.jpg",
           "look": "Oikawa Tooru, Haikyuu!!, 1boy,\ntall, lean athletic build, broad shoulders, long limbs,\nfair skin, youthful handsome face, slim defined jawline,\n2::short chocolate brown hair::,\n1.9::fluffy brown hair with outward-flipped ends::,\n1.8::soft side-swept bangs across forehead::,\nslightly tousled hair, short nape,\n1.8::warm brown eyes::,\nslightly upturned eyes,\nconfident playful smile, relaxed expression,\n\n2::Aoba Johsai High School volleyball uniform::,\n2::white short-sleeved volleyball jersey::,\n1.9::teal collar and teal sleeve trim::,\nteal side accents,\n2::dark number 1 printed on chest and back::,\nsmall Japanese team lettering on chest,\n2::teal volleyball shorts with white side details::,\nwhite athletic socks,\nwhite volleyball shoes with blue accents",
           "outfit": "worst quality, low quality, lowres, blurry, jpeg artifacts,\nbad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character,\nold man, beard, mustache, stubble,\nbulky muscles, bodybuilder,\nlong hair, shoulder-length hair, ponytail, braids,\nflat hair, buzz cut, tightly curled hair, slicked-back hair,\ncenter-parted hair, curtain bangs, fully exposed forehead,\nblack hair, blond hair, orange hair, white hair,\nblue eyes, green eyes, red eyes,\nglasses, facial scars, freckles,\nblack jersey, red jersey, orange jersey, sleeveless jersey,\nlong sleeves, jacket, long pants,\nincorrect number, watermark, signature"
+        },
+        {
+          "tag": "Satoru Gojo",
+          "label": "Jujutsu Kaisen",
+          "name": "고죠 사토루",
+          "image": "images/me-1792691396879-0.jpg",
+          "look": "Gojo Satoru, Jujutsu Kaisen, 1boy, adult male,\ntall, lean muscular build, broad shoulders, long limbs,\nfair skin, youthful handsome masculine face,\n1.8::short snow-white hair::,\n1.7::soft tousled white hair::,\n1.7::white bangs falling loosely over forehead::,\nslightly separated wispy bangs, short sides, short nape,\n1.9::both eyes fully visible::,\n1.9::bright icy blue eyes::,\n1.8::luminous crystalline blue irises::,\nwhite eyelashes, thin white eyebrows,\nslim angular jawline, straight nose,\nconfident playful smirk, looking at viewer,\n\n1.8::black high-collared uniform jacket::,\n1.7::tall structured collar covering neck::,\nlong sleeves, fitted black jacket, closed front,\nmatching slim black trousers,\nblack ankle boots",
+          "outfit": "worst quality, low quality, lowres, blurry, bad anatomy, bad proportions, bad hands, extra fingers, missing fingers, extra limbs, duplicate character, multiple people,\nchild, old man, bulky bodybuilder, beard, mustache, stubble, facial hair,\nblack hair, brown hair, blonde hair, dark gray hair, long hair, shoulder-length hair, ponytail, braids, bald, buzz cut,\nbrown eyes, black eyes, red eyes, green eyes, dark irises,\nblindfold, covered eyes, eye-obscuring bangs, sunglasses, eyeglasses, eyepatch, bandages over eyes, closed eyes,\nfacial scars, facial tattoos,\nopen collar, unbuttoned jacket, exposed chest, necktie, hood, cape, armor, shorts, sandals,\ntext, watermark, signature"
         }
       ]
     },
