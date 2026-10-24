@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792781313522,
+  "updatedAt": 1792871073826,
   "title": [
     "LOVE",
     "ME"
@@ -289,22 +289,22 @@ window.SITE_DATA = {
           "title": "home",
           "sites": [
             {
-              "title": "LOVE",
+              "title": "chanhee1",
               "desc": "임찬희 개인 홈",
+              "url": "https://luvme11.github.io/chanhee1/",
+              "image": "images/me-1792871069028-0.jpg"
+            },
+            {
+              "title": "7",
+              "desc": "AFTER MESS 7 개인 홈",
+              "url": "https://luvme11.github.io/7/",
+              "image": "images/me-1792871069028-1.jpg"
+            },
+            {
+              "title": "LOVE",
+              "desc": "구 임찬희 개인 홈",
               "url": "https://luvme11.github.io/home/#home",
               "image": "images/me-1792341092727-0.jpg"
-            },
-            {
-              "title": "luvinfo",
-              "desc": "메인 성향글",
-              "url": "https://luvinfo.me/0413",
-              "image": "images/me-1792341092727-1.jpg"
-            },
-            {
-              "title": "luvinfo",
-              "desc": "서브 성향글",
-              "url": "https://luvinfo.me/love0413",
-              "image": "images/me-1792341092727-2.jpg"
             }
           ]
         }
