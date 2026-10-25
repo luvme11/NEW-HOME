@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1792871073826,
+  "updatedAt": 1792891422212,
   "title": [
     "LOVE",
     "ME"
@@ -299,6 +299,12 @@ window.SITE_DATA = {
               "desc": "AFTER MESS 7 개인 홈",
               "url": "https://luvme11.github.io/7/",
               "image": "images/me-1792871069028-1.jpg"
+            },
+            {
+              "title": "OOC 백업",
+              "desc": "",
+              "url": "https://luvme11.github.io/OOC/",
+              "image": "images/me-1792891419916-0.jpg"
             },
             {
               "title": "LOVE",
