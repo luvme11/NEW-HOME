@@ -1,5 +1,5 @@
 window.SITE_DATA = {
-  "updatedAt": 1793387063173,
+  "updatedAt": 1793387069770,
   "title": [
     "LOVE",
     "ME"
@@ -527,7 +527,7 @@ window.SITE_DATA = {
         },
         {
           "tag": "미르유리",
-          "label": "OC",
+          "label": "Caveduck",
           "couple": "worst quality, low quality, lowres, blurry, jpeg artifacts, bad anatomy, bad proportions, bad composition, distorted face, asymmetrical eyes, deformed eyes, bad hands, bad fingers, extra fingers, missing fingers, extra arms, extra legs, extra limbs, malformed limbs,\n\n3girls, 2girls, 2boys, multiple boys, multiple girls, extra person, third person, duplicate characters, cloned characters, identical faces, merged bodies, fused bodies, overlapping faces, extra heads, extra faces, conjoined twins,\n\ngender swap, gender confusion, androgynous male, feminine male, girlish boy, baby face male, overly delicate male face, female facial features on male, narrow shoulders on male, overly slender shoulders on male, exaggerated eyelashes on male, lipstick on male,\n\nmasculine female, masculine facial features on female, overly muscular female, broad shoulders on female,\n\nswapped hairstyles, identical hairstyles, matching hair colors, hair color bleeding, mixed hair colors, multicolored hair, gradient hair, colored streaks, incorrect eye color, mismatched eye colors, heterochromia, glowing eyes, unnatural eye colors,\n\nlong hair on male, shoulder-length hair on male, wolf cut on male, mullet on male, long nape on male, ponytail on male, hair bun on male, white headband on male, hair accessories on male, parted bangs on male, exposed forehead on male,\n\nshort hair on female, bob cut on female, pixie cut on female, ponytail on female, twintails on female, braids on female, hair bun on female, middle part on female, center-parted hair on female, symmetrical parted hair on female, blunt bangs on female, missing headband on female, black headband on female,\n\nblush, blushing, red cheeks, flushed face, excessive makeup, heavy makeup, exaggerated facial expressions,\n\ntext, watermark, username, signature, logo, border, frame, cropped, nsfw",
           "a": {
             "role": "OC",
